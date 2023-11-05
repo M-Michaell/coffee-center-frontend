@@ -1,0 +1,17 @@
+.navbar-toggler{
+    margin-inline-end: 5% !important;
+    margin-bottom: 5px
+
+}
+div#responsive-navbar-nav{
+    margin-inline-start: 10%;
+}
+div.navbar-nav{
+    align-items: flex-start;
+}
+
+/* lange drop down */
+.dropdown-menu.show {
+    background: RGB(255, 193, 7);
+    margin-inline-start: 20%;
+}

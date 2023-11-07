@@ -1,7 +1,7 @@
 import React, { Suspense } from "react";
 import { Route, Routes } from "react-router-dom";
 import TextDetails from "../pages/Details/text_details";
-const Loader = React.lazy(() => import("../general_general_components/Loader/Loader"));
+const Loader = React.lazy(() => import("../general_components/Loader/Loader"));
 const Cart = React.lazy(() => import("../pages/Cart/Cart"));
 const NotFound = React.lazy(() => import("../pages/NotFound"));
 

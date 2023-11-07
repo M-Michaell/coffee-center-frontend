@@ -1,15 +1,3 @@
-
-:root {
-    --orange: #Bd712b;
-    --fff: #ffffff;
-    --gray1: #959595;
-    --gray2: #232122;
-  }
-
-*{
-    background-color: #100E0f
-}
-
 .orange{
 color: var(--orange) !important;
 }

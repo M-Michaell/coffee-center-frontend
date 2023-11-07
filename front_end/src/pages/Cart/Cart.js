@@ -6,7 +6,8 @@ function Cart() {
   return (
     <>
       <div className="container">
-        <h2 className="orange mt-4">Cart</h2>
+        <h2 className="orange mt-4 text-start fs-1 ms-5">Cart
+        <hr></hr></h2>
         <div className="row g-2">
           {/* Cart Items (order-1 on small screens) */}
           <div className="col-xl-5 col order-2 order-md-2">
@@ -21,7 +22,7 @@ function Cart() {
                 <p className="custom-border px-2 fs-5 fff me-3">1</p>
               </div>
               <div>
-                <p className="ms-3 fff fs-5">Personal Details</p>
+                <p className="ms-3 fff fs-5 text-start">Personal Details</p>
                 <div className="row g-4 text-nowrap fs-5 gray1">
                   <div className="col-xl-6 col"> name: michael maher</div>
                   <div className="col-xl-6 col">
@@ -40,7 +41,7 @@ function Cart() {
                 <p className="custom-border px-2 fs-5 fff me-3">2</p>
               </div>
               <div className="mb-5">
-                <p className="ms-3 fff fs-5 ">Delivery Details</p>
+                <p className="ms-3 fff fs-5 text-start">Delivery Details</p>
                 <div className="row g-4 text-nowrap fs-5">
                   {/* first */}
                   <div
@@ -112,7 +113,7 @@ function Cart() {
                 <p className="custom-border px-2 fs-5 fff me-3">1</p>
               </div>
               <div>
-                <p className="ms-3 fff fs-5">Personal Details</p>
+                <p className="ms-3 fff fs-5 text-start">Payment Details</p>
                 <div className="row g-4 text-nowrap fs-5 gray1">
                   <div className="form-check">
                     <input

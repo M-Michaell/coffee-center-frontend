@@ -1,0 +1,17 @@
+/* Navbarr.css */
+.orange-icon {
+    color: rgb(206, 134, 0); /* Set the color to orange */
+    /* You can add more styling properties as needed, such as border, padding, etc. */
+  }
+  
+.navbar-toggler-icon {
+    color: orange !important;
+  }
+
+
+@media (max-width: 768px) {
+    .navbar-toggler {
+      display: inline-block;
+      margin-left: auto;
+    }
+  }

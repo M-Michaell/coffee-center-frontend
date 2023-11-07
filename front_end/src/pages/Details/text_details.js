@@ -4,7 +4,7 @@ import DetailsImage from "./componants/image";
 
 export default function TextDetails() {
   return (
-      <div className="container bg-black vh-100 p-5">
+      <div className="container vh-100 p-5 ">
         <div className="row">
           <div className="col-6">
             <div className="pb-5">

@@ -1,0 +1,90 @@
+
+:root {
+    --orange: #Bd712b;
+    --fff: #ffffff;
+    --gray1: #959595;
+    --gray2: #232122;
+  }
+
+*{
+    background-color: #100E0f
+}
+
+.orange{
+color: var(--orange) !important;
+}
+.fff{
+   color:var(--fff) !important;
+}
+.gray1 {
+    color: var(--gray1) !important;
+}
+.gray2 {
+    color: var(--gray2) !important;
+}
+
+.custom-border{
+    border: 2px solid var(--orange);
+    border-radius: 1000%;
+    padding-inline: 10px !important;
+
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+/* <div class="row g-2">
+<div class="col-6-md">
+  <div class="form-outline  ">
+    <input type="text" id="form12" class="form-control" disabled  value={"michael"}/>
+    <label class="form-label " for="form12">
+     name
+    </label>
+  </div>
+</div>
+</div> */
+
+
+
+
+
+
+/*
+
+
+
+input, .form-control, .custom-select {
+    border: 1px solid #Bd712b !important;
+    background-color: var(--gray2) !important;
+    color: #Bd712b !important;
+  }
+  
+
+  .form-control:focus, .custom-select:focus {
+    border: 1px solid #Bd712b !important;
+    background-color: transparent !important;
+    box-shadow: 0 0 0 0.25rem rgba(189, 113, 43, 0.25) !important; 
+  }
+  
+
+  .form-label {
+    background-color: transparent !important;
+    color: #959595 !important;
+  }
+  
+
+
+*/

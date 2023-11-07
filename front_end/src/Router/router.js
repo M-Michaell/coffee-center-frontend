@@ -11,7 +11,7 @@ function Router() {
   return (
     <Suspense fallback={<Loader />}>
       <Routes>
-      <Route path="/" element={<TextDetails />} />
+      <Route path="/product/details/" element={<TextDetails />} />
         <Route path="/cart" element={<Cart />} />
         <Route path="*" element={<NotFound />} />
 

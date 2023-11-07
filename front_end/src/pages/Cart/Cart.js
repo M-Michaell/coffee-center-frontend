@@ -5,7 +5,7 @@ import map from "../../assets/map.png";
 function Cart() {
   return (
     <>
-      <div className="container">
+      <div className="container" style={{backgroundColor: "var(--background)"}}>
         <h2 className="orange mt-4 text-start fs-1 ms-5">Cart
         <hr></hr></h2>
         <div className="row g-2">

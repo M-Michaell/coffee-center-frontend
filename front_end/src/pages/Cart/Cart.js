@@ -1,17 +1,30 @@
 import CartItems from "./component/CartItems";
 import "./main.css";
 import map from "../../assets/map.png";
+import { useState } from "react";
 
 function Cart() {
+  const [Delivery, setDelivery] = useState(0);
+
+  const onCheck = () => {
+    Delivery === 0 ? setDelivery(50) : setDelivery(0); // Set the delivery cost to 50
+  };
+
+
   return (
     <>
-      <div className="container" style={{backgroundColor: "var(--background)"}}>
-        <h2 className="orange mt-4 text-start fs-1 ms-5">Cart
-        <hr></hr></h2>
+      <div
+        className="container text-start"
+        style={{ backgroundColor: "var(--background)" }}
+      >
+        <h2 className="orange mt-4 text-start fs-1 ms-5">
+          Cart
+          <hr></hr>
+        </h2>
         <div className="row g-2">
           {/* Cart Items (order-1 on small screens) */}
           <div className="col-xl-5 col order-2 order-md-2">
-            <CartItems />
+            <CartItems Delivery={Delivery} />
           </div>
 
           {/* Details and Delivery (order-2 on small screens) */}
@@ -56,9 +69,10 @@ function Cart() {
                       type="radio"
                       name="flexRadioDefault"
                       id="flexRadioDefault1"
+                      onClick={onCheck}
                     />
                     <div className="d-flex justify-contant-between w-100">
-                      <label 
+                      <label
                         className="form-check-label gray1"
                         htmlFor="flexRadioDefault1"
                       >
@@ -68,7 +82,7 @@ function Cart() {
                     </div>
                   </div>
                   <div className="collapse" id="mapstore">
-                    <div className="card  ">
+                    <div className="mb-5">
                       <img className="img-fluid" src={map} alt=".." />
                     </div>
                   </div>
@@ -86,6 +100,7 @@ function Cart() {
                       type="radio"
                       name="flexRadioDefault"
                       id="flexRadioDefault2"
+                      onClick={onCheck}
                     />
                     <div className="d-flex justify-contant-between w-100">
                       <label

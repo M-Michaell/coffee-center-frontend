@@ -10,9 +10,10 @@ export function usePopularData(page) {
   useEffect(() => {
     setIsLoading(true);
     axiosInstance
-      .get(`/movie/popular?language=${language}&page=${page}`)
+      .get(`/products/`)
       .then((res) => {
-        setPopularData(res.data);
+        console.log(res);
+        setPopularData(res);
         setIsLoading(false);
       })
       .catch((err) => console.log(err));

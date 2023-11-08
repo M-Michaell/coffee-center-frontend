@@ -1,8 +1,16 @@
 import React from "react";
 import image from "../assets/404-error-template-10.jpg";
 import { Link } from "react-router-dom";
+import axios from "axios";
 
 function NotFound() {
+  axios
+    .get("http://127.0.0.1:8000/api/products/")
+    .then((res) => {
+      console.log(res);
+    })
+    .catch((err) => console.log(err));
+
   return (
     <div className="text-center my-5 d-flex flex-column  position-relative">
       <img

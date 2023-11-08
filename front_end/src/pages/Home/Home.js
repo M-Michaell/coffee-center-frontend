@@ -1,12 +1,15 @@
 import CardSlider from "./component/CardSlider";
-import QuiltedImageList from "./component/Image";
 import CardList from "./component/CardList";
+import ButtonHome from "./component/button";
+import Images from "./component/Image";
 
-export default function Home(){
-    return(
-        <div style={{backgroundColor:"#100E0f"}}>
+export default function Home() {
+    return (
+        <div style={{backgroundColor: "var(--background)"}}>
             <CardSlider/>
+            <Images/>
             <CardList/>
+            <ButtonHome/>
         </div>
     );
 }

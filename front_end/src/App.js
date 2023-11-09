@@ -6,6 +6,7 @@ import { BrowserRouter } from "react-router-dom";
 import Router from "./Router/router";
 import Navbarr from "./general_components/Header/header";
 import Footerr from "./general_components/Footer/footer";
+import {CookiesProvider} from "react-cookie";
 function App() {
   return (
     <BrowserRouter>

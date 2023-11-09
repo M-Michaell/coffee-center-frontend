@@ -7,7 +7,7 @@ const Loader = React.lazy(() => import("../general_components/Loader/Loader"));
 const Cart = React.lazy(() => import("../pages/Cart/Cart"));
 const Login = React.lazy(() => import("../pages/Auth/Login"));
 const NotFound = React.lazy(() => import("../pages/NotFound"));
-
+const Registration= React.lazy(()=> import("../pages/registration/Registration"))
 function Router() {
 
   return (
@@ -17,7 +17,9 @@ function Router() {
         <Route path="/cart" element={<Cart />} />
         <Route path="*" element={<NotFound />} />
           <Route path="home/" element={<Home/>}/>
+          <Route path="registration/" element={<Registration/>}/>
           <Route path="login/" element={<Login/>}/>
+
       </Routes>
     </Suspense>
   );

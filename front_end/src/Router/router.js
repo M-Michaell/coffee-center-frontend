@@ -5,6 +5,7 @@ import TextDetails from "../pages/Details/text_details";
 const Home = React.lazy(()=> import("../pages/Home/Home"))
 const Loader = React.lazy(() => import("../general_components/Loader/Loader"));
 const Cart = React.lazy(() => import("../pages/Cart/Cart"));
+const Login = React.lazy(() => import("../pages/Auth/Login"));
 const NotFound = React.lazy(() => import("../pages/NotFound"));
 const Registration= React.lazy(()=> import("../pages/registration/Registration"))
 function Router() {
@@ -16,7 +17,9 @@ function Router() {
         <Route path="/cart" element={<Cart />} />
         <Route path="*" element={<NotFound />} />
           <Route path="home/" element={<Home/>}/>
-          <Route path="Registration/" element={<Registration/>}/>
+          <Route path="registration/" element={<Registration/>}/>
+          <Route path="login/" element={<Login/>}/>
+
       </Routes>
     </Suspense>
   );

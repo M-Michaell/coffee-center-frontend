@@ -6,10 +6,12 @@ import { useState } from "react";
 function Cart() {
   const [Delivery, setDelivery] = useState(0);
 
-  const onCheck = () => {
-    Delivery === 0 ? setDelivery(50) : setDelivery(0); // Set the delivery cost to 50
+  const addDelivery = () => {
+    setDelivery(50);
   };
-
+  const removeDelivery = () => {
+    setDelivery(0);
+  };
 
   return (
     <>
@@ -17,11 +19,12 @@ function Cart() {
         className="container text-start"
         style={{ backgroundColor: "var(--background)" }}
       >
-        <h2 className="orange mt-4 text-start fs-1 ms-5">
-          Cart
-          <hr></hr>
-        </h2>
-        <div className="row g-2">
+        <h2 className="orange mt-4 text-start fs-1 ms-5">Cart</h2>
+        <hr
+          className=" orange mb-5"
+          style={{ backgroundColor: "var(--orange)", height: "3px" }}
+        />
+        <div className="row g-4">
           {/* Cart Items (order-1 on small screens) */}
           <div className="col-xl-5 col order-2 order-md-2">
             <CartItems Delivery={Delivery} />
@@ -69,7 +72,7 @@ function Cart() {
                       type="radio"
                       name="flexRadioDefault"
                       id="flexRadioDefault1"
-                      onClick={onCheck}
+                      onClick={removeDelivery}
                     />
                     <div className="d-flex justify-contant-between w-100">
                       <label
@@ -100,7 +103,7 @@ function Cart() {
                       type="radio"
                       name="flexRadioDefault"
                       id="flexRadioDefault2"
-                      onClick={onCheck}
+                      onClick={addDelivery}
                     />
                     <div className="d-flex justify-contant-between w-100">
                       <label
@@ -109,7 +112,7 @@ function Cart() {
                       >
                         Delivery it to your place
                       </label>
-                      <p className="justify-self-end ms-5 fff"> 50 EGP</p>
+                      <p className="justify-self-end ms-3 fff"> +50 EGP</p>
                     </div>
                     <div className="collapse" id="adress">
                       <p>adress1</p>
@@ -125,7 +128,7 @@ function Cart() {
             {/* start paymentDetails */}
             <div className="d-flex">
               <div>
-                <p className="custom-border px-2 fs-5 fff me-3">1</p>
+                <p className="custom-border px-2 fs-5 fff me-3">3</p>
               </div>
               <div>
                 <p className="ms-3 fff fs-5 text-start">Payment Details</p>

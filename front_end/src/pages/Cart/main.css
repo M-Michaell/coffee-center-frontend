@@ -53,7 +53,7 @@ color: var(--orange) !important;
 
 
 
-/*
+
 
 
 
@@ -70,12 +70,25 @@ input, .form-control, .custom-select {
     box-shadow: 0 0 0 0.25rem rgba(189, 113, 43, 0.25) !important; 
   }
   
-
-  .form-label {
-    background-color: transparent !important;
-    color: #959595 !important;
-  }
   
 
+  .form-label {
+    background-color: var(--background) !important;
+    color: var(--gray1) !important;
+  } 
 
-*/
+
+   /* <div class="row g-2">
+   <div class="col-6-md">
+     <div class="form-outline  ">
+       <input
+         type="text"
+         id="form12"
+         class="form-control"
+       />
+       <label class="form-label " for="form12">
+         name
+       </label>
+     </div>
+   </div>
+ </div> */

@@ -14,7 +14,7 @@ export default function CardSlider(){
 
   };
     return(
-        <div style={{marginRight: "80px", marginLeft:"80px"}}>
+        <div style={{marginRight: "80px", marginLeft:"80px"}} >
         <Slider {...settings}>
 
                 <Card/>

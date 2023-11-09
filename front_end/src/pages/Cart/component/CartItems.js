@@ -71,6 +71,10 @@ function CartItems(props) {
             </button>
           </div>
           {/* end total */}
+          {/*  */}
+
+          
+          {/*  */}
         </div>
       </div>
     </>

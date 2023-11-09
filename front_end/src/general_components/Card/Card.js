@@ -2,9 +2,21 @@ import React from 'react';
 import Badge from '@mui/material/Badge';
 import {styled} from '@mui/material/styles';
 import photo from './mm.png'
-import {useState} from "react";
+import {useState, useEffect} from "react";
+import {useDispatch} from "react-redux";
+import {addToCart, decreaceQuantity, increaseQuantity, removeFromCart} from "../../store/slices/cart";
+import {useCookies} from "react-cookie";
 
-export default function Card() {
+export default function Card({cardData}) {
+    const item = {
+        id: "1",
+        name: "turkish coffee",
+        desc: "coffee with premuim test",
+        quantity: "1",
+        price: "50",
+        discount: "25",
+    }
+    const disPatch = useDispatch()
     const [isHeartClicked, setHeartClicked] = useState(false);
     const [count, setCount] = useState(1);
     const [weight, setweight] = useState('');
@@ -20,12 +32,11 @@ export default function Card() {
             border: `2px solid ${theme.palette.background.paper}`,
         },
     }));
-    const handleChange = (event) => {
-        setweight(event.target.value);
-    };
+
     const handleHeart = () => {
         setHeartClicked(!isHeartClicked);
     };
+
 
     return (
         <div className="mt-4">
@@ -44,7 +55,7 @@ export default function Card() {
                             className={`m-2 bi ${isHeartClicked ? "bi-heart-fill" : "bi-heart"} position-absolute`}
                             style={{top: "0px", left: "0px", color: "var(--orange)", fontSize: "23px"}}
                             onClick={handleHeart}></i></a>
-                        <h5 className="card-title" style={{color: "var(--orange)"}}>ROSSO & NERO</h5>
+                        <h5 className="card-title" style={{color: "var(--orange)"}}>title</h5>
                         <p className="card-text" style={{fontSize: "13px", height: "60px"}}>LINDT CREATION HASELNUSS DE
                             LUXE FEINHERB TAFEL - 150G </p>
 
@@ -54,8 +65,13 @@ export default function Card() {
                                     <div className="d-flex justify-content-between mt-5">
                                         <h3 style={{color: "var(--fff)"}} className="m-2">20$</h3>
 
-                                        <a style={{backgroundColor: "var(--orange)", color: "var(----fff)", fontSize: "18px"}}
+                                        <a style={{
+                                            backgroundColor: "var(--orange)",
+                                            color: "var(----fff)",
+                                            fontSize: "18px"
+                                        }}
                                            onClick={() => {
+                                               disPatch(addToCart(item))
                                                setInvisible(true);
                                                setCartVisibility(false);
                                                setCount(1)
@@ -66,6 +82,7 @@ export default function Card() {
                                 (
                                     <div className="d-flex justify-content-around mt-5">
                                         <a onClick={() => {
+                                            disPatch(decreaceQuantity(item))
                                             setCount(Math.max(count - 1, 0));
                                             count <= 1 ? setCartVisibility(true) : setCartVisibility(false)
                                         }} className="btn shadow  rounded rounded-pill " style={{
@@ -77,6 +94,7 @@ export default function Card() {
                                         }}>-</a>
                                         <h3>{20 * count}$</h3>
                                         <a onClick={() => {
+                                            disPatch(increaseQuantity(item))
                                             setCount(count + 1)
                                         }} className="btn shadow  rounded btn rounded-pill" style={{
                                             height: "44px",

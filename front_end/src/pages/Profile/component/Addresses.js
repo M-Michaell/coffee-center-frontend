@@ -1,9 +1,5 @@
-// OrdersComponent.js
 import React from 'react';
 
-const AddressesComponent = () => {
-  return <div>Addresses Component</div>;
-};
-
-export default AddressesComponent;
-
+export default function AddressesComponent() {
+  return <div><h1>Addresses Component</h1></div>;
+}

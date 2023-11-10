@@ -22,3 +22,7 @@
     background-color: var(--orange);
     color: white;
   }
+
+.active-link {
+    color: var(--orange);
+}

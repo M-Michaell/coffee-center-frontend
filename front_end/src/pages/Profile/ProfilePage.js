@@ -1,38 +1,41 @@
+// ProfilePage.js
 import React, { useState, startTransition } from "react";
 import { Link } from "react-router-dom";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import {faTableList,faHeartCircleCheck,} from "@fortawesome/free-solid-svg-icons";
-import {faAddressBook,faCreditCard,faUser,} from "@fortawesome/free-regular-svg-icons";
+import { faTableList, faHeartCircleCheck, faAddressBook, faCreditCard, faUser } from "@fortawesome/free-solid-svg-icons";
 import "./profile.css";
 import { useUserData } from "../../apis/profile";
-import OrdersComponent from "./component/Orders";
-import AddressesComponent from "./component/Addresses";
 
+const OrdersComponent = React.lazy(() => import("./component/Orders"));
+const AddressesComponent = React.lazy(() => import("./component/Addresses"));
+const ProfileComponent = React.lazy(() => import("./component/Profile"));
+const WishlistComponent = React.lazy(() => import("./component/Wishlist"));
+const PaymentsComponent = React.lazy(() => import("./component/Payments"));
 
 export default function Account() {
-    const { detailsData } = useUserData();
-    const [activeComponent, setActiveComponent] = useState('addresses');
-    const handleLinkClick = (component) => {
-        startTransition(() => {
-          setActiveComponent(component);
-        });
-      };
-    const componentMap = {
-        orders: OrdersComponent,
-        addresses: AddressesComponent,
-        // Add other components...
-    };
-    
-    const RenderComponent = componentMap[activeComponent];
-    
+  const { detailsData } = useUserData();
+  const [activeComponent, setActiveComponent] = useState('profile');
+  const handleLinkClick = (component) => {
+    startTransition(() => {
+      setActiveComponent(component);
+    });
+  };
+  const componentMap = {
+    orders: OrdersComponent,
+    addresses: AddressesComponent,
+    profile : ProfileComponent,
+    wishlist : WishlistComponent,
+    payments : PaymentsComponent
+  };
+
+  const RenderComponent = componentMap[activeComponent];
+
   if (!detailsData || !detailsData.Users || detailsData.Users.length === 0) {
-    // Return loading state or handle the absence of data
     return <p>Loading...</p>;
   }
 
   const user = detailsData.Users[0];
   return (
-
     <div className="container">
       <div className="row">
         <div className="col-lg-2 text-start text-light">
@@ -56,18 +59,6 @@ export default function Account() {
                 <span className="arrow-icon">&#9654;</span>
               </li>
             </Link>
-            <Link to={`/profile/wishlist`} className="order-link" onClick={() => handleLinkClick('wishlist')}>
-              <li className="mb-3 text-light">
-                <FontAwesomeIcon
-                  icon={faHeartCircleCheck}
-                  className="me-2"
-                  style={{ color: "var(--orange)" }}
-                />
-                Wishlist
-                <span className="arrow-icon">&#9654;</span>
-              </li>
-            </Link>
-
             <Link to={`/profile/addresses`} className="order-link" onClick={() => handleLinkClick('addresses')}>
               <li className="mb-3 text-light">
                 <FontAwesomeIcon
@@ -81,6 +72,19 @@ export default function Account() {
                 </span>
               </li>
             </Link>
+            <Link to={`/profile/wishlist`} className="order-link" onClick={() => handleLinkClick('wishlist')}>
+              <li className="mb-3 text-light">
+                <FontAwesomeIcon
+                  icon={faHeartCircleCheck}
+                  className="me-2"
+                  style={{ color: "var(--orange)" }}
+                />
+                Wishlist
+                <span className="arrow-icon" style={{ color: "var(--orange)" }}>
+                  &#9654;
+                </span>
+              </li>
+            </Link>
             <Link to={`/profile/payments`} className="order-link" onClick={() => handleLinkClick('payments')}>
               <li className="mb-3 text-light">
                 <FontAwesomeIcon
@@ -89,19 +93,22 @@ export default function Account() {
                   style={{ color: "var(--orange)" }}
                 />
                 Payments
-                <span className="arrow-icon">&#9654;</span>
+                <span className="arrow-icon" style={{ color: "var(--orange)" }}>
+                  &#9654;
+                </span>
               </li>
             </Link>
-
-            <Link to={`/profile`} className="order-link" onClick={() => handleLinkClick('profile')}>
+            <Link to={`/profile/addresses`} className="order-link" onClick={() => handleLinkClick('profile')}>
               <li className="mb-3 text-light">
                 <FontAwesomeIcon
                   icon={faUser}
-                  className="me-2 fw-bold"
+                  className="me-2"
                   style={{ color: "var(--orange)" }}
                 />
                 Profile
-                <span className="arrow-icon">&#9654;</span>
+                <span className="arrow-icon" style={{ color: "var(--orange)" }}>
+                  &#9654;
+                </span>
               </li>
             </Link>
           </ul>
@@ -109,15 +116,14 @@ export default function Account() {
           <Link to={`/cart`}>
             <p className="mt-5 mb-5 text-light" >Sign Out</p>
             <span className="arrow-icon" style={{ color: "var(--orange)" }}>
-                  &#9654;
-                </span>
+              &#9654;
+            </span>
           </Link>
         </div>
         <div
           className="col-lg-10 shadow-lg p-3 mt-3 mb-5 p-4"
-          //   style={{ border: "2px solid orange" }}
         >
-         <RenderComponent user={user} />
+          <RenderComponent user={user} />
         </div>
       </div>
     </div>

@@ -1,8 +1,5 @@
-// OrdersComponent.js
 import React from 'react';
 
-const OrdersComponent = () => {
-  return <div>Orders Component</div>;
-};
-
-export default OrdersComponent;
+export default function OrdersComponent() {
+  return <div><h1>Orders Component</h1></div>;
+}

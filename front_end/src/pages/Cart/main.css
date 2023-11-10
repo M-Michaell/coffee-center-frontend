@@ -20,7 +20,9 @@ color: var(--orange) !important;
     padding-inline: 10px !important;
 
 }
-
+.background{
+  background-color: var(--background) !important;
+}
 
 
 

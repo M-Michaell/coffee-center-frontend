@@ -2,24 +2,16 @@ import React from 'react';
 import Badge from '@mui/material/Badge';
 import {styled} from '@mui/material/styles';
 import photo from './mm.png'
-import {useState, useEffect} from "react";
+import {useState} from "react";
 import {useDispatch} from "react-redux";
 import {addToCart, decreaceQuantity, increaseQuantity, removeFromCart} from "../../store/slices/cart";
-import {useCookies} from "react-cookie";
 
-export default function Card({cardData}) {
-    const item = {
-        id: "1",
-        name: "turkish coffee",
-        desc: "coffee with premuim test",
-        quantity: "1",
-        price: "50",
-        discount: "25",
-    }
-    const disPatch = useDispatch()
+
+
+export default function Card({item}) {
+    const disPatch = useDispatch();
     const [isHeartClicked, setHeartClicked] = useState(false);
     const [count, setCount] = useState(1);
-    const [weight, setweight] = useState('');
     const [invisible, setInvisible] = useState(false);
     const [isCartVisible, setCartVisibility] = useState(true);
     const StyledBadge = styled(Badge)(({theme}) => ({
@@ -47,7 +39,7 @@ export default function Card({cardData}) {
                 backgroundColor: "var(--gray2)",
                 marginTop: "100px"
             }}>
-                <img src={photo} className="mt-5 position-absolute top-0 start-50 translate-middle"
+                <img src={`http://127.0.0.1:8000${item?.image}`} className="mt-5 position-absolute top-0 start-50 translate-middle"
                      style={{height: "250px"}} alt="..."/>
                 <StyledBadge badgeContent={count} color="success" invisible={!invisible}>
                     <div className="card-body " style={{marginTop: "150px"}}>
@@ -55,15 +47,14 @@ export default function Card({cardData}) {
                             className={`m-2 bi ${isHeartClicked ? "bi-heart-fill" : "bi-heart"} position-absolute`}
                             style={{top: "0px", left: "0px", color: "var(--orange)", fontSize: "23px"}}
                             onClick={handleHeart}></i></a>
-                        <h5 className="card-title" style={{color: "var(--orange)"}}>title</h5>
-                        <p className="card-text" style={{fontSize: "13px", height: "60px"}}>LINDT CREATION HASELNUSS DE
-                            LUXE FEINHERB TAFEL - 150G </p>
+                        <h5 className="card-title" style={{color: "var(--orange)"}}>{item?.name}</h5>
+                        <p className="card-text" style={{fontSize: "13px", height: "60px"}}>{item?.desc}</p>
 
                         {
                             isCartVisible ?
                                 (
                                     <div className="d-flex justify-content-between mt-5">
-                                        <h3 style={{color: "var(--fff)"}} className="m-2">20$</h3>
+                                        <h3 style={{color: "var(--fff)"}} className="m-2">{item?.price}$</h3>
 
                                         <a style={{
                                             backgroundColor: "var(--orange)",
@@ -92,7 +83,7 @@ export default function Card({cardData}) {
                                             fontSize: "20px",
                                             color: "var(--fff)"
                                         }}>-</a>
-                                        <h3>{20 * count}$</h3>
+                                        <h3>{item?.price * count}$</h3>
                                         <a onClick={() => {
                                             disPatch(increaseQuantity(item))
                                             setCount(count + 1)

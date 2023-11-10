@@ -21,9 +21,7 @@ export default function Images(){
                     <img src={m4} style={{height:"50%", width:"100%"}} className="mb-4 rounded-5"/>
                     <br/>
                     <img src={m5} style={{height:"50%", width:"100%"}} className="rounded-5"/>
-
                 </div>
-
             </div>
         </div>
     );

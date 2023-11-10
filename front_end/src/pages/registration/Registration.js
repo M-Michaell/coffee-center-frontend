@@ -1,5 +1,4 @@
 import React, {useState} from "react";
-import image2 from "../../assets/images/pexels-photo-3879495.webp";
 
 export default function RegistrationForm() {
     const specialCharsRegex = /[^a-zA-Z0-9]/;
@@ -48,7 +47,7 @@ export default function RegistrationForm() {
             seterr({...err, userName: !letterRegex.test(e.target.value) ? "must have 1 letter at lest" : null});
 
         }
-        if (e.target.name == 'email') {
+        if (e.target.name === 'email') {
             setFormInput({...formInput, email: e.target.value})
 
         }

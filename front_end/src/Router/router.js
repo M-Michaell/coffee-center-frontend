@@ -8,6 +8,7 @@ const Cart = React.lazy(() => import("../pages/Cart/Cart"));
 const Login = React.lazy(() => import("../pages/Auth/Login"));
 const NotFound = React.lazy(() => import("../pages/NotFound"));
 const Registration= React.lazy(()=> import("../pages/registration/Registration"))
+const Account= React.lazy(() => import("../pages/Profile/ProfilePage"))
 function Router() {
 
   return (
@@ -19,7 +20,7 @@ function Router() {
           <Route path="home/" element={<Home/>}/>
           <Route path="registration/" element={<Registration/>}/>
           <Route path="login/" element={<Login/>}/>
-
+          <Route path="/profile/*" element={<Account/>}/>
       </Routes>
     </Suspense>
   );

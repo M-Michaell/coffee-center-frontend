@@ -1,0 +1,28 @@
+.order-link {
+    position: relative;
+  }
+  
+.arrow-icon {
+    color: var(--orange);
+    position: absolute;
+    right: 0;
+    opacity: 0;
+    transition: opacity 0.3s;
+  }
+  
+.order-link:hover .arrow-icon {
+    opacity: 1;
+  }
+
+.custom-btn {
+    transition: background-color 0.3s;
+  }
+  
+.custom-btn:hover {
+    background-color: var(--orange);
+    color: white;
+  }
+
+.active-link {
+    color: var(--orange);
+}

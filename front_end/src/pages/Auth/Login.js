@@ -1,28 +1,28 @@
 import React, { useState } from "react";
-import image1 from "../../assets/images/pexels-photo-1235706.webp";
 import image2 from "../../assets/images/pexels-photo-3879495.webp";
 import "../Cart/main.css";
+import { useDispatch, useSelector } from "react-redux";
+import { useNavigate } from "react-router-dom";
+import { axiosInstance } from "../../apis/config";
+import { loginFailure, loginSuccess } from "../../store/slices/user";
+import { initialCart } from "../../store/slices/cart";
+import CartItems from '../Cart/component/CartItems';
+import {  InitialCartAPI } from "../../apis/cartOperations/getCartData";
 
 function Login() {
+  const navigate = useNavigate();
+  const dispatch = useDispatch();
+  const error = useSelector((state) => state.user.error);
   const [Form, setForm] = useState({
     email: "",
-    // username: "",
     password: "",
   });
   const [FormErr, setFormErr] = useState({
     email: null,
-    // username: null,
     password: null,
   });
 
-  const handleSubmitForm = (e) => {
-    e.preventDefault();
-    console.log(Form);
-  };
-
   const handleFormChange = (e) => {
-  
-
     if (e.target.name === "email") {
       const email = e.target.value;
       const emailRegex = /^[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[A-Za-z]{2,}$/;
@@ -42,8 +42,7 @@ function Login() {
     }
     if (e.target.name === "password") {
       const password = e.target.value;
-      const passwordRegex =
-        /^(?=.*[A-Z])(?=.*[a-z])(?=.*\d)(?=.*[!@#$%^&*()_+{}[\]:;<$>,.?~]).{8,}$/;
+      const passwordRegex = /^.{8,}$/;
       setForm({
         ...Form,
         password: password,
@@ -60,17 +59,42 @@ function Login() {
     }
   };
 
+  const handleSubmit = async (event) => {
+    console.log(Form);
+    event.preventDefault(); // Prevent the default form submission behavior
+
+    try {
+      const response = await axiosInstance.post("/accounts/api/login", Form);
+      const userData = response.data;
+      console.log(userData);
+
+      dispatch(loginSuccess(userData));
+      dispatch(initialCart(InitialCartAPI(userData)))
+      navigate("/home");
+
+      console.log(response);
+    } catch (error) {
+      console.error(error);
+
+      let errorMessage = "Login failed. Please check your credentials.";
+      console.log("Login failed:", error.message);
+
+      dispatch(loginFailure(errorMessage));
+    }
+  };
+
   return (
     <div>
       <div className="  m-3 d-flex ">
         <div className="mb-5 mx-auto my-5 h-100 ">
+          {error && <h3>{error}</h3>}
           <div
             className="row g-0  rounded-5 "
             style={{
               maxWidth: "900px",
               borderColor: "var(--orange)",
               border: "3px solid var(--orange)",
-              boxShadow:"1px 1px 40px var(--orange)"
+              boxShadow: "1px 1px 40px var(--orange)",
             }}
           >
             <div className="col-md-6 shadow-5">
@@ -90,7 +114,10 @@ function Login() {
 
                     <form>
                       {/* <!-- Email input --> */}
-                      <label htmlFor="inputeail" className="form-label text-start">
+                      <label
+                        htmlFor="inputeail"
+                        className="form-label text-start"
+                      >
                         Email Address
                       </label>
                       <input
@@ -104,7 +131,10 @@ function Login() {
                         aria-describedby="passwordHelpBlock"
                       />
                       {FormErr.email && (
-                        <p id="passHelping" className="form-text text-danger text-wrap ">
+                        <p
+                          id="passHelping"
+                          className="form-text text-danger text-wrap "
+                        >
                           {FormErr.email}
                         </p>
                       )}
@@ -127,7 +157,10 @@ function Login() {
                         aria-describedby="passwordHelpBlock"
                       />
                       {FormErr.password && (
-                        <p id="passHelping" className="form-text text-danger text-wrap">
+                        <p
+                          id="passHelping"
+                          className="form-text text-danger text-wrap"
+                        >
                           {FormErr.password}
                         </p>
                       )}
@@ -166,7 +199,7 @@ function Login() {
                         type="submit"
                         className="btn rounded-pill btn-block mb-4 fff"
                         style={{ backgroundColor: " var(--orange) " }}
-                        onClick={handleSubmitForm}
+                        onClick={handleSubmit}
                       >
                         Login in
                       </button>

@@ -5,15 +5,17 @@ import Oneproduct from "./oneproduct";
 function CartItems(props) {
   const { Delivery } = props;
   const cart = useSelector((state) => state.cart.cartItems);
+  
+  // console.log("cart",cart);
 
   let totalPrice = 0;
   let totalDiscount = 0;
-  const cartPrices = cart.map((item) => Math.round(item.price * item.quantity));
+  const cartPrices = cart.map((item) => Math.round(item.product.price * item.quantity));
   cartPrices.forEach((itemPrice) => {
     totalPrice += itemPrice;
   });
   const cartDiscount = cart.map((item) =>
-    Math.round((item.price * item.quantity * item.discount) / 100)
+    Math.round((item.product.price * item.quantity * item.product.discount_percentage) / 100)
   );
   cartDiscount.forEach((itemDiscount) => {
     totalDiscount += itemDiscount;

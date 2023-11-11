@@ -7,7 +7,11 @@ export default function OrderRow({ count, product, quantity}) {
       <td>{quantity}</td>
       <td>{product.price}</td>
       <td>{product.discount_percentage}</td>
-      <td><img src={product.image} width={30} alt="" /></td>
+      <td>
+        <a href={product.image} target="_blank">
+          <img src={product.image} height={50} alt="" />
+        </a>
+      </td>
     </tr>
   );
 }

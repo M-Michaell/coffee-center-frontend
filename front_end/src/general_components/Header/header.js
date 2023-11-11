@@ -33,7 +33,7 @@ export default function Navbarr() {
                                     >
                                         Actions
                                     </Nav.Link>
-                                    <Nav.Link href="#link" className="m-3 text-light">
+                                    <Nav.Link href="/order" className="m-3 text-light">
                                         Payment and Delivery
                                     </Nav.Link>
                                     <Nav.Link href="#link" className="m-3 text-light">

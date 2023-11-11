@@ -19,13 +19,18 @@
     }
     
     .rating-color{
-        color:#fbc634 !important;
+        color:#BD712B !important;
+    }
+
+    .rating-star{
+        font-size:14px !important;
+
     }
     
     .review-count{
+        align-self: start;
         font-weight:400;
-        margin-bottom:2px;
-        font-size:24px !important;
+        font-size:10px !important;
     }
     
     .small-ratings i{

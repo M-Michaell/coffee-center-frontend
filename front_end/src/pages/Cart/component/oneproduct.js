@@ -20,10 +20,10 @@ function Oneproduct(props) {
             <div className="border-0 w-100 background ">
               <div className=" text-start d-flex flex-column align-items-start pt-0">
                 <div className="d-flex justify-content-between">
-                  <h4 className="orange">{item.name}</h4>
+                  <h4 className="orange">{item.product.name}</h4>
                 </div>
 
-                <p className="gray1 fw-bold mb-1">{item.desc}</p>
+                <p className="gray1 fw-bold mb-1">{item.product.desc}</p>
                 <p className="gray1 py-0 my-0 ">250 g</p>
                 {/* controls */}
                 <Counter product={item} />

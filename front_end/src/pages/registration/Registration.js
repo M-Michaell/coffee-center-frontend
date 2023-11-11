@@ -4,10 +4,13 @@ export default function RegistrationForm() {
     const specialCharsRegex = /[^a-zA-Z0-9]/;
     const capitalLetterRegex = /[A-Z]/;
     const letterRegex = /[a-z]/;
+    const phoneRegex = /^(?:\+20|0)?1[0-2]\d{8}$/;
+
     const [formInput, setFormInput] = useState({
         fname: "",
         lname: "",
         email: "",
+        phone: "",
         userName: "",
         password: '',
         // confirmPassword: '',
@@ -18,6 +21,7 @@ export default function RegistrationForm() {
         fname: null,
         lname: null,
         email: null,
+        phone: null,
         userName: null,
         password: null,
         confirmPassword: null,
@@ -54,6 +58,10 @@ export default function RegistrationForm() {
         if (e.target.name === 'confirm') {
             // setFormInput({...formInput, confirmPassword: e.target.value});
             seterr({...err, confirmPassword: e.target.value !== formInput.password ? "password dont match" : null});
+        }
+        if (e.target.name === 'phone'){
+            setFormInput({...formInput, phone: e.target.value});
+            seterr({...err, phone: !phoneRegex.test(e.target.value) ? "write correct phone number" : null })
         }
     }
     const submited = (e) => {
@@ -103,6 +111,21 @@ export default function RegistrationForm() {
                            required/>
                 </div>
                 {err.fname && (<h6 className="form-text text-danger">{err.fname}</h6>)}
+
+                <div className="col-md-4 w-75">
+                    <label for="phone"
+                           style={{color:"var(--gray1)",fontSize:"18px"}}
+                           className="form-label mt-3">Phone Number</label>
+                    <input value={formInput.phone}
+                           style={{backgroundColor:"var(--gray2)", borderColor:"var(--orange)", fontSize:"20px" ,color:"var(--orange)"}}
+                           name="phone"
+                           onChange={handeler}
+                           type="text"
+                           className="form-control"
+                           id="phone"
+                           required/>
+                </div>
+                {err.phone && (<h6 className="form-text text-danger fs-5">{err.phone}</h6>)}
 
                 <div className="col-md-4 w-75">
                     <label for="validationDefault02"

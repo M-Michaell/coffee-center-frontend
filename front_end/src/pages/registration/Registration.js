@@ -1,116 +1,120 @@
-import React, {useState} from "react";
+import React, { useState } from "react";
+import axios from "axios";
+import { axiosInstance } from "../../apis/config";
+import { useNavigate } from "react-router-dom";
 
 export default function RegistrationForm() {
     const specialCharsRegex = /[^a-zA-Z0-9]/;
     const capitalLetterRegex = /[A-Z]/;
     const letterRegex = /[a-z]/;
     const phoneRegex = /^(?:\+20|0)?1[0-2]\d{8}$/;
-
+    const navigate = useNavigate()
     const [formInput, setFormInput] = useState({
-        fname: "",
-        lname: "",
+        first_name: "",
+        last_name: "",
         email: "",
         phone: "",
-        userName: "",
+        username: "",
         password: '',
-        // confirmPassword: '',
-        // checked: false,
+        // ...
+    });
 
-    })
-    const [err, seterr] = useState({
-        fname: null,
-        lname: null,
+    const [err, setErr] = useState({
+        first_name: null,
+        last_name: null,
         email: null,
         phone: null,
-        userName: null,
+        username: null,
         password: null,
         confirmPassword: null,
         checked: null,
+    });
 
-    })
-    const handeler = (e) => {
-        if (e.target.name === 'lname') {
-            setFormInput({...formInput, lname: e.target.value});
+    const handleInput = (e) => {
+        if (e.target.name === 'last_name') {
+            setFormInput({ ...formInput, last_name: e.target.value });
         }
-        if (e.target.name === 'fname') {
-            setFormInput({...formInput, fname: e.target.value});
+        if (e.target.name === 'first_name') {
+            setFormInput({ ...formInput, first_name: e.target.value });
         }
         if (e.target.name === 'password') {
-            setFormInput({...formInput, password: e.target.value});
-            seterr({
+            setFormInput({ ...formInput, password: e.target.value });
+            setErr({
                 ...err,
                 password:
                     e.target.value.length < 8 ? "length should be 8 or more" : null
                     || !specialCharsRegex.test(e.target.value) ? "must have special char" : null
-                    || !letterRegex.test(e.target.value) ? "must have 1 letter at lest" : null
-                    || !capitalLetterRegex.test(e.target.value) ? "must have captial letter" : null
+                    || !letterRegex.test(e.target.value) ? "must have 1 letter at least" : null
+                    || !capitalLetterRegex.test(e.target.value) ? "must have capital letter" : null
             });
         }
-        if (e.target.name === 'user') {
-            setFormInput({...formInput, userName: e.target.value})
-            seterr({...err, userName: !letterRegex.test(e.target.value) ? "must have 1 letter at lest" : null});
-
+        if (e.target.name === 'username') {
+            setFormInput({ ...formInput, username: e.target.value })
+            setErr({ ...err, username: !letterRegex.test(e.target.value) ? "must have 1 letter at least" : null });
         }
         if (e.target.name === 'email') {
-            setFormInput({...formInput, email: e.target.value})
-
+            setFormInput({ ...formInput, email: e.target.value })
         }
-        if (e.target.name === 'confirm') {
-            // setFormInput({...formInput, confirmPassword: e.target.value});
-            seterr({...err, confirmPassword: e.target.value !== formInput.password ? "password dont match" : null});
+        if (e.target.name === 'confirmPassword') {
+            setErr({ ...err, confirmPassword: e.target.value !== formInput.password ? "passwords don't match" : null });
         }
         if (e.target.name === 'phone'){
             setFormInput({...formInput, phone: e.target.value});
-            seterr({...err, phone: !phoneRegex.test(e.target.value) ? "write correct phone number" : null })
+            setErr({...err, phone: !phoneRegex.test(e.target.value) ? "write correct phone number" : null })
         }
-    }
-    const submited = (e) => {
+    };
+
+    const handleSubmit = async (e) => {
         e.preventDefault();
-        console.log(formInput);
-    }
+        try {
+            const response = await axiosInstance.post('/accounts/api/', formInput);
+            console.log(response.data);
+            navigate('/login')
+        } catch (error) {
+            console.error(error);
+        }
+    };
+
     return (
-        <div className="text-start "
-             style={{color:"var(--gray1)"}}
-        >
-            <form className="p-5 mb-5 mx-auto my-5 "
-                  onSubmit={submited}
+        <div className="text-start" style={{ color: "var(--gray1)" }}>
+            <form className="p-5 mb-5 mx-auto my-5"
+                  onSubmit={handleSubmit}
                   style={{
                       maxWidth: "900px",
                       borderColor: "var(--orange)",
                       border: "3px solid var(--orange)",
                       boxShadow: "1px 1px 40px var(--orange)",
-
                   }}
             >
                 <h1 className="text-center">Registration</h1>
                 <div className="col-md-4 w-75">
-                    <label for="validationDefault01"
-                           style={{color:"var(--gray1)" ,fontSize:"18px"}}
+                    <label htmlFor="validationDefault01"
+                           style={{ color: "var(--gray1)", fontSize: "18px" }}
                            className="form-label mt-3">First name</label>
-                    <input value={formInput.fname}
-                           style={{backgroundColor:"var(--gray2)", borderColor:"var(--orange)", fontSize:"20px" ,color:"var(--orange)"}}
-                           onChange={handeler}
-                           name='fname' type="text"
+                    <input value={formInput.first_name}
+                           style={{ backgroundColor: "var(--gray2)", borderColor: "var(--orange)", fontSize: "20px", color: "var(--orange)" }}
+                           onChange={handleInput}
+                           name='first_name' type="text"
                            pattern="[a-zA-Z]+"
                            className="form-control"
                            id="validationDefault01"
                            required/>
                 </div>
                 <div className="col-md-4 w-75">
-                    <label for="validationDefault02"
-                           style={{color:"var(--gray1)",fontSize:"18px"}}
+                    <label htmlFor="validationDefault02"
+                           style={{ color: "var(--gray1)", fontSize: "18px" }}
                            className="form-label mt-3">Last name</label>
-                    <input value={formInput.lname}
-                           style={{backgroundColor:"var(--gray2)", borderColor:"var(--orange)", fontSize:"20px" ,color:"var(--orange)"}}
-                           name="lname"
-                           onChange={handeler}
+                    <input value={formInput.last_name}
+                           style={{ backgroundColor: "var(--gray2)", borderColor: "var(--orange)", fontSize: "20px", color: "var(--orange)" }}
+                           name="last_name"
+                           onChange={handleInput}
                            type="text"
                            pattern="[a-zA-Z]+"
                            className="form-control"
                            id="validationDefault02"
                            required/>
                 </div>
-                {err.fname && (<h6 className="form-text text-danger">{err.fname}</h6>)}
+                {err.first_name && (<h6 className="form-text text-danger">{err.first_name}</h6>)}
 
                 <div className="col-md-4 w-75">
                     <label for="phone"
@@ -119,7 +123,7 @@ export default function RegistrationForm() {
                     <input value={formInput.phone}
                            style={{backgroundColor:"var(--gray2)", borderColor:"var(--orange)", fontSize:"20px" ,color:"var(--orange)"}}
                            name="phone"
-                           onChange={handeler}
+                           onChange={handleInput}
                            type="text"
                            className="form-control"
                            id="phone"
@@ -128,11 +132,11 @@ export default function RegistrationForm() {
                 {err.phone && (<h6 className="form-text text-danger fs-5">{err.phone}</h6>)}
 
                 <div className="col-md-4 w-75">
-                    <label for="validationDefault02"
-                           style={{color:"var(--gray1)", fontSize:"18px"}}
+                    <label htmlFor="validationDefault02"
+                           style={{ color: "var(--gray1)", fontSize: "18px" }}
                            className="form-label text-start mt-2">Email</label>
-                    <input onChange={handeler}
-                           style={{backgroundColor:"var(--gray2)", borderColor:"var(--orange)", fontSize:"20px" ,color:"var(--orange)"}}
+                    <input onChange={handleInput}
+                           style={{ backgroundColor: "var(--gray2)", borderColor: "var(--orange)", fontSize: "20px", color: "var(--orange)" }}
                            name="email"
                            value={formInput.email}
                            type="email"
@@ -142,17 +146,17 @@ export default function RegistrationForm() {
                            required/>
                 </div>
                 <div className="col-md-4 w-75">
-                    <label for="validationDefaultUsername"
-                            style={{color:"var(--gray1)", fontSize:"18px"}}
+                    <label htmlFor="validationDefaultUsername"
+                           style={{ color: "var(--gray1)", fontSize: "18px" }}
                            className="form-label mt-2">User Name</label>
                     <div className="input-group">
                     <span className="input-group-text"
-                          style={{backgroundColor:"var(--gray2)", borderColor:"var(--orange)", fontSize:"20px" ,color:"var(--orange)"}}
+                          style={{ backgroundColor: "var(--gray2)", borderColor: "var(--orange)", fontSize: "20px", color: "var(--orange)" }}
                           id="inputGroupPrepend2">@</span>
-                        <input onChange={handeler}
-                               style={{backgroundColor:"var(--gray2)", borderColor:"var(--orange)",  fontSize:"20px" ,color:"var(--orange)"}}
-                               name="user"
-                               value={formInput.userName}
+                        <input onChange={handleInput}
+                               style={{ backgroundColor: "var(--gray2)", borderColor: "var(--orange)", fontSize: "20px", color: "var(--orange)" }}
+                               name="username"
+                               value={formInput.username}
                                type="text"
                                className="form-control"
                                id="validationDefaultUsername"
@@ -160,63 +164,60 @@ export default function RegistrationForm() {
                                required/>
                     </div>
                 </div>
-                {err.userName && (<h6 className="form-text text-danger fs-5">{err.userName}</h6>)}
+                {err.username && (<h6 className="form-text text-danger fs-5">{err.username}</h6>)}
 
                 <div className="col-md-4 w-75">
-                    <label for="inputPassword6"
-                            style={{color:"var(--gray1)", fontSize:"20px"}}
+                    <label htmlFor="inputPassword6"
+                           style={{ color: "var(--gray1)", fontSize: "20px" }}
                            className="col-form-label mt-2">Password</label>
                 </div>
-                <div class="col-md-4 w-75">
-                    <input onChange={handeler}
-                           style={{backgroundColor:"var(--gray2)", borderColor:"var(--orange)", fontSize:"20px" ,color:"var(--orange)"}}
+                <div className="col-md-4 w-75">
+                    <input onChange={handleInput}
+                           style={{ backgroundColor: "var(--gray2)", borderColor: "var(--orange)", fontSize: "20px", color: "var(--orange)" }}
                            type="password"
                            id="inputPassword6"
                            name='password'
                            className="form-control"
                            aria-describedby="passwordHelpInline"/>
                 </div>
-                    {err.password && (<h6 id="passwordHelp" className="form-text text-danger fs-5">{err.password}</h6>)}
+                {err.password && (<h6 id="passwordHelp" className="form-text text-danger fs-5">{err.password}</h6>)}
 
+<div className="col-md-4 w-75">
+    <label htmlFor="validationDefault02"
+            style={{ color: "var(--gray1)", fontSize: "20px" }}
+            className="form-label mt-2">Confirm Password</label>
+    <input onChange={handleInput}
+           style={{ backgroundColor: "var(--gray2)", borderColor: "var(--orange)", fontSize: "20px", color: "var(--orange)" }}
+           name='confirmPassword'
+           type="password"
+           className="form-control"
+           id="validationDefault02"
+           required/>
+</div>
+{err.confirmPassword && (<h6 className="form-text text-danger fs-5">{err.confirmPassword}</h6>)}
 
-                <div className="col-md-4 w-75">
-                    <label for="validationDefault02"
-                            style={{color:"var(--gray1)", fontSize:"20px"}}
-                           className="form-label mt-2">confirm passwrd</label>
-                    <input onChange={handeler}
-                           style={{backgroundColor:"var(--gray2)", borderColor:"var(--orange)", fontSize:"20px" ,color:"var(--orange)"}}
-
-                           name='confirm'
-                           type="password"
-                           className="form-control"
-                           id="validationDefault02"
-                           required/>
-                </div>
-                {err.confirmPassword && (<h6 className="form-text text-danger fs-5">{err.confirmPassword}</h6>)}
-                <div className="col-12">
-                    <div className="form-check">
-                        <input className="form-check-input mt-3"
-                               style={{backgroundColor:"var(--orange)"}}
-                               type="checkbox"
-                               value=""
-                               id="invalidCheck2"
-                               required/>
-                        <label className="form-check-label mt-2"
-                           style={{borderColor:"var(--orange)", fontSize:"20px" ,color:"var(--orange)"}}
-
-                               for="invalidCheck2">
-                            Agree to terms and conditions
-                        </label>
-                    </div>
-                </div>
-                <div className="col-12">
-                    <button className="btn rounded-pill btn-block mb-4 mt-3"
-                             style={{ backgroundColor: " var(--orange) ", color:"var(--fff)", fontSize:"18px" }}
-                            type="submit">Sign Up
-                    </button>
-                </div>
-            </form>
-        </div>
-
-    );
+<div className="col-12">
+    <div className="form-check">
+        <input className="form-check-input mt-3"
+               style={{ backgroundColor: "var(--orange)" }}
+               type="checkbox"
+               value=""
+               id="invalidCheck2"
+               required/>
+        <label className="form-check-label mt-2"
+               style={{ borderColor: "var(--orange)", fontSize: "20px", color: "var(--orange)" }}
+               htmlFor="invalidCheck2">
+            Agree to terms and conditions
+        </label>
+    </div>
+</div>
+<div className="col-12">
+    <button className="btn rounded-pill btn-block mb-4 mt-3"
+            style={{ backgroundColor: " var(--orange) ", color: "var(--fff)", fontSize: "18px" }}
+            type="submit">Sign Up
+    </button>
+</div>
+</form>
+</div>
+);
 }

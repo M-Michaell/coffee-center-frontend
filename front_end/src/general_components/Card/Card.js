@@ -72,9 +72,14 @@ export default function Card({item}) {
                                 (
                                     <div className="d-flex justify-content-around mt-5">
                                         <a onClick={() => {
-                                            disPatch(decreaceQuantity(item))
                                             setCount(Math.max(count - 1, 0));
-                                            count <= 1 ? setCartVisibility(true) : setCartVisibility(false)
+                                            if (count <= 1){
+                                                setCartVisibility(true);
+                                                disPatch(removeFromCart(item))
+                                            }
+                                            else{
+                                                setCartVisibility(false)
+                                            }
                                         }} className="btn shadow  rounded rounded-pill " style={{
                                             height: "44px",
                                             width: "62px",

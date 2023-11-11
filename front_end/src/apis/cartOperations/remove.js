@@ -3,9 +3,9 @@ import { axiosInstance } from "../config";
 export function deleteAPI(data, session) {
 
     console.log("deletttttttttttttttttttttttttttt",data)
+    console.log("sesssssssssssssssssion",session)
 
-
-    axiosInstance.delete(`cart/shopping-sessions/${session}/delete_cart_item/`, data)
+    axiosInstance.delete(`cart/shopping-sessions/${session}/delete_cart_item/`, { data:{product:data}})
       .then((response) => {
         console.log("API Response:", response.data);
       })

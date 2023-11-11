@@ -82,10 +82,6 @@ const cart = createSlice({
                 : alert(
                     "you can not decrease quantity more than once,  you can remove it"
                 );
-            state.cartItems = [
-                ...state.cartItems.filter((item) => item.id !== action.payload.id),
-            ];
-
         },
     },
 });

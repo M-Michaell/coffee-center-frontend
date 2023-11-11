@@ -1,6 +1,9 @@
 import OrderProducts from "./componants/OrderProducts";
 import { OrderDetailsApi } from "../../apis/order_details";
 import React, { useEffect, useState } from "react";
+import TrackOrder from "./componants/TrackOrder";
+import "./../Cart/main.css";
+import TotalPrice from "./componants/TotalPrice";
 
 export default function Order() {
   const orderID = 1;
@@ -21,19 +24,21 @@ export default function Order() {
     fetchData();
   }, []);
 
-
   return (
-    <div>
-        {orderDetails ? (
+    <div className="p-5 m-5"style={{border:'1px orange solid'}}>
+      {orderDetails ? (
         <div className="vh-100 mt-5">
-          <OrderProducts order_items={orderDetails.order_items}/>
+          <h1 className="orange pb-5">Thank you for your order</h1>
+          <OrderProducts order_items={orderDetails.order_items} />
+          <TotalPrice price={orderDetails.payment_method.amount} />
+          <div className="pt-5 mt-5">
+            <h1 className="orange">Tracking</h1>
+              <TrackOrder />
+          </div>
         </div>
-          ) : (
-            <p>Loading...</p>
-          )}
-        
-        
-        
+      ) : (
+        <p className="p-5 m-5">Loading...</p>
+      )}
     </div>
-  )
+  );
 }

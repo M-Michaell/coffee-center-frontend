@@ -11,13 +11,13 @@ export default function OrderProducts({order_items}) {
           <table className="table table-striped table-dark">
             <thead>
               <tr>
-                <th scope="col">#</th>
-                <th scope="col">Name</th>
-                <th scope="col">Description</th>
-                <th scope="col">Quantity</th>
-                <th scope="col">Price</th>
-                <th scope="col">Discount</th>
-                <th scope="col">image</th>
+                <th scope="col" className="orange fs-5" style={{width:'10px'}}>#</th>
+                <th scope="col" className="orange fs-5">image</th>
+                <th scope="col" className="orange fs-5">Name</th>
+                <th scope="col" className="orange fs-5">Quantity</th>
+                <th scope="col" className="orange fs-5">Unit Price</th>
+                <th scope="col" className="orange fs-5">Total Price</th>
+                
               </tr>
             </thead>
             <tbody>
@@ -30,7 +30,7 @@ export default function OrderProducts({order_items}) {
               ))}
             </tbody>
           </table>
-          <TotalPrice price={1000} />
+          
         </div>
 
     </div>

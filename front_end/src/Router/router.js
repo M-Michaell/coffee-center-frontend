@@ -22,6 +22,7 @@ function Router() {
         <Route path="registration/" element={<Registration/>}/>
         <Route path="login/" element={<Login/>}/>
         <Route path="/profile/*" element={<Account/>}/>
+        <Route path="/order/tracking/" element={<Account/>}/>
         <Route path="*" element={<NotFound />} />
 
       </Routes>

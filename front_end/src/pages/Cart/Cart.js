@@ -2,10 +2,18 @@ import CartItems from "./component/CartItems";
 import "./main.css";
 import map from "../../assets/map.png";
 import { useState } from "react";
+import { useSelector } from "react-redux";
 
 function Cart() {
+  const user = useSelector((state) => state.user?.user?.user);
+  console.log(user);
+  const addresses = useSelector((state) => state.user?.user?.addresses);
+  const payments = useSelector((state) => state.user?.user?.payments);
   const [Delivery, setDelivery] = useState(0);
-
+  const [DeliveryAddress, setDeliveryAddress] = useState();
+  const [payment, setPayment] = useState("pack it from store");
+    console.log(addresses)
+    console.log(payments);
   const addDelivery = () => {
     setDelivery(50);
   };
@@ -40,13 +48,13 @@ function Cart() {
               <div>
                 <p className="ms-3 fff fs-5 text-start">Personal Details</p>
                 <div className="row g-4 text-nowrap fs-5 gray1">
-                  <div className="col-xl-6 col"> name: michael maher</div>
+                  <div className="col-xl-6 col"> UserName:{user.username}</div>
+                  <div className="col-xl-6 col"> Name:{user.first_name}{" "}{user.last_name}</div>
                   <div className="col-xl-6 col">
                     {" "}
-                    email: michaelmaher@gmail.com
+                    Email: {user.email}
                   </div>
-                  <div className="col-xl-6 col"> phone: 023212656565</div>
-                  <div className="col-xl-6 col"> city: mansoura</div>
+                  <div className="col-xl-6 col"> Phone: {user.phone}</div>
                 </div>
               </div>
             </div>
@@ -115,9 +123,7 @@ function Cart() {
                       <p className="justify-self-end ms-3 fff"> +50 EGP</p>
                     </div>
                     <div className="collapse" id="adress">
-                      <p>adress1</p>
-                      <p>adress2</p>
-                      <p>adress3</p>
+                      addesses.map
                     </div>
                   </div>
                   {/*end second */}

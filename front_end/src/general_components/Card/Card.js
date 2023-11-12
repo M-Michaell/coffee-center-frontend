@@ -3,7 +3,7 @@ import Badge from '@mui/material/Badge';
 import {styled} from '@mui/material/styles';
 import photo from './mm.png'
 import {useState} from "react";
-import {useDispatch} from "react-redux";
+import {useDispatch, useSelector} from "react-redux";
 import {addToCart, decreaceQuantity, increaseQuantity, removeFromCart} from "../../store/slices/cart";
 
 export default function Card({item}) {
@@ -12,6 +12,7 @@ export default function Card({item}) {
     const [count, setCount] = useState(1);
     const [invisible, setInvisible] = useState(false);
     const [isCartVisible, setCartVisibility] = useState(true);
+    const session=useSelector((state) => state?.user?.user?.session?.id)
     const StyledBadge = styled(Badge)(({theme}) => ({
         '& .MuiBadge-badge': {
             borderRadius: '50%',
@@ -61,7 +62,9 @@ export default function Card({item}) {
 
                                         }}
                                            onClick={() => {
-                                               disPatch(addToCart(item))
+                                            
+                                                const product=item
+                                               disPatch(addToCart({product,session}))
                                                setInvisible(true);
                                                setCartVisibility(false);
                                                setCount(1)
@@ -72,10 +75,11 @@ export default function Card({item}) {
                                 (
                                     <div className="d-flex justify-content-around mt-5">
                                         <a onClick={() => {
+                                            const product=item
                                             setCount(Math.max(count - 1, 0));
                                             if (count <= 1){
                                                 setCartVisibility(true);
-                                                disPatch(removeFromCart(item))
+                                                disPatch(removeFromCart(item,session))
                                             }
                                             else{
                                                 setCartVisibility(false)
@@ -89,7 +93,8 @@ export default function Card({item}) {
                                         }}>-</a>
                                         <h3>{item?.price * count}$</h3>
                                         <a onClick={() => {
-                                            disPatch(increaseQuantity(item))
+                                            const product=item
+                                            disPatch(increaseQuantity({product,session}))
                                             setCount(count + 1)
                                         }} className="btn shadow  rounded btn rounded-pill" style={{
                                             height: "44px",

@@ -1,9 +1,10 @@
 import { createSlice } from "@reduxjs/toolkit";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { axiosInstance } from "../../apis/config";
 import { increaseAPI } from "../../apis/cartOperations/increase";
 import { decreaseAPI } from "../../apis/cartOperations/decrease";
 import { deleteAPI } from "../../apis/cartOperations/remove";
+import { addToCartAPI } from "../../apis/cartOperations/addtocart";
 
 const INITIAL_STATE = {
   cartItems: [],
@@ -17,37 +18,42 @@ const cart = createSlice({
     initialCart: (state, action) => {
       // console.log("payload",action.payload);
       action
-        ? state.cartItems=[ ...action.payload ]
+        ? (state.cartItems = [...action.payload])
         : console.log(action.payload);
     },
+
     addToCart: (state, action) => {
-      state.cartItems.length < state.maxItems
-        ? state.cartItems.find((item) => item.id === action.payload.id)
-          ? ///
-            (state.cartItems.find(
-              (item) => item.id === action.payload.id
-            ).quantity += 1)
-          : state.cartItems.push({ product:{...action.payload}, quantity: 1 })
-        : ///
-          alert(`Cart is full empty it first`);
-
-
-
+      const { product,session } = action.payload;
+      console.log(product);
+      // console.log(session);
+      // Check if the cart is not full
+      if (state.cartItems.length < state.maxItems) {
+        const item={ product: { ...product }, quantity: 1 }
+          state.cartItems.push(item);
+          addToCartAPI(item, session)
+      } else {
+        // If the cart is full, show an alert
+        alert(`Cart is full, empty it first`);
+      }
     },
 
     removeFromCart: (state, action) => {
       const { product, session } = action.payload;
       state.cartItems = [
-        ...state.cartItems.filter((item) => item.product.id !== product.product.id),
+        ...state.cartItems.filter(
+          (item) => item.product.id !== product.product.id
+        ),
       ];
-      deleteAPI(JSON.stringify(product.product),session)
+      deleteAPI(JSON.stringify(product.product), session);
     },
 
     increaseQuantity: (state, action) => {
       const { product, session } = action.payload;
-      const exsistItem = state.cartItems.find(
+      console.log(product);
+      const exsistItem1 = state.cartItems.filter(
         (item) => item.product.id === product.product.id
       );
+     const exsistItem=exsistItem1[0]
       if (exsistItem) {
         // action.payload.stock > exsistItem.quantity
         true
@@ -55,11 +61,7 @@ const cart = createSlice({
           : alert("not enough quantity to increase quantity");
       } else alert("Add first to cart ");
 
-
-     
-      increaseAPI(JSON.stringify(exsistItem),session)
-
-
+      increaseAPI(JSON.stringify(exsistItem), session);
     },
 
     decreaceQuantity: (state, action) => {
@@ -67,17 +69,23 @@ const cart = createSlice({
       const exsistItem = state.cartItems.find(
         (item) => item.product.id === product.product.id
       );
-      if (exsistItem.quantity > 1){
-        (exsistItem.quantity -= 1)
-        decreaseAPI(JSON.stringify(exsistItem),session)}
-        else alert(
-            "you can not decrease quantity more than once,  you can remove it"
-          );
+      if (exsistItem.quantity > 1) {
+        exsistItem.quantity -= 1;
+        decreaseAPI(JSON.stringify(exsistItem), session);
+      } else
+        alert(
+          "you can not decrease quantity more than once,  you can remove it"
+        );
     },
   },
 });
 
-export const {initialCart, addToCart, removeFromCart, increaseQuantity, decreaceQuantity } =
-  cart.actions;
+export const {
+  initialCart,
+  addToCart,
+  removeFromCart,
+  increaseQuantity,
+  decreaceQuantity,
+} = cart.actions;
 
 export default cart.reducer;

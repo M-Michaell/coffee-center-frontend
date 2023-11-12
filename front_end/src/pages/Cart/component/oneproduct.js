@@ -11,7 +11,7 @@ function Oneproduct(props) {
             <div className="card  rounded-5 w-100 h-100 background">
               <img
                 className="img-fluid rounded-5 shadow-lg "
-                src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQI6R30Iix8-fjF7Lgnaqu4TXhRBbPLqKpJbsrKkMIJ3VRXbUWvOiEymJpKnHhhslDWQAg&usqp=CAU"
+                src={`http://127.0.0.1:8000/${item.product.image}`}
                 alt="Card cap"
               />
             </div>

@@ -11,7 +11,7 @@ export default function Counter(props) {
   const { product } = props;
   const dispatch = useDispatch();
   const cart = useSelector((state) => state.cart.cartItems);
-  const session=useSelector((state) => state.user.user.session.id)
+  const session=useSelector((state) => state?.user?.user?.session?.id)
   // console.log("session",session)
 
 

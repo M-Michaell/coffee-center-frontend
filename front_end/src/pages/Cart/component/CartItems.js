@@ -1,10 +1,12 @@
 import React from "react";
 import { useSelector } from "react-redux";
 import Oneproduct from "./oneproduct";
+import { confirmOrder } from "../../../apis/cartOperations/confirm";
 
 function CartItems(props) {
-  const { Delivery } = props;
+  const { Delivery ,payment, DeliveryAddress,setMust} = props;
   const cart = useSelector((state) => state.cart.cartItems);
+  const session=useSelector((state) => state?.user?.user?.session?.id)
   
   // console.log("cart",cart);
 
@@ -22,6 +24,52 @@ function CartItems(props) {
   });
 
   let toPay = totalPrice - totalDiscount;
+
+
+
+  const confirm = () => {
+    const must = [];
+  
+    if (!cart || cart.length === 0) {
+      must.push({ message: "You should add items first" });
+    }
+  
+    if (!payment) {
+      must.push({ message: "You must choose a payment method" });
+    }
+  
+    if (!DeliveryAddress) {
+      must.push({ message: "You must choose an address first" });
+    }
+  
+    if (must.length === 0) {
+      const data = {
+        items: cart,
+        address: DeliveryAddress,
+        payment: payment,
+        totalPrice: totalPrice,
+        totalDiscount: totalDiscount,
+        toPay: toPay,
+        Shopping_session_id:session
+      };
+
+  
+      confirmOrder(data)
+      console.log("Confirmation Data:", data);
+    } else {
+      // Update state with must array to display error messages
+      setMust(must);
+      console.log("mussssssssssssssssssst",must)
+
+
+      window.scrollTo({
+        top: 0,
+        behavior: "smooth"
+      });
+
+    }
+  };
+  
 
   return (
     <>
@@ -68,6 +116,7 @@ function CartItems(props) {
             <button
               className="btn rounded-pill fff w-75 align-self-end py-2 border-0 "
               style={{ background: "var(--orange)" }}
+              onClick={confirm}
             >
               Confirm the order
             </button>

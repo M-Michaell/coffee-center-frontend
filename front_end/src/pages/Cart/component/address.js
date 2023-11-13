@@ -1,5 +1,4 @@
 import React, { useState } from "react";
-import { faTableList } from '@fortawesome/free-solid-svg-icons';
 
 function Address(props) {
   const { address, setDeliveryAddress, index } = props;

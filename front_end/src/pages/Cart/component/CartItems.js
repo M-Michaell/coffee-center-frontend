@@ -2,22 +2,27 @@ import React from "react";
 import { useSelector } from "react-redux";
 import Oneproduct from "./oneproduct";
 import { confirmOrder } from "../../../apis/cartOperations/confirm";
+import { useNavigate } from "react-router-dom";
 
 function CartItems(props) {
-  const { Delivery ,payment, DeliveryAddress,setMust} = props;
+  const { Delivery, payment, DeliveryAddress, setMust, user } = props;
   const cart = useSelector((state) => state.cart.cartItems);
-  const session=useSelector((state) => state?.user?.user?.session?.id)
-  
-  // console.log("cart",cart);
+  const session = useSelector((state) => state?.user?.user?.session?.id);
+  const navigate = useNavigate();
 
   let totalPrice = 0;
   let totalDiscount = 0;
-  const cartPrices = cart.map((item) => Math.round(item.product.price * item.quantity));
+  const cartPrices = cart.map((item) =>
+    Math.round(item.product.price * item.quantity)
+  );
   cartPrices.forEach((itemPrice) => {
     totalPrice += itemPrice;
   });
   const cartDiscount = cart.map((item) =>
-    Math.round((item.product.price * item.quantity * item.product.discount_percentage) / 100)
+    Math.round(
+      (item.product.price * item.quantity * item.product.discount_percentage) /
+        100
+    )
   );
   cartDiscount.forEach((itemDiscount) => {
     totalDiscount += itemDiscount;
@@ -25,51 +30,51 @@ function CartItems(props) {
 
   let toPay = totalPrice - totalDiscount;
 
-
-
   const confirm = () => {
     const must = [];
-  
+
     if (!cart || cart.length === 0) {
       must.push({ message: "You should add items first" });
     }
-  
+
     if (!payment) {
       must.push({ message: "You must choose a payment method" });
     }
-  
+
     if (!DeliveryAddress) {
       must.push({ message: "You must choose an address first" });
     }
-  
+
     if (must.length === 0) {
       const data = {
+        user: user,
         items: cart,
         address: DeliveryAddress,
         payment: payment,
         totalPrice: totalPrice,
         totalDiscount: totalDiscount,
         toPay: toPay,
-        Shopping_session_id:session
+        Shopping_session_id: session,
       };
 
-  
-      confirmOrder(data)
+      confirmOrder(data);
       console.log("Confirmation Data:", data);
-    } else {
-      // Update state with must array to display error messages
-      setMust(must);
-      console.log("mussssssssssssssssssst",must)
-
+      (() => navigate("/home"))();
 
       window.scrollTo({
         top: 0,
-        behavior: "smooth"
       });
+    } else {
+      // Update state with must array to display error messages
+      setMust(must);
+      console.log("mussssssssssssssssssst", must);
 
+      window.scrollTo({
+        top: 0,
+        behavior: "smooth",
+      });
     }
   };
-  
 
   return (
     <>
@@ -124,7 +129,6 @@ function CartItems(props) {
           {/* end total */}
           {/*  */}
 
-          
           {/*  */}
         </div>
       </div>

@@ -6,7 +6,7 @@ import "./../Cart/main.css";
 import TotalPrice from "./componants/TotalPrice";
 
 export default function Order() {
-  const orderID = 1;
+  const orderID = 5;
   const orderDetailsInstance = OrderDetailsApi(orderID);
   const [orderDetails, setOrderDetails] = useState(null);
 
@@ -30,7 +30,7 @@ export default function Order() {
         <div className="vh-100 mt-5">
           <h1 className="orange pb-5">Thank you for your order</h1>
           <OrderProducts order_items={orderDetails.order_items} />
-          <TotalPrice price={orderDetails.payment_method.amount} />
+          <TotalPrice price={orderDetails.payment_method.amount} price_before={orderDetails.payment_method.total_price} />
           <div className="pt-5 mt-5">
             <h1 className="orange">Tracking</h1>
               <TrackOrder />

@@ -56,6 +56,7 @@ function Cart() {
               payment={payment}
               DeliveryAddress={DeliveryAddress}
               setMust={setMust}
+              user = {user}
             />
           </div>
 

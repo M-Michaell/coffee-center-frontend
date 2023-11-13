@@ -24,7 +24,9 @@ color: var(--orange) !important;
   background-color: var(--background) !important;
 }
 
-
+*{
+  box-sizing: border-box;
+}
 
 
 
@@ -55,7 +57,10 @@ color: var(--orange) !important;
 
 
 
-
+.custom-btn:hover {
+  background-color: var(--orange);
+  color: white;
+}
 
 
 
@@ -72,12 +77,43 @@ input, .form-control, .custom-select {
     box-shadow: 0 0 0 0.25rem rgba(189, 113, 43, 0.25) !important; 
   }
   
-  
+  input::after{
+    background-color: transparent ; 
+  }
 
   .form-label {
     background-color: var(--background) !important;
     color: var(--gray1) !important;
   } 
+
+
+
+
+  .form-check-input[type=radio]:checked:after {
+    border-radius: 50%;
+    width: 0.625rem;
+    height: 0.625rem;
+    border-color: var(--orange);
+    background-color: var(--orange);
+    transition: border-color;
+    transform: translate(-50%, -50%);
+    position: absolute;
+    left: 50%;
+    top: 50%;
+}
+
+.form-check-input[type=radio]:after {
+  content: "";
+  position: absolute;
+  width: 1rem;
+  height: 1rem;
+  z-index: 1;
+  display: block;
+  border-radius: 50%;
+  background-color:transparent;
+}
+
+
 
 
    /* <div class="row g-2">

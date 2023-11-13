@@ -55,7 +55,7 @@ export default function Card({item}) {
                                     <div className="d-flex justify-content-between mt-5 ">
                                         <h3 style={{color: "var(--fff)"}} className="mt-2">{item?.price}$</h3>
 
-                                        <a style={{
+                                        <button style={{
                                             backgroundColor: "var(--orange)",
                                             color: "var(----fff)",
                                             fontSize: "18px",
@@ -68,13 +68,13 @@ export default function Card({item}) {
                                                setInvisible(true);
                                                setCartVisibility(false);
                                                setCount(1)
-                                           }} className="shadow  rounded-pill btn ">Cart <i className="bi bi-cart3"></i></a>
+                                           }} className="shadow  rounded-pill btn ">Cart <i className="bi bi-cart3"></i></button>
                                     </div>
                                 )
                                 :
                                 (
                                     <div className="d-flex justify-content-around mt-5">
-                                        <a onClick={() => {
+                                        <button onClick={() => {
                                             const product=item
                                             setCount(Math.max(count - 1, 0));
                                             if (count <= 1){
@@ -90,9 +90,9 @@ export default function Card({item}) {
                                             backgroundColor: "var(--orange)",
                                             fontSize: "20px",
                                             color: "var(--fff)"
-                                        }}>-</a>
+                                        }}>-</button>
                                         <h3>{item?.price * count}$</h3>
-                                        <a onClick={() => {
+                                        <button onClick={() => {
                                             const product=item
                                             disPatch(increaseQuantity({product,session}))
                                             setCount(count + 1)
@@ -102,7 +102,7 @@ export default function Card({item}) {
                                             backgroundColor: "var(--orange)",
                                             fontSize: "20px",
                                             color: "var(--fff)"
-                                        }}>+</a>
+                                        }}>+</button>
                                     </div>
                                 )
                         }

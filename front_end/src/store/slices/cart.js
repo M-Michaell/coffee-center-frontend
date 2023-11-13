@@ -50,13 +50,11 @@ const cart = createSlice({
     increaseQuantity: (state, action) => {
       const { product, session } = action.payload;
       console.log(product);
-      const exsistItem1 = state.cartItems.filter(
+      const exsistItem = state.cartItems.find(
         (item) => item.product.id === product.product.id
       );
-     const exsistItem=exsistItem1[0]
       if (exsistItem) {
-        // action.payload.stock > exsistItem.quantity
-        true
+        product.product.quantity > exsistItem.quantity
           ? (exsistItem.quantity = parseInt(exsistItem.quantity) + 1)
           : alert("not enough quantity to increase quantity");
       } else alert("Add first to cart ");

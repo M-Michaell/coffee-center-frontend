@@ -60,21 +60,19 @@ function Login() {
   };
 
   const handleSubmit = async (event) => {
-    console.log(Form);
     event.preventDefault(); // Prevent the default form submission behavior
 
     try {
       const response = await axiosInstance.post("/accounts/api/login", Form);
       const userData = response.data;
-      console.log(userData);
 
       dispatch(loginSuccess(userData));
       dispatch(initialCart(InitialCartAPI(userData)))
       navigate("/home");
 
-      console.log(response);
+      console.log("Api response",response);
     } catch (error) {
-      console.error(error);
+      console.error("Api error",error);
 
       let errorMessage = "Login failed. Please check your credentials.";
       console.log("Login failed:", error.message);

@@ -12,7 +12,7 @@ export function useUserData() {
         console.log(res);
       })
       .catch((err) => console.log(err));
-  }, []); // Provide an empty dependency array to run the effect only once
+  }, []); 
 
   return { detailsData };
 }

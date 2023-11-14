@@ -1,16 +1,34 @@
+import { toast } from "react-toastify";
 import { axiosInstance } from "../config";
 
 export function deleteAPI(data, session) {
-
-    console.log("deletttttttttttttttttttttttttttt",data)
-    console.log("sesssssssssssssssssion",session)
-
-    axiosInstance.delete(`cart/shopping-sessions/${session}/delete_cart_item/`, { data:{product:data}})
-      .then((response) => {
-        console.log("API Response:", response.data);
-      })
-      .catch((error) => {
-        console.error("API Error:", error);
-        // Handle the error as needed
+  axiosInstance
+    .delete(`cart/shopping-sessions/${session}/delete_cart_item/`, {
+      data: { product: data },
+    })
+    .then((response) => {
+      toast.success("Product deleted from cart successfully.", {
+        position: "top-center",
+        autoClose: 3000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+        theme: "dark",
       });
-  }
+    })
+    .catch((error) => {
+      console.log(error)
+      toast.error(error.message, {
+        position: "top-center",
+        autoClose: 5000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+        theme: "dark",
+      });
+    });
+}

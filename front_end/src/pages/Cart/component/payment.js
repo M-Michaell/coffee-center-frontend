@@ -11,12 +11,11 @@ function Payment(props) {
       <>
       <div>
         <div
-          // Adding a unique key for each iteration
           className="form-check w-100"
           data-bs-toggle="collapse"
-          data-bs-target={`#address-${index}`} // Making the target ID unique for each iteration
+          data-bs-target={`#card-${index}`} 
           aria-expanded="true"
-          aria-controls={`address-${index}`}
+          aria-controls={`card-${index}`}
         >
           <input
             className="form-check-input"
@@ -24,7 +23,7 @@ function Payment(props) {
             name="flexRadioDefault"
             id={`flexRadioCard${index}`}
             onClick={() => {
-              handleSetPayment(); // Call your handleSetAddress function
+              handleSetPayment(); 
             }}
           />
           <div className="d-flex justify-content-between w-100">
@@ -33,7 +32,6 @@ function Payment(props) {
               htmlFor={`flexRadioCard${index}`}
             >
               Account: {payment?.account_no}
-              {/* Assuming you have a property named "name" in your address object */}
             </label>
           </div>
   

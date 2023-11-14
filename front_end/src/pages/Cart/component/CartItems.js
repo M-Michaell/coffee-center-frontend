@@ -34,6 +34,7 @@ function CartItems(props) {
     const must = [];
 
     if (!cart || cart.length === 0) {
+      
       must.push({ message: "You should add items first" });
     }
 
@@ -65,9 +66,7 @@ function CartItems(props) {
         top: 0,
       });
     } else {
-      // Update state with must array to display error messages
       setMust(must);
-      console.log("mussssssssssssssssssst", must);
 
       window.scrollTo({
         top: 0,
@@ -75,6 +74,7 @@ function CartItems(props) {
       });
     }
   };
+
 
   return (
     <>

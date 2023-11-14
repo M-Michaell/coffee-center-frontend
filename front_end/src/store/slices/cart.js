@@ -5,6 +5,7 @@ import { increaseAPI } from "../../apis/cartOperations/increase";
 import { decreaseAPI } from "../../apis/cartOperations/decrease";
 import { deleteAPI } from "../../apis/cartOperations/remove";
 import { addToCartAPI } from "../../apis/cartOperations/addtocart";
+import { toast } from "react-toastify";
 
 const INITIAL_STATE = {
   cartItems: [],
@@ -49,21 +50,39 @@ const cart = createSlice({
 
     increaseQuantity: (state, action) => {
       const { product, session } = action.payload;
-      console.log(product);
-      const exsistItem = state.cartItems.find(
+      const existingItem = state.cartItems.find(
         (item) => item.product.id === product.product.id
       );
-      if (exsistItem) {
-        product.product.quantity > exsistItem.quantity
-          ? (exsistItem.quantity = parseInt(exsistItem.quantity) + 1)
-          : alert("not enough quantity to increase quantity");
-      } else alert("Add first to cart ");
-
-      increaseAPI(JSON.stringify(exsistItem), session);
+    
+      if (existingItem) {
+        const newQuantity = parseInt(existingItem.quantity) + 1;
+    
+        if (newQuantity <= product.product.quantity) {
+          existingItem.quantity = newQuantity;
+    
+          increaseAPI(JSON.stringify(existingItem), session);
+        } else {
+          toast.info("Not enough quantity to increase", 
+            {
+              position: "top-center",
+              autoClose: 3000,
+              hideProgressBar: false,
+              closeOnClick: true,
+              pauseOnHover: true,
+              draggable: true,
+              progress: undefined,
+              theme: "dark",
+              });
+        }
+      } else {
+        alert("Add to cart first");
+      }
     },
+    
 
     decreaceQuantity: (state, action) => {
       const { product, session } = action.payload;
+      console.log("product",action.payload);
       const exsistItem = state.cartItems.find(
         (item) => item.product.id === product.product.id
       );
@@ -71,9 +90,18 @@ const cart = createSlice({
         exsistItem.quantity -= 1;
         decreaseAPI(JSON.stringify(exsistItem), session);
       } else
-        alert(
-          "you can not decrease quantity more than once,  you can remove it"
-        );
+        toast.info("you can not decrease quantity more than once,  you can remove it", 
+        {
+          position: "top-center",
+          autoClose: 3000,
+          hideProgressBar: false,
+          closeOnClick: true,
+          pauseOnHover: true,
+          draggable: true,
+          progress: undefined,
+          theme: "dark",
+          });
+        
     },
   },
 });

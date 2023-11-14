@@ -1,13 +1,33 @@
+import { toast } from "react-toastify";
 import { axiosInstance } from "../config";
 
 export function increaseAPI(data, session) {
     // console.log("Increasing",data)
     axiosInstance.put(`cart/shopping-sessions/${session}/update_cart_item/`, data)
       .then((response) => {
-        console.log("API Response:", response.data);
+        toast.success('Quantity increased successfully', 
+        {
+          position: "top-center",
+          autoClose: 3000,
+          hideProgressBar: false,
+          closeOnClick: true,
+          pauseOnHover: true,
+          draggable: true,
+          progress: undefined,
+          theme: "dark",
+          })
       })
       .catch((error) => {
-        console.error("API Error:", error);
-        // Handle the error as needed
+        toast.error(error.message, 
+        {
+          position: "top-center",
+          autoClose: 5000,
+          hideProgressBar: false,
+          closeOnClick: true,
+          pauseOnHover: true,
+          draggable: true,
+          progress: undefined,
+          theme: "dark",
+          })
       });
   }

@@ -1,13 +1,32 @@
+import { toast } from "react-toastify";
 import { axiosInstance } from "../config";
 
 export function addToCartAPI(data, session) {
-    // console.log("Increasing",data)
     axiosInstance.post(`cart/shopping-sessions/${session}/add_to_cart/`, data)
       .then((response) => {
-        console.log("API Response:", response.data);
+        toast.success(response.data.message, 
+          {
+            position: "top-center",
+            autoClose: 3000,
+            hideProgressBar: false,
+            closeOnClick: true,
+            pauseOnHover: true,
+            draggable: true,
+            progress: undefined,
+            theme: "dark",
+            })
       })
       .catch((error) => {
-        console.error("API Error:", error);
-        // Handle the error as needed
+        toast.error(error.message, 
+          {
+            position: "top-center",
+            autoClose: 5000,
+            hideProgressBar: false,
+            closeOnClick: true,
+            pauseOnHover: true,
+            draggable: true,
+            progress: undefined,
+            theme: "dark",
+            })
       });
   }

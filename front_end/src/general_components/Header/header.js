@@ -6,9 +6,42 @@ import Container from "react-bootstrap/Container";
 import {faHeart} from "@fortawesome/free-regular-svg-icons";
 import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
 import {faPhoneVolume, faCartShopping, faMagnifyingGlass} from "@fortawesome/free-solid-svg-icons";
-import {NavLink} from "react-router-dom";
+import {NavLink, useNavigate} from "react-router-dom";
+import { useSelector } from "react-redux";
+import { toast } from "react-toastify";
+
 
 export default function Navbarr() {
+const user = useSelector((state) => state.user?.user?.user);
+const navigate=useNavigate
+
+    const handleCart = () => {
+        if (user) {
+           navigate("/cart")
+
+         
+        } else {
+          const CustomToast = ({ closeToast }) => (
+            <div>
+              You should login first. <a href="/login/">Login now</a>
+            </div>
+          );
+    
+          toast.info(<CustomToast />, {
+            position: "top-center",
+            autoClose: 5000,
+            hideProgressBar: false,
+            closeOnClick: true,
+            pauseOnHover: true,
+            draggable: true,
+            progress: undefined,
+            theme: "dark",
+          });
+        }
+      };
+
+
+
     return (
         <Container fluid className="p-0 text-light" style={{backgroundColor: "var(--background)"}}>
             <Navbar expand="lg" className="bg-transparent">
@@ -62,7 +95,7 @@ export default function Navbarr() {
 
                             </NavLink>
 
-                            <NavLink to="/cart" style={{color: "rgb(206, 124, 0)"}}>
+                            <NavLink onClick={handleCart} style={{color: "rgb(206, 124, 0)"}}>
                                 <FontAwesomeIcon icon={faCartShopping} className="ms-3"/>
                             </NavLink>
 

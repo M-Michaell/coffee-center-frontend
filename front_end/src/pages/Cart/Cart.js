@@ -37,15 +37,10 @@ function Cart() {
           style={{ backgroundColor: "var(--orange)", height: "3px" }}
         />
         <div className="mb-5">
-          {must.map((item,index) => (
-            <>
-           <Messages
-           item={item} 
-           key={index}
-           must={must}
-           setMust={setMust}
-           />
-            </>
+          {must.map((item, index) => (
+            <div key={index}>
+              <Messages item={item}  must={must} setMust={setMust} />
+            </div>
           ))}
         </div>
         <div className="row g-4">
@@ -56,7 +51,7 @@ function Cart() {
               payment={payment}
               DeliveryAddress={DeliveryAddress}
               setMust={setMust}
-              user = {user}
+              user={user}
             />
           </div>
 

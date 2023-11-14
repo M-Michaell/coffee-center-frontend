@@ -117,7 +117,7 @@ export default function RegistrationForm() {
                 {err.first_name && (<h6 className="form-text text-danger">{err.first_name}</h6>)}
 
                 <div className="col-md-4 w-75">
-                    <label for="phone"
+                    <label htmlFor="phone"
                            style={{color:"var(--gray1)",fontSize:"18px"}}
                            className="form-label mt-3">Phone Number</label>
                     <input value={formInput.phone}

@@ -10,7 +10,7 @@ function Address(props) {
   };
   return (
     <>
-    <fieldset>
+    <div>
       <div
         // Adding a unique key for each iteration
         className="form-check w-100"
@@ -54,7 +54,7 @@ function Address(props) {
         Add Address
       </a>
         </div>
-        </fieldset>
+        </div>
     </>
   );
 }

@@ -11,9 +11,11 @@ import {
   removeFromCart,
 } from "../../store/slices/cart";
 import { toast } from "react-toastify";
+import { addToWishlist, removeFromWishlist } from "../../store/slices/wishlist";
 
 export default function Card({ item }) {
   const disPatch = useDispatch();
+  const isProductInWishlist = useSelector(state => state.wishlist.products.some(p => p.id === item.id));
   const [isHeartClicked, setHeartClicked] = useState(false);
   const [count, setCount] = useState(1);
   const [invisible, setInvisible] = useState(false);
@@ -93,7 +95,13 @@ export default function Card({ item }) {
     }
   };
 
-  const handleHeart = () => {
+  const handleHeart = () => {  
+    if (isProductInWishlist) {
+      disPatch(removeFromWishlist(item.id));
+    } else {
+      disPatch(addToWishlist(item));
+    }
+  
     setHeartClicked(!isHeartClicked);
   };
 
@@ -123,7 +131,7 @@ export default function Card({ item }) {
           <div className="card-body " style={{ marginTop: "150px" }}>
             <button
               className={`border border-0 m-2 bi position-absolute ${
-                isHeartClicked ? "bi-heart-fill" : "bi-heart"
+                isProductInWishlist ? "bi-heart-fill" : "bi-heart"
               } `}
               style={{
                 top: "0px",

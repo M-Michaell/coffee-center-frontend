@@ -16,6 +16,8 @@ import { toast } from "react-toastify";
 import { Button, Form, FormControl } from "react-bootstrap";
 
 export default function Navbarr() {
+  const wishlistCount = useSelector(state => state.wishlist.count);
+
   const user = useSelector((state) => state.user?.user?.user);
 
   const [searchTerm, setSearchTerm] = useState("");
@@ -155,9 +157,15 @@ export default function Navbarr() {
                 />
                 +20 120 912 2212
               </strong>
-              <NavLink to="" style={{ color: "rgb(206, 124, 0)" }}>
-                <FontAwesomeIcon icon={faHeart} className="me-3" />
-              </NavLink>
+              <NavLink to="/profile/wishlist" style={{ color: 'rgb(206, 124, 0)' }} className="position-relative me-3">
+        <FontAwesomeIcon icon={faHeart} className="me-1" />
+        {wishlistCount > 0 && (
+          <span className="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-primary">
+            {wishlistCount}
+            <span className="visually-hidden">wishlist items</span>
+          </span>
+        )}
+      </NavLink>
               <NavLink to="" style={{ color: "rgb(206, 124, 0)" }}></NavLink>
               <NavLink to="/cart" style={{ color: "rgb(206, 124, 0)" }}>
                 <FontAwesomeIcon icon={faCartShopping} />

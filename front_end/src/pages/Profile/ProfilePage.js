@@ -120,7 +120,7 @@ export default function Account() {
             </span>
           </Link>
         </div>
-        <div className="col-lg-10 shadow-lg p-3 mt-3 mb-5 p-4" style={{ paddingBottom: '2rem' }}>
+        <div className="col-lg-10 shadow-lg p-3 mt-3 mb-5 p-4">
           <RenderComponent user={user} />
         </div>
       </div>

@@ -1,16 +1,22 @@
 import {useEffect, useState} from "react";
 import {axiosInstance} from "./config";
 
-export function ProductItems(){
+export function ProductItems(page){
+    console.log(page);
     const [products, setProduct] = useState([]);
+    const [paginationInfo, setPaginationInfo] = useState({});
 
     useEffect(() => {
         axiosInstance
-            .get("products/")
-            .then((res)=>{console.log("show me inside",res.data.list);setProduct(res.data.list)})
+            .get(`/products/?page=${page}`)
+            .then((res)=>{
+                setProduct(res.data.products);
+                setPaginationInfo(res.data.pagination_info);
+            
+            
+            })
             .catch((err)=>{console.log(err)})
-    }, []);
-    console.log("show me products",products);
-    return (products);
+    }, [page]);
+    return{ products,paginationInfo}
 
 }

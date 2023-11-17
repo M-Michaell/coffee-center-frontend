@@ -70,7 +70,7 @@ export default function Navbarr() {
     if (user) {
       return (
         <>
-          <NavLink to="/profile" href="#username" className="m-3 text-light">
+          <NavLink to="/profile" className="m-3 text-light fs-5 orange">
             {user.username}
           </NavLink>
 
@@ -86,11 +86,10 @@ export default function Navbarr() {
     } else {
       return (
         <>
-          <NavLink to="/login"
-        className="m-3 text-light">
+          <NavLink to="/login" className="m-3 text-light fs-5">
             Login
           </NavLink>
-          <NavLink to="/registration" className="m-3 text-light">
+          <NavLink to="registration" className="m-3 text-light fs-5">
             Register
           </NavLink>
         </>
@@ -112,21 +111,21 @@ export default function Navbarr() {
               className="fs-3 fw-bold text-light"
               style={{ fontFamily: "Brush Script, cursive" }}
             >
-              Coffee<span style={{ color: "rgb(206, 124, 0)" }}>Geek</span>
+              Coffee<span style={{ color: "var(--orange)" }}>Geek</span>
             </NavLink>
           </div>
 
           <Navbar.Toggle
             aria-controls="responsive-navbar-nav"
-            style={{ color: "rgb(206, 124, 0)" }}
+            style={{ color: "var(--orange)" }}
           />
 
-          <Navbar.Collapse id="responsive-navbar-nav">
-            <Nav className="mx-auto">
+          <Navbar.Collapse id="responsive-navbar-nav" >
+            {/* <Nav className="mx-auto">
               <Nav.Link
                 href="#home"
                 className="m-3"
-                style={{ color: "rgb(206, 124, 0)" }}
+                style={{ color: "var(--orange)" }}
               >
                 Actions
               </Nav.Link>
@@ -139,23 +138,24 @@ export default function Navbarr() {
               <Nav.Link href="#link" className="m-3 text-light">
                 Personal Area
               </Nav.Link>
-            </Nav>
+            </Nav> */}
 
-            <div className="d-flex mx-auto" style={{maxWidth:"400px"}}>
+            <div className="d-flex ms-auto customSearch" style={{ maxWidth: "400px" }}>
               <FormControl
                 type="text"
                 placeholder="Search"
                 className="mr-2"
-                value={searchTerm}
                 onChange={handleSearchChange}
               />
               <Button variant="bg-transparent" onClick={handleSearchClick}>
-                <FontAwesomeIcon icon={faMagnifyingGlass} className="me-2 orange fs-5" />
+                <FontAwesomeIcon
+                  icon={faMagnifyingGlass}
+                  className="me-2 orange fs-5"
+                />
               </Button>
             </div>
 
-            <div className="d-flex align-items-center">
-              {renderAuthLinks()}
+            
 
               <strong className="fs-5 me-3">
                 <FontAwesomeIcon
@@ -164,20 +164,17 @@ export default function Navbarr() {
                 />
                 +20 120 912 2212
               </strong>
-              <NavLink to="/profile/wishlist" style={{ color: 'rgb(206, 124, 0)' }} className="position-relative me-3">
-        <FontAwesomeIcon icon={faHeart} className="me-1" />
-        {wishlistCount > 0 && (
-          <span className="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-primary">
-            {wishlistCount}
-            <span className="visually-hidden">wishlist items</span>
-          </span>
-        )}
-      </NavLink>
-              <NavLink to="" style={{ color: "rgb(206, 124, 0)" }}></NavLink>
-              <NavLink to="/cart" style={{ color: "rgb(206, 124, 0)" }}>
+              <div className="d-flex">
+
+              <NavLink to="" style={{ color: "var(--orange)" }}>
+                <FontAwesomeIcon icon={faHeart} className="me-3" />
+              </NavLink>
+              <NavLink to="/cart" style={{ color: "var(--orange)" }}>
                 <FontAwesomeIcon icon={faCartShopping} />
               </NavLink>
-            </div>
+              </div>
+              {renderAuthLinks()}
+
           </Navbar.Collapse>
         </Container>
       </Navbar>
@@ -186,24 +183,8 @@ export default function Navbarr() {
         className="container-fluid text-light row row-cols-1 row-cols-md-3 row-cols-xl-6 pt-2 px-5 gx-0 justify-content-center align-items-center "
         style={{ backgroundColor: "rgb(206, 134, 0)" }}
       >
-        <div>
-          <p>Coffee machines</p>
-        </div>
-        <div>
-          <p>Natural Coffee</p>
-        </div>
-        <div>
-          <p>Instant Coffee</p>
-        </div>
-        <div>
-          <p>Cocoa Coffee</p>
-        </div>
-        <div>
-          <p>Syrups</p>
-        </div>
-        <div>
-          <p>Accessories</p>
-        </div>
+        
+          <p className="fs-5 mx-auto w-100">Unlock a 25% discount – Your savings, our treat!</p>
       </div>
     </Container>
   );

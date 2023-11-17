@@ -5,6 +5,8 @@ import "bootstrap/dist/js/bootstrap.bundle.min.js";
 import "mdb-react-ui-kit/dist/css/mdb.min.css";
 import "@fortawesome/fontawesome-free/css/all.min.css";
 import { BrowserRouter } from "react-router-dom";
+import { Provider } from 'react-redux';
+import store from './store';
 import Router from "./Router/router";
 import Navbarr from "./general_components/Header/header";
 import Footerr from "./general_components/Footer/footer";
@@ -14,6 +16,7 @@ import "react-toastify/dist/ReactToastify.css";
 
 function App() {
   return (
+    <Provider store={store}>
     <BrowserRouter>
       <div>
         <link rel="preconnect" href="https://fonts.googleapis.com" />
@@ -47,6 +50,7 @@ function App() {
         <Footerr />
       </div>
     </BrowserRouter>
+    </Provider>
   );
 }
 

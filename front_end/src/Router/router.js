@@ -14,6 +14,8 @@ const Registration = React.lazy(() =>
 );
 const Account = React.lazy(() => import("../pages/Profile/ProfilePage"));
 const Search = React.lazy(() => import("../pages/Search/component/Search"));
+const AddressForm = React.lazy(() => import("../pages/Profile/component/AddressForm"));
+const AddressEdit = React.lazy(()=> import("../pages/Profile/component/AddressEdit"))
 function Router() {
   return (
     <Suspense fallback={<Loader />}>
@@ -28,6 +30,12 @@ function Router() {
         <Route path="/order/tracking/" element={<Account />} />
         <Route path="/search/:productname" element={<Search />} />
         <Route path="*" element={<NotFound />} />
+          <Route path="home/" element={<Home/>}/>
+          <Route path="registration/" element={<Registration/>}/>
+          <Route path="login/" element={<Login/>}/>
+          <Route path="/profile/*" element={<Account/>}/>
+          <Route path="/addressform/:id" element={<AddressForm />} />
+          <Route path="/addressform" element={<AddressForm/>}/>
       </Routes>
     </Suspense>
   );

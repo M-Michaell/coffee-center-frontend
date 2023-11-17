@@ -6,7 +6,7 @@ export function ProductItems(){
 
     useEffect(() => {
         axiosInstance
-            .get("/products/")
+            .get("products/")
             .then((res)=>{console.log("show me inside",res.data.list);setProduct(res.data.list)})
             .catch((err)=>{console.log(err)})
     }, []);

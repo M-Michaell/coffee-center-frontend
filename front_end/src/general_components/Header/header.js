@@ -13,9 +13,15 @@ import {
 import { NavLink, useNavigate } from "react-router-dom";
 import { useSelector } from "react-redux";
 import { toast } from "react-toastify";
+import {logout} from "../../store/slices/auth";
+import { useDispatch} from "react-redux";
+
+
 
 export default function Navbarr() {
+  const dispatch = useDispatch();
   const user = useSelector((state) => state.user?.user?.user);
+    const { userInfo } = useSelector((state) => state.auth)
   const navigate = useNavigate("/cart");
 
 //   const handleCart = () => {
@@ -81,12 +87,12 @@ export default function Navbarr() {
                   <Nav.Link href="/order" className="m-3 text-light">
                     Payment and Delivery
                   </Nav.Link>
-                  <Nav.Link href="#link" className="m-3 text-light">
+                  <Nav.Link href="#link" onClick={()=>{dispatch(logout())}} className="m-3 text-light">
                     Contacts
                   </Nav.Link>
-                  <Nav.Link href="#link" className="m-3 text-light">
+                  <NavLink to="/delete-user" className="m-3 text-light">
                     Personal Area
-                  </Nav.Link>
+                  </NavLink>
                 </Navbar.Collapse>
               </Nav>
             </div>
@@ -95,7 +101,7 @@ export default function Navbarr() {
                 icon={faPhoneVolume}
                 className="orange-icon me-2 mt-1"
               />
-              +20 120 912 2212
+               {userInfo.first_name}
             </strong>
             <div>
               <NavLink to="" style={{ color: "rgb(206, 124, 0)" }}>

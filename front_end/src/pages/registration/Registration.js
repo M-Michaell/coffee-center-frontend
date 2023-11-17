@@ -2,11 +2,12 @@ import React, {useState, useEffect} from "react";
 import {useDispatch, useSelector} from 'react-redux';
 import {axiosInstance} from "../../apis/config";
 import {useNavigate} from "react-router-dom";
-import {registerUser} from "../../store/slices/authThunk";
+import {register, reset} from "../../store/slices/auth";
+import { toast } from 'react-toastify'
 
 export default function RegistrationForm() {
-    const dispatch = useDispatch()
-    const {loading, userInfo, error, success} = useSelector((state) => state.auth)
+    const { user, isLoading, isError, isSuccess, message } = useSelector((state) => state.auth);
+    const dispatch = useDispatch();
     const specialCharsRegex = /[^a-zA-Z0-9]/;
     const capitalLetterRegex = /[A-Z]/;
     const letterRegex = /[a-z]/;
@@ -69,17 +70,25 @@ export default function RegistrationForm() {
         }
     };
 
-    // useEffect(() => {
-    //     // redirect user to login page if registration was successful
-    //     if (success) navigate('/login')
-    //     // redirect authenticated user to profile screen
-    //     if (userInfo) navigate('/home')
-    // }, [navigate, userInfo, success])
+
 
     const handleSubmit = async (e) => {
         e.preventDefault();
-        dispatch(registerUser({...formInput}));
+        dispatch(register({...formInput}));
     };
+     useEffect(() => {
+        if (isError) {
+            toast.error(message)
+        }
+
+        if (isSuccess || user) {
+            navigate("/")
+            toast.success("An activation email has been sent to your email. Please check your email")
+        }
+
+        dispatch(reset())
+
+    }, [isError, isSuccess, user, navigate, dispatch])
 
 
     return (

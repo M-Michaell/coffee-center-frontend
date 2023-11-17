@@ -10,6 +10,7 @@ import "./navbar.css";
 import Badge from "@mui/material/Badge";
 import Language from "../Language&Theme/language";
 
+
 export default function Navbar2() {
   const watchList = useSelector((state) => state.WatchList.watchListItems);
   const navigate = useNavigate();

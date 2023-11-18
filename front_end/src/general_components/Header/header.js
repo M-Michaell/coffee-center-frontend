@@ -73,9 +73,10 @@ export default function Navbarr() {
           <NavLink to="/profile" href="#username" className="m-3 text-light">
             {user.username}
           </NavLink>
+
           <NavLink  
-    onClick={()=>{dispatch(logout()); navigate('/')}}
-    className="m-3 text-light">
+              onClick={()=>{dispatch(logout()); navigate('/')}}
+              className="m-3 text-light">
             Logout
           </NavLink>
         </>

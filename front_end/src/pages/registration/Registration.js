@@ -70,24 +70,20 @@ export default function RegistrationForm() {
         }
     };
 
-
-
     const handleSubmit = async (e) => {
         e.preventDefault();
         dispatch(register({...formInput}));
+
     };
      useEffect(() => {
         if (isError) {
             toast.error(message)
         }
-
         if (isSuccess || user) {
             navigate("/")
             toast.success("An activation email has been sent to your email. Please check your email")
         }
-
         dispatch(reset())
-
     }, [isError, isSuccess, user, navigate, dispatch])
 
 

@@ -14,7 +14,7 @@ import { Link, NavLink, useNavigate, useSearchParams } from "react-router-dom";
 import { useSelector } from "react-redux";
 import { toast } from "react-toastify";
 import { Button, Form, FormControl } from "react-bootstrap";
-import {login, logout, register} from "../../store/slices/auth";
+import {logout} from "../../store/slices/auth";
 import {useDispatch}  from "react-redux";
 
 export default function Navbarr() {
@@ -74,22 +74,23 @@ export default function Navbarr() {
             {user.username}
           </NavLink>
 
-          <NavLink  
-              onClick={()=>{dispatch(logout()); navigate('/')}}
+          <a
+              href="/"
+              type="submit"
+              onClick={()=>{dispatch(logout());}}
               className="m-3 text-light">
             Logout
-          </NavLink>
+          </a>
         </>
       );
     } else {
       return (
         <>
-          <NavLink to="/login"  
-         onClick={()=>{dispatch(login())}}
+          <NavLink to="/login"
         className="m-3 text-light">
             Login
           </NavLink>
-          <NavLink to="registration" className="m-3 text-light">
+          <NavLink to="/registration" className="m-3 text-light">
             Register
           </NavLink>
         </>

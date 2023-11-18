@@ -7,33 +7,29 @@ export function SearchResult(searchWord ,page,filters) {
     const [paginationInfo, setPaginationInfo] = useState({});
     console.log("api",searchWord)
 
-  const url = `/search?search_word=${searchWord}&filters=${filters
-    ? Object.entries(filters)
-        .filter(([key, value]) => value != null && value !== '')
-        .map(([key, value]) => `${key}=${value}`)
-        .join(',')
-    : ''}&page=${page}`;
+    const url = `/search?search_word=${searchWord}&filters=${Object.entries(filters)
+        .filter(([key, value]) => value && value.length > 0)  
+        .map(([key, value]) => `${key}=${value.join('_')}`)
+        .join(',')}&page=${page}`;
   
     console.log("url", url)
 
+
   useEffect(() => {
-    const fetchData = async () => {
-      try {
-        const response = await axiosInstance.get(url);
+    axiosInstance
+      .get(url)
+      .then((response) => {
         const data = response.data;
         setProducts(data.products);
         setFilterOptions(data.filter_options);
         setPaginationInfo(data.pagination_info);
         console.log(data)
-      } catch (error) {
-        console.error('Error:', error);
-      }
-    };
+      })
+      .catch((err) => console.log(err));
+  },  [searchWord, filters, page, setProducts, setFilterOptions, setPaginationInfo, url]); 
 
-    fetchData();
-  }, [searchWord, filters, page, setProducts, setFilterOptions, setPaginationInfo, url]);
-
-  
-  return 
+  return {
+    products,paginationInfo,filterOptions
+  }
   ;
 }

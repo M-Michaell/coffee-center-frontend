@@ -10,8 +10,8 @@ import Messages from "./component/errorMessages";
 function Cart() {
   const cart = useSelector((state) => state.cart.cartItems);
   const user = useSelector(state => state.auth.userInfo);
-  const addresses = useSelector((state) => state.user?.user?.addresses);
-  const payments = useSelector((state) => state.user?.user?.payments);
+  const addresses = useSelector((state) => state.user?.addresses);
+  const payments = useSelector((state) => state.user?.payments);
   const [Delivery, setDelivery] = useState(0);
   const [DeliveryAddress, setDeliveryAddress] = useState();
   const [payment, setPayment] = useState();

@@ -7,7 +7,7 @@ import { useNavigate } from "react-router-dom";
 function CartItems(props) {
   const { Delivery, payment, DeliveryAddress, setMust, user } = props;
   const cart = useSelector((state) => state.cart.cartItems);
-  const session = useSelector((state) => state?.user?.user?.session?.id);
+  const session = useSelector((state) => state?.user?.shoppingSession?.id);
   const navigate = useNavigate();
 
   let totalPrice = 0;
@@ -34,7 +34,6 @@ function CartItems(props) {
     const must = [];
 
     if (!cart || cart.length === 0) {
-      
       must.push({ message: "You should add items first" });
     }
 
@@ -74,7 +73,6 @@ function CartItems(props) {
       });
     }
   };
-
 
   return (
     <>

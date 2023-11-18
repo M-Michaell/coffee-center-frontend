@@ -5,6 +5,7 @@ const user = JSON.parse(localStorage.getItem("user"))
 const info = JSON.parse(localStorage.getItem("userInfo"))
 
 
+
 const initialState = {
     user: user ? user : null,
     userInfo: info ? info : null,
@@ -12,7 +13,13 @@ const initialState = {
     isSuccess: false,
     isLoading: false,
     message: "",
+
 }
+
+
+
+
+
 
 export const register = createAsyncThunk(
     "auth/register",

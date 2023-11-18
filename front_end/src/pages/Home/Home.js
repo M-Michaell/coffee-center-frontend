@@ -14,19 +14,7 @@ export default function Home() {
     const [page, setPage] = useState(1);
     const dispatch = useDispatch();
     const userId = useSelector((state) => state?.auth?.userInfo?.id);
-    const [loading, setLoading] = useState(false); // Add loading state
   
-    useEffect(() => {
-      const fetchData = async () => {
-        if (userId) {
-          setLoading(true);
-          await UserDataAPI(userId, dispatch);
-          setLoading(false);
-        }
-      };
-  
-      fetchData();
-    }, [userId, dispatch]);
   
 
   const handlePageChange = (event, value) => {
@@ -36,9 +24,8 @@ export default function Home() {
   const { products, paginationInfo } = ProductItems(page);
   return (
     <div style={{ backgroundColor: "var(--background)" }}>
-      {loading ? (
-        <Loader/>
-      ) : (
+      (
+       
         <>
           <Carousel />
           <CardSlider cards={products} />
@@ -52,7 +39,7 @@ export default function Home() {
             />
           </div>
         </>
-      )}
+      )
     </div>
   );
 }

@@ -5,6 +5,7 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faTableList, faHeartCircleCheck, faAddressBook, faCreditCard, faUser } from "@fortawesome/free-solid-svg-icons";
 import "./profile.css";
 import { useUserData } from "../../apis/profile";
+import {useSelector} from "react-redux";
 
 const OrdersComponent = React.lazy(() => import("./component/Orders"));
 const AddressesComponent = React.lazy(() => import("./component/Addresses"));
@@ -30,11 +31,11 @@ export default function Account() {
 
   const RenderComponent = componentMap[activeComponent];
 
-  if (!detailsData || !detailsData.Users || detailsData.Users.length === 0) {
-    return <p>Loading...</p>;
-  }
+  // if (!detailsData || !detailsData.Users || detailsData.Users.length === 0) {
+  //   return <p>Loading...</p>;
+  // }
+  const user = useSelector(state => state.auth.userInfo);
 
-  const user = detailsData.Users[0];
   return (
     <div className="container">
       <div className="row">

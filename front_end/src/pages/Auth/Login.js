@@ -1,8 +1,11 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import image2 from "../../assets/images/pexels-photo-3879495.webp";
 import "../Cart/main.css";
 import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
+import { login, getUserInfo, reset} from "../../store/slices/auth";
+import { toast } from 'react-toastify'
+import { NavLink } from "react-router-dom";
 import { axiosInstance } from "../../apis/config";
 import { loginFailure, loginSuccess } from "../../store/slices/user";
 import { initialCart } from "../../store/slices/cart";
@@ -10,9 +13,9 @@ import CartItems from '../Cart/component/CartItems';
 import {  InitialCartAPI } from "../../apis/cartOperations/getCartData";
 
 function Login() {
+    const { user, isLoading, isError, isSuccess, message } = useSelector((state) => state.auth)
   const navigate = useNavigate();
   const dispatch = useDispatch();
-  const error = useSelector((state) => state.user.error);
   const [Form, setForm] = useState({
     email: "",
     password: "",
@@ -58,34 +61,30 @@ function Login() {
       });
     }
   };
+   useEffect(() => {
+        if (isError) {
+            toast.error(message)
+        }
 
-  const handleSubmit = async (event) => {
+        if (isSuccess || user) {
+            navigate("/")
+        }
+
+        dispatch(reset())
+        dispatch(getUserInfo())
+
+    }, [isError, isSuccess, user, navigate, dispatch])
+
+  const handleSubmit = async (event)=>{
     event.preventDefault(); // Prevent the default form submission behavior
-
-    try {
-      const response = await axiosInstance.post("/accounts/api/login", Form);
-      const userData = response.data;
-
-      dispatch(loginSuccess(userData));
-      dispatch(initialCart(InitialCartAPI(userData)))
-      navigate("/home");
-
-      console.log("Api response",response);
-    } catch (error) {
-      console.error("Api error",error);
-
-      let errorMessage = "Login failed. Please check your credentials.";
-      console.log("Login failed:", error.message);
-
-      dispatch(loginFailure(errorMessage));
-    }
+    dispatch(login({...Form}));
   };
 
   return (
     <div>
       <div className="  m-3 d-flex ">
         <div className="mb-5 mx-auto my-5 h-100 ">
-          {error && <h3>{error}</h3>}
+          {/*{err && <h3>{err}</h3>}*/}
           <div
             className="row g-0  rounded-5 "
             style={{
@@ -186,9 +185,9 @@ function Login() {
 
                         <div className="col-md-6 d-flex justify-content-center orange">
                           {/* <!-- Simple link --> */}
-                          <a href="#!" className="orange">
+                          <NavLink to="/reset-password" className="orange">
                             Forgot password?
-                          </a>
+                          </NavLink>
                         </div>
                       </div>
 

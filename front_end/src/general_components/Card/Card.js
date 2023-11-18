@@ -22,7 +22,7 @@ export default function Card({ item }) {
   const [isCartVisible, setCartVisibility] = useState(true);
   const session = useSelector((state) => state?.user?.user?.session?.id);
   const cart = useSelector((state) => state.cart.cartItems);
-  const user = useSelector((state) => state.user?.user?.user);
+  const user = useSelector(state => state.auth.userInfo);
   const StyledBadge = styled(Badge)(({ theme }) => ({
     "& .MuiBadge-badge": {
       borderRadius: "50%",

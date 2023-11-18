@@ -14,12 +14,13 @@ import { Link, NavLink, useNavigate, useSearchParams } from "react-router-dom";
 import { useSelector } from "react-redux";
 import { toast } from "react-toastify";
 import { Button, Form, FormControl } from "react-bootstrap";
+import {login, logout, register} from "../../store/slices/auth";
+import {useDispatch}  from "react-redux";
 
 export default function Navbarr() {
+  const dispatch = useDispatch();
   const wishlistCount = useSelector(state => state.wishlist.count);
-
-  const user = useSelector((state) => state.user?.user?.user);
-
+  const user = useSelector(state => state.auth.userInfo);
   const [searchTerm, setSearchTerm] = useState("");
   const handleSearchChange = (e) => {
     setSearchTerm(e.target.value);
@@ -72,7 +73,9 @@ export default function Navbarr() {
           <NavLink to="/profile" href="#username" className="m-3 text-light">
             {user.username}
           </NavLink>
-          <NavLink  className="m-3 text-light">
+          <NavLink  
+    onClick={()=>{dispatch(logout()); navigate('/')}}
+    className="m-3 text-light">
             Logout
           </NavLink>
         </>
@@ -80,7 +83,9 @@ export default function Navbarr() {
     } else {
       return (
         <>
-          <NavLink to="/login"  className="m-3 text-light">
+          <NavLink to="/login"  
+         onClick={()=>{dispatch(login())}}
+        className="m-3 text-light">
             Login
           </NavLink>
           <NavLink to="registration" className="m-3 text-light">

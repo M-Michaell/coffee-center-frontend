@@ -104,7 +104,7 @@ const getUserInfo = async (accessToken) => {
 
     const response = await axios.get(GET_USER_INFO, config)
     if (response.data){
-        localStorage.setItem("userInfo", JSON.stringify(response.data));
+        localStorage.setItem("userInfo", JSON.stringify(response.data));    
     }
     return response.data
 }

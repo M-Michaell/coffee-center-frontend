@@ -1,4 +1,5 @@
 import "./header.css";
+
 import React, { useState } from "react";
 import Navbar from "react-bootstrap/Navbar";
 import Container from "react-bootstrap/Container";
@@ -12,9 +13,10 @@ import {
 import {  NavLink, useNavigate } from "react-router-dom";
 import { useSelector } from "react-redux";
 import { toast } from "react-toastify";
-import { Button, Form, FormControl } from "react-bootstrap";
+import { Button, FormControl } from "react-bootstrap";
 import {logout} from "../../store/slices/auth";
 import {useDispatch}  from "react-redux";
+import "../../pages/Cart/main.css"
 
 export default function Navbarr() {
   const dispatch = useDispatch();
@@ -44,16 +46,9 @@ export default function Navbarr() {
 
 
   const handleCart = () => {
-    if (user) {
-        navigate("cart/");
-    } else {
-      const CustomToast = ({ closeToast }) => (
-        <div>
-          You should login first. <a href="/login/">Login now</a>
-        </div>
-      );
-
-      toast.info(<CustomToast />, {
+    if (!user) {
+  
+      toast.info("You should login first" , {
         position: "top-center",
         autoClose: 5000,
         hideProgressBar: false,
@@ -158,19 +153,19 @@ export default function Navbarr() {
 
             
 
-              <strong className="fs-5 me-3">
+              <strong className="fs-5 me-3 ">
                 <FontAwesomeIcon
                   icon={faPhoneVolume}
-                  className="orange-icon me-2 mt-1"
+                  className="orange-icon me-2 mt-1 orange"
                 />
                 +20 120 912 2212
               </strong>
-              <div className="d-flex">
+              <div className="d-flex my-3">
 
               <NavLink to="" style={{ color: "var(--orange)" }}>
                 <FontAwesomeIcon icon={faHeart} className="me-3 fs-4" />
               </NavLink>
-              <NavLink to={user ? "/cart" : "/login"} onClick={handleCart} style={{ color: "var(--orange)" }}>
+              <NavLink to= {user?"/cart":"/login"} onClick={handleCart} style={{ color: "var(--orange)" }}>
 
                 <FontAwesomeIcon icon={faCartShopping}className=" fs-4"  />
               </NavLink>

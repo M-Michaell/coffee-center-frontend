@@ -17,7 +17,6 @@ const cart = createSlice({
   initialState: INITIAL_STATE,
   reducers: {
     initialCart: (state, action) => {
-      // console.log("payload",action.payload);
       action
         ? (state.cartItems = [...action.payload])
         : console.log(action.payload);
@@ -26,15 +25,23 @@ const cart = createSlice({
     addToCart: (state, action) => {
       const { product,session } = action.payload;
       console.log(product);
-      // console.log(session);
-      // Check if the cart is not full
+
       if (state.cartItems.length < state.maxItems) {
         const item={ product: { ...product }, quantity: 1 }
           state.cartItems.push(item);
           addToCartAPI(item, session)
       } else {
-        // If the cart is full, show an alert
-        alert(`Cart is full, empty it first`);
+        toast.info("Cart is full, empty it first", 
+        {
+          position: "top-center",
+          autoClose: 3000,
+          hideProgressBar: false,
+          closeOnClick: true,
+          pauseOnHover: true,
+          draggable: true,
+          progress: undefined,
+          theme: "dark",
+          });
       }
     },
 

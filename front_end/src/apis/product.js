@@ -2,7 +2,6 @@ import {useEffect, useState} from "react";
 import {axiosInstance} from "./config";
 
 export function ProductItems(page){
-    console.log(page);
     const [products, setProduct] = useState([]);
     const [paginationInfo, setPaginationInfo] = useState({});
 

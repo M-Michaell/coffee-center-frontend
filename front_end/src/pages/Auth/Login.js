@@ -6,14 +6,11 @@ import {useNavigate} from "react-router-dom";
 import {login, getUserInfo, reset} from "../../store/slices/auth";
 import {toast} from 'react-toastify'
 import {NavLink} from "react-router-dom";
-import {axiosInstance} from "../../apis/config";
-import {loginFailure, loginSuccess} from "../../store/slices/user";
-import {initialCart} from "../../store/slices/cart";
-import CartItems from '../Cart/component/CartItems';
-import {InitialCartAPI} from "../../apis/cartOperations/getCartData";
+
 
 function Login() {
     const {user, isLoading, isError, isSuccess, message} = useSelector((state) => state.auth);
+    
     const navigate = useNavigate();
     const dispatch = useDispatch();
     const [Form, setForm] = useState({

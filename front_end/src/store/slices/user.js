@@ -1,24 +1,25 @@
-// Redux slice
 import { createSlice } from "@reduxjs/toolkit";
 
 const userSlice = createSlice({
   name: "user",
   initialState: {
-    user: [],
-    error: null,
+    addresses: [],
+    payments: [],
+    shoppingSession: [],
   },
   reducers: {
-    loginSuccess: (state, action) => {
-      state.user = action.payload;
-      state.error = null;
+    addAddresses: (state, action) => {
+      state.addresses = action.payload;
     },
-    loginFailure: (state, action) => {
-      state.user = [];
-      state.error = action.payload;
+    addPayments: (state, action) => {
+      state.payments = action.payload;
+    },
+    addShoppingSession: (state, action) => {
+      state.shoppingSession = action.payload;
     },
   },
 });
 
-export const { loginSuccess, loginFailure } = userSlice.actions;
+export const { addAddresses, addPayments, addShoppingSession } = userSlice.actions;
 
 export default userSlice.reducer;

@@ -14,14 +14,16 @@ import { addToWishlist, removeFromWishlist } from "../../store/slices/wishlist";
 
 export default function Card({ item }) {
   const disPatch = useDispatch();
-  const isProductInWishlist = useSelector(state => state.wishlist.products.some(p => p.id === item.id));
+  const isProductInWishlist = useSelector((state) =>
+    state.wishlist.products.some((p) => p.id === item.id)
+  );
   const [isHeartClicked, setHeartClicked] = useState(false);
   const [count, setCount] = useState(1);
   const [invisible, setInvisible] = useState(false);
   const [isCartVisible, setCartVisibility] = useState(true);
-  const session = useSelector((state) => state?.user?.user?.session?.id);
+  const session = useSelector((state) => state?.user?.shoppingSession?.id);
   const cart = useSelector((state) => state.cart.cartItems);
-  const user = useSelector(state => state.auth.userInfo);
+  const user = useSelector((state) => state.auth.userInfo);
   const StyledBadge = styled(Badge)(({ theme }) => ({
     "& .MuiBadge-badge": {
       borderRadius: "50%",
@@ -74,7 +76,6 @@ export default function Card({ item }) {
       setCartVisibility(false);
       setCount(1);
     } else {
-
       toast.info(<CustomToast />, {
         position: "top-center",
         autoClose: 5000,
@@ -88,13 +89,13 @@ export default function Card({ item }) {
     }
   };
 
-  const handleHeart = () => {  
+  const handleHeart = () => {
     if (isProductInWishlist) {
       disPatch(removeFromWishlist(item.id));
     } else {
       disPatch(addToWishlist(item));
     }
-  
+
     setHeartClicked(!isHeartClicked);
   };
 

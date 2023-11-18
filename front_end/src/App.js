@@ -5,16 +5,19 @@ import "bootstrap/dist/js/bootstrap.bundle.min.js";
 import "mdb-react-ui-kit/dist/css/mdb.min.css";
 import "@fortawesome/fontawesome-free/css/all.min.css";
 import { BrowserRouter } from "react-router-dom";
-import { Provider } from 'react-redux';
+import { Provider, useSelector } from 'react-redux';
 import store from './store';
 import Router from "./Router/router";
 import Navbarr from "./general_components/Header/header";
 import Footerr from "./general_components/Footer/footer";
-import { CookiesProvider } from "react-cookie";
-import { ToastContainer, toast } from "react-toastify";
+import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
+import { UserDataAPI } from "./apis/cartOperations/getUserData";
 
 function App() {
+
+  
+
   return (
     <Provider store={store}>
     <BrowserRouter>
@@ -36,7 +39,7 @@ function App() {
         <Router />
         <ToastContainer
           position="top-center"
-          autoClose={5000}
+          autoClose={3000}
           limit={4}
           hideProgressBar={false}
           newestOnTop

@@ -11,12 +11,10 @@ export default function Counter(props) {
   const { product } = props;
   const dispatch = useDispatch();
   const cart = useSelector((state) => state.cart.cartItems);
-  const session=useSelector((state) => state?.user?.user?.session?.id)
-  // console.log("session",session)
+  const session = useSelector((state) => state?.user?.shoppingSession?.id);
 
 
   const exsisting = cart.find((item) => item.product.id === product.product.id);
-  // console.log("exttttttt",exsisting)
   return (
     <>
       <div className="d-flex justify-content-between align-items-center w-100 text-nowrap flex-wrap ">

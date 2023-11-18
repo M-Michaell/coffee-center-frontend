@@ -8,6 +8,7 @@ const ACTIVATE_URL = `${BACKEND_DOMAIN}/accounts/api/auth/users/activation/`
 const RESET_PASSWORD_URL = `${BACKEND_DOMAIN}/accounts/api/auth/users/reset_password/`
 const RESET_PASSWORD_CONFIRM_URL = `${BACKEND_DOMAIN}/accounts/api/auth/users/reset_password_confirm/`
 const GET_USER_INFO = `${BACKEND_DOMAIN}/accounts/api/auth/users/me/`
+const DELETE_USER = `${BACKEND_DOMAIN}/accounts/api/auth/users/me/`
 
 
 
@@ -109,19 +110,18 @@ const getUserInfo = async (accessToken) => {
 }
 // delete user
 
-const deleteUser = async (userData) => {
-    const user = JSON.parse(localStorage.getItem("user"));
-    const accessToken = user.access;
-            console.log("mohammed", accessToken);
+const deleteUser = async (accessToken,userData) => {
+    // const user = JSON.parse(localStorage.getItem("user"));
+    // const accessToken = user.access;
+    // console.log("mohammed", accessToken);
     const config = {
         headers: {
-            'Accept': 'application/json',
-           "Content-type": "application/json",
             "Authorization": `JWT ${accessToken}`
-
         },
+        data: userData,
+
     }
-    const response = await axios.delete(GET_USER_INFO, userData, config)
+    const response = await axios.delete(DELETE_USER, config)
     return response.data
 }
 

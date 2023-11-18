@@ -1,23 +1,28 @@
 import React, {useState, useEffect} from "react";
 import {useDispatch, useSelector} from 'react-redux';
 import {useNavigate} from "react-router-dom";
-import { toast } from 'react-toastify'
-import {deleteUser, logout} from "../../store/slices/auth";
+import {toast} from 'react-toastify'
+import {deleteUser, logout, reset} from "../../store/slices/auth";
 import {useParams} from "react-router-dom";
 
+
 export default function DeleteUser() {
+    const userInfo = useSelector(state => state.auth.userInfo);
     const specialCharsRegex = /[^a-zA-Z0-9]/;
     const capitalLetterRegex = /[A-Z]/;
     const letterRegex = /[a-z]/;
-    const { user, isLoading, isError, isSuccess, message } = useSelector((state) => state.auth);
+    const {user, isLoading, isError, isSuccess, message} = useSelector((state) => state.auth);
     const dispatch = useDispatch();
     const navigate = useNavigate();
     const [formInput, setFormInput] = useState({
-       current_password: '',
+        current_password: '',
+        username: userInfo?.username,
+        first_name: userInfo?.first_name
     });
 
     const [err, setErr] = useState({
-       current_password: '',
+        current_password: '',
+
 
     });
 
@@ -36,22 +41,23 @@ export default function DeleteUser() {
     };
 
 
-
     const handleSubmit = async (e) => {
         e.preventDefault();
-        dispatch(deleteUser({...formInput}))
-        // dispatch(logout())
+        dispatch(deleteUser({...formInput}));
+         dispatch(logout());
 
     };
-     useEffect(() => {
-         if (isError) {
-             toast.error(message)
-         }
-         if (isSuccess) {
-             navigate("/home")
-             toast.success("Your user was delete successfully.")
-         }
-     });
+    useEffect(() => {
+        if (isError) {
+            toast.error(message)
+        }
+        if (isSuccess) {
+            navigate('/')
+            toast.success("Your account was delete successfully.")
+
+        }
+        dispatch(reset())
+    }, [isError, isSuccess, user, navigate, dispatch])
 
     return (
         <div className="text-start" style={{color: "var(--gray1)"}}>
@@ -64,7 +70,7 @@ export default function DeleteUser() {
                       boxShadow: "1px 1px 40px var(--orange)",
                   }}
             >
-                <h1 className="text-center">Reset Password</h1>
+                <h1 className="text-center">Delete Account</h1>
 
                 <div className="col-md-4 w-75">
                     <label htmlFor="inputPassword6"
@@ -85,12 +91,13 @@ export default function DeleteUser() {
                            className="form-control"
                            aria-describedby="passwordHelpInline"/>
                 </div>
-                {err.new_password && (<h6 id="passwordHelp" className="form-text text-danger fs-5">{err.new_password}</h6>)}
+                {err.current_password && (
+                    <h6 id="passwordHelp" className="form-text text-danger fs-5">{err.current_password}</h6>)}
 
                 <div className="d-flex justify-content-center mt-5">
                     <button className="btn rounded-pill btn-block mb-4 mt-3 w-50"
                             style={{backgroundColor: " var(--orange) ", color: "var(--fff)", fontSize: "18px"}}
-                            type="submit">Reset
+                            type="submit">Confirm
                     </button>
                 </div>
             </form>

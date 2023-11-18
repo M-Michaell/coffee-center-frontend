@@ -1,7 +1,8 @@
 // Router.js
 import React, {Suspense} from "react";
 import {Route, Routes} from "react-router-dom";
-import DeleteUser from "../pages/delete_user/DeleteUser";
+import PrivateRoute from "../pages/Auth/PrivateRoute";
+const DeleteUser= React.lazy(()=> import("../pages/delete_user/DeleteUser"));
 const ActivatePage= React.lazy(()=> import("../pages/registration/Activation"));
 const SendMail= React.lazy(()=> import("../pages/registration/SendMail"));
 const Reset= React.lazy(()=> import("../pages/registration/Reset"));
@@ -23,7 +24,11 @@ function Router() {
         <Suspense fallback={<Loader/>}>
             <Routes>
                 <Route path="/product/details/" element={<TextDetails/>}/>
-                <Route path="/cart" element={<Cart/>}/>
+                <Route path="/cart" element={
+                    <PrivateRoute>
+                        <Cart/>
+                    </PrivateRoute>
+                    }/>
                 <Route path="/home" element={<Home/>}/>
                 <Route path="/activate/:uid/:token" element={<ActivatePage/>}/>
                 <Route path="/reset-password" element={<SendMail/>}/>
@@ -33,7 +38,11 @@ function Router() {
                 <Route path="order/" element={<Order/>}/>
                 <Route path="registration/" element={<Registration/>}/>
                 <Route path="login/" element={<Login/>}/>
-                <Route path="/profile/*" element={<Account/>}/>
+                <Route path="/profile/*" element={
+                    <PrivateRoute>
+                        <Account/>
+                    </PrivateRoute>
+                    }/>
                 <Route path="/order/tracking/" element={<Account/>}/>
                 <Route path="/search/:productname" element={<Search/>}/>
                 <Route path="*" element={<NotFound/>}/>

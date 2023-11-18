@@ -1,4 +1,6 @@
 import React from 'react';
+import {NavLink} from "react-router-dom";
+
 
 export default function ProfileComponent({ user }) {
   return (
@@ -40,9 +42,11 @@ export default function ProfileComponent({ user }) {
       <a href="#" className="btn btn-outline-light mt-5 custom-btn">
         Edit my info
       </a>
-      <a href="#" className="btn btn-outline-danger ms-5 mt-5 custom-btn">
+      <NavLink
+          to="/delete-user"
+         className="btn btn-outline-danger ms-5 mt-5 custom-btn">
         Delete account
-      </a>
+      </NavLink>
     </div>
   );
 }

@@ -6,6 +6,8 @@ import { faTableList, faHeartCircleCheck, faAddressBook, faCreditCard, faUser } 
 import "./profile.css";
 import { useUserData } from "../../apis/profile";
 import {useSelector} from "react-redux";
+import {logout} from "../../store/slices/auth";
+import {useDispatch} from "react-redux";
 
 const OrdersComponent = React.lazy(() => import("./component/Orders"));
 const AddressesComponent = React.lazy(() => import("./component/Addresses"));
@@ -14,6 +16,7 @@ const WishlistComponent = React.lazy(() => import("./component/Wishlist"));
 const PaymentsComponent = React.lazy(() => import("./component/Payments"));
 
 export default function Account() {
+  const dispatch = useDispatch();
   const { detailsData } = useUserData();
   const [activeComponent, setActiveComponent] = useState('profile');
   const handleLinkClick = (component) => {
@@ -114,12 +117,17 @@ export default function Account() {
             </Link>
           </ul>
           <hr></hr>
-          <Link to={`/cart`}>
-            <p className="mt-5 text-light" >Sign Out</p>
+          <a
+
+          className="mt-5 text-light"
+          href="/home"
+          onClick={()=>{dispatch(logout())}}
+          >
+            <p  >Sign Out</p>
             <span className="arrow-icon" style={{ color: "var(--orange)" }}>
               &#9654;
             </span>
-          </Link>
+          </a>
         </div>
         <div className="col-lg-10 shadow-lg p-3 mt-3 mb-5 p-4">
           <RenderComponent user={user} />

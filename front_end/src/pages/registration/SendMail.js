@@ -10,8 +10,7 @@ import { toast } from 'react-toastify'
 export default function SendMail() {
     const { user, isLoading, isError, isSuccess, message } = useSelector((state) => state.auth);
     const dispatch = useDispatch();
-
-
+    const emailRegex = /^[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[A-Za-z]{2,}$/;
     const navigate = useNavigate()
     const [formInput, setFormInput] = useState({
 
@@ -27,7 +26,15 @@ export default function SendMail() {
 
     const handleInput = (e) => {
         if (e.target.name === 'email') {
-            setFormInput({...formInput, email: e.target.value})
+            setFormInput({...formInput, email: e.target.value});
+            setErr({
+                ...err, email:
+                    emailRegex.test(e.target.value)
+                        ? null
+                        : e.target.value.length === 0
+                            ? "This field is required"
+                            : "Enter a valid email address example , xxx@example.com",
+            });
         }
     };
 
@@ -80,11 +87,12 @@ export default function SendMail() {
                            name="email"
                            value={formInput.email}
                            type="email"
-                           pattern="[a-z0-9]+@[a-z]+\.[a-z]{2,3}"
                            className="form-control"
                            id="validationDefault02"
                            required/>
                 </div>
+                {err.email && (<h6 className="form-text text-danger fs-5">{err.email}</h6>)}
+
 
                 <div className=" d-flex justify-content-center">
                     <button className="btn rounded-pill btn-block mb-4 mt-5 w-50"

@@ -6,7 +6,7 @@ import { faTableList, faHeartCircleCheck, faAddressBook, faCreditCard, faUser } 
 import "./profile.css";
 import { useUserData } from "../../apis/profile";
 import {useSelector} from "react-redux";
-import {logout} from "../../store/slices/auth";
+import {logout, deleteUser} from "../../store/slices/auth";
 import {useDispatch} from "react-redux";
 
 const OrdersComponent = React.lazy(() => import("./component/Orders"));
@@ -44,7 +44,7 @@ export default function Account() {
       <div className="row">
         <div className="col-lg-2 text-start text-light">
           <div className="mt-5 mb-5">
-            <p className="fw-bold fs-3">Hello {user.username}!</p>
+            <p className="fw-bold fs-3">Hello {user?.username}!</p>
             <p>{user.email}</p>
           </div>
           <hr></hr>

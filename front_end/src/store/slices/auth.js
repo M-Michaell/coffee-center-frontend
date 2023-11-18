@@ -100,9 +100,9 @@ export const deleteUser = createAsyncThunk(
     "auth/deleteUser",
     async (userData, thunkAPI) => {
         try {
-            const accessToken = thunkAPI.getState().auth.user.access
+             const accessToken = thunkAPI.getState().auth.user.access
             console.log("mohammed", accessToken);
-            return await authService.deleteUser(userData)
+            return await authService.deleteUser(accessToken, userData)
         } catch (error) {
             const message = (error.response && error.response.data
                 && error.response.data.message) ||
@@ -228,6 +228,8 @@ export const authSlice = createSlice({
                 state.isLoading = false
                 state.isSuccess = true
                 state.user = null
+                state.userInfo = null
+
             })
             .addCase(deleteUser.pending, (state) => {
                 state.isLoading = true

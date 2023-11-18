@@ -8,6 +8,7 @@ import { toast } from 'react-toastify'
 export default function RegistrationForm() {
     const { user, isLoading, isError, isSuccess, message } = useSelector((state) => state.auth);
     const dispatch = useDispatch();
+    const emailRegex = /^[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[A-Za-z]{2,}$/;
     const specialCharsRegex = /[^a-zA-Z0-9]/;
     const capitalLetterRegex = /[A-Z]/;
     const letterRegex = /[a-z]/;
@@ -58,7 +59,15 @@ export default function RegistrationForm() {
             setErr({...err, username: !letterRegex.test(e.target.value) ? "must have 1 letter at least" : null});
         }
         if (e.target.name === 'email') {
-            setFormInput({...formInput, email: e.target.value})
+            setFormInput({...formInput, email: e.target.value});
+            setErr({
+                ...err, email:
+                    emailRegex.test(e.target.value)
+                        ? null
+                        : e.target.value.length === 0
+                            ? "This field is required"
+                            : "Enter a valid email address example , xxx@example.com",
+            });
         }
         if (e.target.name === 'confirmPassword') {
             setFormInput({...formInput, re_password: e.target.value})
@@ -84,7 +93,7 @@ export default function RegistrationForm() {
             toast.success("An activation email has been sent to your email. Please check your email")
         }
         dispatch(reset())
-    }, [isError, isSuccess, user, navigate, dispatch])
+    }, [isError, isSuccess])
 
 
     return (
@@ -158,6 +167,8 @@ export default function RegistrationForm() {
                 </div>
                 {err.phone && (<h6 className="form-text text-danger fs-5">{err.phone}</h6>)}
 
+
+
                 <div className="col-md-4 w-75">
                     <label htmlFor="validationDefault02"
                            style={{color: "var(--gray1)", fontSize: "18px"}}
@@ -172,11 +183,13 @@ export default function RegistrationForm() {
                            name="email"
                            value={formInput.email}
                            type="email"
-                           pattern="[a-z0-9]+@[a-z]+\.[a-z]{2,3}"
                            className="form-control"
                            id="validationDefault02"
                            required/>
                 </div>
+                {err.email && (<h6 className="form-text text-danger fs-5">{err.email}</h6>)}
+
+
                 <div className="col-md-4 w-75">
                     <label htmlFor="validationDefaultUsername"
                            style={{color: "var(--gray1)", fontSize: "18px"}}

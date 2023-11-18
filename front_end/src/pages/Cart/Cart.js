@@ -9,7 +9,7 @@ import Messages from "./component/errorMessages";
 
 function Cart() {
   const cart = useSelector((state) => state.cart.cartItems);
-  const user = useSelector((state) => state.user?.user?.user);
+  const user = useSelector(state => state.auth.userInfo);
   const addresses = useSelector((state) => state.user?.user?.addresses);
   const payments = useSelector((state) => state.user?.user?.payments);
   const [Delivery, setDelivery] = useState(0);
@@ -37,7 +37,7 @@ function Cart() {
           style={{ backgroundColor: "var(--orange)", height: "3px" }}
         />
         <div className="mb-5">
-          {must.map((item, index) => (
+          {must?.map((item, index) => (
             <div key={index}>
               <Messages item={item}  must={must} setMust={setMust} />
             </div>
@@ -145,7 +145,7 @@ function Cart() {
                         <p className=" ms-3 mb-0 fff"> +50 EGP</p>
                       </div>
                       <div className="collapse ms-3" id="adress">
-                        {addresses.map((address, index) => (
+                        {addresses?.map((address, index) => (
                           <Address
                             address={address}
                             setDeliveryAddress={setDeliveryAddress}
@@ -202,7 +202,7 @@ function Cart() {
                       </span>
                     </div>
                     <div className="collapse ms-3 mb-3" id="onlinecard">
-                      {payments.map((payment, index) => (
+                      {payments?.map((payment, index) => (
                         <Payment
                           payment={payment}
                           setPayment={setPayment}

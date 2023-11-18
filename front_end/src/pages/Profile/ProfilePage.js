@@ -5,6 +5,7 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faTableList, faHeartCircleCheck, faAddressBook, faCreditCard, faUser } from "@fortawesome/free-solid-svg-icons";
 import "./profile.css";
 import { useUserData } from "../../apis/profile";
+import {useSelector} from "react-redux";
 
 const OrdersComponent = React.lazy(() => import("./component/Orders"));
 const AddressesComponent = React.lazy(() => import("./component/Addresses"));
@@ -30,11 +31,11 @@ export default function Account() {
 
   const RenderComponent = componentMap[activeComponent];
 
-  if (!detailsData || !detailsData.Users || detailsData.Users.length === 0) {
-    return <p>Loading...</p>;
-  }
+  // if (!detailsData || !detailsData.Users || detailsData.Users.length === 0) {
+  //   return <p>Loading...</p>;
+  // }
+  const user = useSelector(state => state.auth.userInfo);
 
-  const user = detailsData.Users[0];
   return (
     <div className="container">
       <div className="row">
@@ -45,7 +46,7 @@ export default function Account() {
           </div>
           <hr></hr>
           <ul
-            className="text-start mt-5 mb-5 "
+            className="text-start mt-5 "
             style={{ listStyleType: "none" }}
           >
             <Link to={`/profile/orders`} className="order-link" onClick={() => handleLinkClick('orders')}>
@@ -114,15 +115,13 @@ export default function Account() {
           </ul>
           <hr></hr>
           <Link to={`/cart`}>
-            <p className="mt-5 mb-5 text-light" >Sign Out</p>
+            <p className="mt-5 text-light" >Sign Out</p>
             <span className="arrow-icon" style={{ color: "var(--orange)" }}>
               &#9654;
             </span>
           </Link>
         </div>
-        <div
-          className="col-lg-10 shadow-lg p-3 mt-3 mb-5 p-4"
-        >
+        <div className="col-lg-10 shadow-lg p-3 mt-3 mb-5 p-4">
           <RenderComponent user={user} />
         </div>
       </div>

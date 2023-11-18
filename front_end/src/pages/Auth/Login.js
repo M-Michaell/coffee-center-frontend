@@ -67,7 +67,7 @@ function Login() {
         }
 
         if (isSuccess || user) {
-            navigate("/profile")
+            navigate("/")
         }
 
         dispatch(reset())

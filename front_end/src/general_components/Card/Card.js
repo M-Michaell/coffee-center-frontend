@@ -11,16 +11,18 @@ import {
   removeFromCart,
 } from "../../store/slices/cart";
 import { toast } from "react-toastify";
+import { addToWishlist, removeFromWishlist } from "../../store/slices/wishlist";
 
 export default function Card({ item }) {
   const disPatch = useDispatch();
+  const isProductInWishlist = useSelector(state => state.wishlist.products.some(p => p.id === item.id));
   const [isHeartClicked, setHeartClicked] = useState(false);
   const [count, setCount] = useState(1);
   const [invisible, setInvisible] = useState(false);
   const [isCartVisible, setCartVisibility] = useState(true);
   const session = useSelector((state) => state?.user?.user?.session?.id);
   const cart = useSelector((state) => state.cart.cartItems);
-  const user = useSelector((state) => state.user?.user?.user);
+  const user = useSelector(state => state.auth.userInfo);
   const StyledBadge = styled(Badge)(({ theme }) => ({
     "& .MuiBadge-badge": {
       borderRadius: "50%",
@@ -93,7 +95,13 @@ export default function Card({ item }) {
     }
   };
 
-  const handleHeart = () => {
+  const handleHeart = () => {  
+    if (isProductInWishlist) {
+      disPatch(removeFromWishlist(item.id));
+    } else {
+      disPatch(addToWishlist(item));
+    }
+  
     setHeartClicked(!isHeartClicked);
   };
 
@@ -123,7 +131,7 @@ export default function Card({ item }) {
           <div className="card-body " style={{ marginTop: "150px" }}>
             <button
               className={`border border-0 m-2 bi position-absolute ${
-                isHeartClicked ? "bi-heart-fill" : "bi-heart"
+                isProductInWishlist ? "bi-heart-fill" : "bi-heart"
               } `}
               style={{
                 top: "0px",

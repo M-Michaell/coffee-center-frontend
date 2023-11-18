@@ -2,13 +2,14 @@
     position: relative;
   }
   
-.arrow-icon {
+  .arrow-icon {
     color: var(--orange);
-    position: absolute;
-    right: 0;
+    margin-left: 5px; /* Add some margin for better spacing */
     opacity: 0;
     transition: opacity 0.3s;
+    display: inline-block; /* Add this line */
   }
+  
   
 .order-link:hover .arrow-icon {
     opacity: 1;
@@ -26,3 +27,17 @@
 .active-link {
     color: var(--orange);
 }
+
+.title-style{
+  font-family: Georgia, 'Times New Roman', Times, serif;
+  font-weight: 700;
+  font-size: 20px;
+  color: hsl(52, 0%, 98%);
+  }
+.title-quote{
+  font-family: Georgia, 'Times New Roman', Times, serif;
+  font-weight: 400;
+  color: hsl(0, 0%, 98%);
+  }
+
+

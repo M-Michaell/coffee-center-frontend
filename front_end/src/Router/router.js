@@ -46,6 +46,5 @@ function Router() {
             </Routes>
         </Suspense>
     );
-}
 
 export default Router;

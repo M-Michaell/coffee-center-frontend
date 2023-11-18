@@ -9,7 +9,6 @@ const store = configureStore({
   reducer: {
     cart: cartSlice,
     wishlist: wishlistReducer,
-
     user: userSlice ,
     auth: authReducer,
   },
@@ -17,3 +16,4 @@ const store = configureStore({
 
 
 export default store;
+

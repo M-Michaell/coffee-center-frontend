@@ -1,7 +1,6 @@
 import React, { useEffect } from "react";
 import Badge from "@mui/material/Badge";
 import { styled } from "@mui/material/styles";
-import photo from "./mm.png";
 import { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import {
@@ -61,10 +60,9 @@ export default function Card({ item }) {
     const product = existing;
     disPatch(increaseQuantity({ product, session }));
   };
-  const CustomToast = ({ closeToast }) => (
+  const CustomToast = () => (
     <div>
       You should login first. <a href="/login/">Login now</a>
-      <button onClick={closeToast}>Close</button>
     </div>
   );
 
@@ -76,11 +74,6 @@ export default function Card({ item }) {
       setCartVisibility(false);
       setCount(1);
     } else {
-      const CustomToast = ({ closeToast }) => (
-        <div>
-          You should login first. <a href="/login/">Login now</a>
-        </div>
-      );
 
       toast.info(<CustomToast />, {
         position: "top-center",

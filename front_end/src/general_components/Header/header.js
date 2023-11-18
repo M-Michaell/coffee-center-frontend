@@ -1,6 +1,5 @@
 import "./header.css";
-import React, { useEffect, useState } from "react";
-import Nav from "react-bootstrap/Nav";
+import React, { useState } from "react";
 import Navbar from "react-bootstrap/Navbar";
 import Container from "react-bootstrap/Container";
 import { faHeart } from "@fortawesome/free-regular-svg-icons";
@@ -10,7 +9,7 @@ import {
   faCartShopping,
   faMagnifyingGlass,
 } from "@fortawesome/free-solid-svg-icons";
-import { Link, NavLink, useNavigate, useSearchParams } from "react-router-dom";
+import {  NavLink, useNavigate } from "react-router-dom";
 import { useSelector } from "react-redux";
 import { toast } from "react-toastify";
 import { Button, Form, FormControl } from "react-bootstrap";
@@ -43,28 +42,30 @@ export default function Navbarr() {
     }
   };
 
-  //   const handleCart = () => {
-  //     if (user) {
-  //       navigate();
-  //     } else {
-  //       const CustomToast = ({ closeToast }) => (
-  //         <div>
-  //           You should login first. <a href="/login/">Login now</a>
-  //         </div>
-  //       );
 
-  //       toast.info(<CustomToast />, {
-  //         position: "top-center",
-  //         autoClose: 5000,
-  //         hideProgressBar: false,
-  //         closeOnClick: true,
-  //         pauseOnHover: true,
-  //         draggable: true,
-  //         progress: undefined,
-  //         theme: "dark",
-  //       });
-  //     }
-  //   };
+  const handleCart = () => {
+    if (user) {
+        navigate("cart/");
+    } else {
+      const CustomToast = ({ closeToast }) => (
+        <div>
+          You should login first. <a href="/login/">Login now</a>
+        </div>
+      );
+
+      toast.info(<CustomToast />, {
+        position: "top-center",
+        autoClose: 5000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+        theme: "dark",
+      });
+    }
+  };
+
 
   const renderAuthLinks = () => {
     if (user) {
@@ -167,10 +168,11 @@ export default function Navbarr() {
               <div className="d-flex">
 
               <NavLink to="" style={{ color: "var(--orange)" }}>
-                <FontAwesomeIcon icon={faHeart} className="me-3" />
+                <FontAwesomeIcon icon={faHeart} className="me-3 fs-4" />
               </NavLink>
-              <NavLink to="/cart" style={{ color: "var(--orange)" }}>
-                <FontAwesomeIcon icon={faCartShopping} />
+              <NavLink to={user ? "/cart" : "/login"} onClick={handleCart} style={{ color: "var(--orange)" }}>
+
+                <FontAwesomeIcon icon={faCartShopping}className=" fs-4"  />
               </NavLink>
               </div>
               {renderAuthLinks()}

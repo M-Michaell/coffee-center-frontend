@@ -8,7 +8,7 @@ export function SearchResult(searchWord ,page,filters) {
     console.log("api",searchWord)
 
     const url = `/search?search_word=${searchWord}&filters=${Object.entries(filters)
-        .filter(([key, value]) => value && value.length > 0)  // Only include non-empty values
+        .filter(([key, value]) => value && value.length > 0)  
         .map(([key, value]) => `${key}=${value.join('_')}`)
         .join(',')}&page=${page}`;
   

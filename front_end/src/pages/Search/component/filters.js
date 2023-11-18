@@ -3,12 +3,11 @@ import React from "react";
 const FilterComponent = ({
   filterType,
   options,
-  selectedValue,
   onFilterChange,
 }) => (
   <div>
     <div
-    className="d-flex justify-content-between"
+      className="d-flex justify-content-between"
       data-bs-toggle="collapse"
       href={`#collapse${filterType}`}
       aria-expanded="false"
@@ -27,10 +26,12 @@ const FilterComponent = ({
             type="checkbox"
             name={filterType}
             value={option.id}
-            id={filterType+option.id}
+            id={filterType + option.id}
             onChange={() => onFilterChange(filterType, option.id)}
           />
-          <label htmlFor={filterType+option.id} className="gray1">{option.name}</label>
+          <label htmlFor={filterType + option.id} className="gray1">
+            {option.name}
+          </label>
         </div>
       ))}
     </div>

@@ -14,9 +14,9 @@ function Search() {
   const [page, setPage] = useState(1);
   const [filters, setFilters] = useState({
     CoffeeType: [],
-    Caffeine: [], // Example with default value '1'
+    Caffeine: [],
     Creator: [],
-    Origin: [], // Example with default value '1'
+    Origin: [],
     RoastingDegree: [],
   });
 
@@ -34,7 +34,6 @@ function Search() {
     setFilters((prevFilters) => {
       const updatedFilters = { ...prevFilters };
 
-      // Toggle the value in the array for multi-value filters
       if (updatedFilters[filterType].includes(value)) {
         updatedFilters[filterType] = updatedFilters[filterType].filter(
           (v) => v !== value
@@ -52,7 +51,9 @@ function Search() {
   return (
     <>
       <div style={{ width: "90%" }} className="mx-auto">
-        <p className="text-start fs-4 orange mt-5">Search Result for: {searchWord}</p>
+        <p className="text-start fs-4 orange mt-5">
+          Search Result for: {searchWord}
+        </p>
         <hr
           className=" orange mb-5"
           style={{ backgroundColor: "var(--orange)", height: "3px" }}
@@ -64,25 +65,26 @@ function Search() {
               className="mx-auto"
               style={{ backgroundColor: "var(--orange)", height: "3px" }}
             />
-            {Object.entries(filterOptions).map(([filterType, options]) => (
-              <div className="">
-                <FilterComponent
-                  key={filterType}
-                  filterType={filterType}
-                  options={options}
-                  selectedValue={filters[filterType]}
-                  onFilterChange={handleChange}
-                />
-              </div>
-            ))}
+            {Object.entries(filterOptions).map(
+              ([filterType, options, index]) => (
+                <div className="" key={filterType + options + index}>
+                  <FilterComponent
+                    filterType={filterType}
+                    options={options}
+                    selectedValue={filters[filterType]}
+                    onFilterChange={handleChange}
+                  />
+                </div>
+              )
+            )}
           </div>
           <div className="col col-sm col-md-9 col-xl-10 mb-5">
             <div className="row row-cols-1 row-cols-md-2 row-cols-xl-3 g-4 justify-content-center align-items-center w-100 h-100">
               {products?.length > 0 ? (
-                products.map((product) => (
+                products.map((product, index) => (
                   <div
                     className="col d-flex justify-content-center"
-                    key={product.id}
+                    key={index}
                   >
                     <Card item={product} />
                   </div>

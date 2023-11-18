@@ -76,6 +76,7 @@ export default function Navbarr() {
             {user.username}
           </NavLink>
           <NavLink
+              type="submit"
               onClick={()=>{dispatch(logout()); navigate('/')}}
               className="m-3 text-light">
             Logout

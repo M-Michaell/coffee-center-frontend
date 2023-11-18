@@ -62,22 +62,20 @@ function Login() {
     }
   };
    useEffect(() => {
-        if (isError) {
+       if (isError) {
             toast.error(message)
         }
-
         if (isSuccess || user) {
+           dispatch(getUserInfo())
             navigate("/")
         }
-
         dispatch(reset())
-        dispatch(getUserInfo())
-
     }, [isError, isSuccess, user, navigate, dispatch])
 
   const handleSubmit = async (event)=>{
     event.preventDefault(); // Prevent the default form submission behavior
     dispatch(login({...Form}));
+
   };
 
   return (

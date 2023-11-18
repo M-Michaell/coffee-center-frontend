@@ -20,9 +20,7 @@ import {useDispatch}  from "react-redux";
 export default function Navbarr() {
   const dispatch = useDispatch();
   const wishlistCount = useSelector(state => state.wishlist.count);
-
   const user = useSelector(state => state.auth.userInfo);
-
   const [searchTerm, setSearchTerm] = useState("");
   const handleSearchChange = (e) => {
     setSearchTerm(e.target.value);
@@ -75,8 +73,8 @@ export default function Navbarr() {
           <NavLink to="/profile" href="#username" className="m-3 text-light">
             {user.username}
           </NavLink>
-          <NavLink
-              type="submit"
+
+          <NavLink  
               onClick={()=>{dispatch(logout()); navigate('/')}}
               className="m-3 text-light">
             Logout
@@ -86,15 +84,12 @@ export default function Navbarr() {
     } else {
       return (
         <>
-          <NavLink
-              onClick={()=>{dispatch(login())}}
-              to="/login"
-              className="m-3 text-light">
+          <NavLink to="/login"  
+         onClick={()=>{dispatch(login())}}
+        className="m-3 text-light">
             Login
           </NavLink>
-          <NavLink
-              onClick={()=>{dispatch(register())}}
-              to="registration" className="m-3 text-light">
+          <NavLink to="registration" className="m-3 text-light">
             Register
           </NavLink>
         </>

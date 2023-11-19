@@ -7,4 +7,4 @@ export default function TotalPrice({price,price_before}){
             </div>
         </div>
     )
-} 
+}   

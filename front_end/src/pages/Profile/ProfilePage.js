@@ -38,6 +38,7 @@ export default function Account() {
   //   return <p>Loading...</p>;
   // }
   const user = useSelector(state => state.auth.userInfo);
+  console.log('user:',user)
 
   return (
     <div className="container">

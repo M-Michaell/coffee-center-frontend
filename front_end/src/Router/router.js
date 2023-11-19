@@ -1,6 +1,6 @@
 // Router.js
-import React, {Suspense} from "react";
-import {Route, Routes} from "react-router-dom";
+import React, { Suspense } from "react";
+import { Route, Routes } from "react-router-dom";
 
 const PrivateRoute = React.lazy(()=> import("../pages/Auth/PrivateRoute"));
 const DeleteUser= React.lazy(()=> import("../pages/delete_user/DeleteUser"));
@@ -8,6 +8,7 @@ const ActivatePage= React.lazy(()=> import("../pages/registration/Activation"));
 const SendMail= React.lazy(()=> import("../pages/registration/SendMail"));
 const Reset= React.lazy(()=> import("../pages/registration/Reset"));
 const Order= React.lazy(()=> import("../pages/Order/OrderPage"));
+const Checkout= React.lazy(()=> import("../pages/paypal/paypal"));
 const TextDetails= React.lazy(()=> import("../pages/Details/text_details"));
 const Home = React.lazy(() => import("../pages/Home/Home"));
 const Loader = React.lazy(() => import("../general_components/Loader/Loader"));
@@ -37,7 +38,7 @@ function Router() {
                 <Route path="/profile/edit-user" element={<EditForm/>}/>
                 <Route path="/email/reset/confirm/:uid/:token" element={<Reset/>}/>
                 <Route path="/" element={<Home/>}/>
-                <Route path="order/" element={<Order/>}/>
+                <Route path="order/:order_id" element={<Order/>}/>
                 <Route path="registration/" element={<Registration/>}/>
                 <Route path="login/" element={<Login/>}/>
                 <Route path="/profile/*" element={
@@ -54,8 +55,25 @@ function Router() {
                 <Route path="/profile/*" element={<Account/>}/>
                 <Route path="/addressform/:id" element={<AddressForm/>}/>
                 <Route path="/addressform" element={<AddressForm/>}/>
+                <Route path="/paypal/" element={<Checkout />} />
             </Routes>
         </Suspense>
     );
+  return (
+    <Suspense fallback={<Loader />}>
+      <Routes>
+        <Route path="/product/details/" element={<TextDetails />} />
+        <Route path="/cart" element={<Cart />} />
+        <Route path="/" element={<Home />} />
+        <Route path="order/" element={<Order />} />
+        <Route path="registration/" element={<Registration />} />
+        <Route path="login/" element={<Login />} />
+        <Route path="/profile/*" element={<Account />} />
+        <Route path="/order/tracking/" element={<Account />} />
+        <Route path="/search/:productname" element={<Search />} />
+        <Route path="*" element={<NotFound />} />
+      </Routes>
+    </Suspense>
+  );
 }
 export default Router;

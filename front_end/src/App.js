@@ -1,6 +1,5 @@
 import "./App.css";
 import "bootstrap/dist/css/bootstrap.min.css";
-import "bootstrap/dist/css/bootstrap.min.css";
 import "bootstrap/dist/js/bootstrap.bundle.min.js";
 import "mdb-react-ui-kit/dist/css/mdb.min.css";
 import "@fortawesome/fontawesome-free/css/all.min.css";
@@ -14,7 +13,7 @@ import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import { UserDataAPI } from "./apis/cartOperations/getUserData";
 import { useEffect, useState } from "react";
-
+import {PayPalScriptProvider,PayPalButtons} from "@paypal/react-paypal-js"
 function App() {
   const dispatch = useDispatch();
   const userId = useSelector((state) => state?.auth?.userInfo?.id);
@@ -33,6 +32,7 @@ function App() {
   
 
   return (
+    <PayPalScriptProvider options={{ "client-id": process.env.REACT_APP_PAYPAL_CLIENT_ID }}>
     <Provider store={store}>
     <BrowserRouter>
       <div>
@@ -68,6 +68,7 @@ function App() {
       </div>
     </BrowserRouter>
     </Provider>
+    </PayPalScriptProvider>
   );
 }
 

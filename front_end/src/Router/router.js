@@ -1,6 +1,12 @@
 // Router.js
 import React, { Suspense } from "react";
 import { Route, Routes } from "react-router-dom";
+import TextDetails from "../pages/Details/text_details";
+import Order from "../pages/Order/OrderPage";
+import Checkout from "../pages/paypal/paypal";
+
+import React, { Suspense } from "react";
+import { Route, Routes } from "react-router-dom";
 
 const PrivateRoute = React.lazy(() => import("../pages/Auth/PrivateRoute"));
 const DeleteUser = React.lazy(() => import("../pages/delete_user/DeleteUser"));

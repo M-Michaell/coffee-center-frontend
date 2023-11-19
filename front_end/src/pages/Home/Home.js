@@ -11,11 +11,9 @@ import { initialCart } from "../../store/slices/cart";
 import Loader from "../../general_components/Loader/Loader";
 
 export default function Home() {
-    const [page, setPage] = useState(1);
-    const dispatch = useDispatch();
-    const userId = useSelector((state) => state?.auth?.userInfo?.id);
-  
-  
+  const [page, setPage] = useState(1);
+  const dispatch = useDispatch();
+  const userId = useSelector((state) => state?.auth?.userInfo?.id);
 
   const handlePageChange = (event, value) => {
     setPage(value);
@@ -24,22 +22,19 @@ export default function Home() {
   const { products, paginationInfo } = ProductItems(page);
   return (
     <div style={{ backgroundColor: "var(--background)" }}>
-      (
-       
-        <>
-          <Carousel />
-          <CardSlider cards={products} />
-          <Images />
-          <CardList cards={products} />
-          <div className="d-flex justify-content-center my-5">
-            <PaginationControlled
-              page={page}
-              handleChange={handlePageChange}
-              counter={paginationInfo.total_pages}
-            />
-          </div>
-        </>
-      )
+      <>
+        <Carousel />
+        <CardSlider cards={products} />
+        <Images />
+        <CardList cards={products} />
+        <div className="d-flex justify-content-center my-5">
+          <PaginationControlled
+            page={page}
+            handleChange={handlePageChange}
+            counter={paginationInfo.total_pages}
+          />
+        </div>
+      </>
     </div>
   );
 }

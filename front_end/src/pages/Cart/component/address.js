@@ -49,11 +49,7 @@ function Address(props) {
 
         </div>
       </div>
-      <div>
-        <a href="#" className="btn btn-outline-light mt-5 custom-btn">
-        Add Address
-      </a>
-        </div>
+     
         </div>
     </>
   );

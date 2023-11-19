@@ -6,22 +6,30 @@ import { useSelector } from "react-redux";
 import Address from "./component/address";
 import Payment from "./component/payment";
 import Messages from "./component/errorMessages";
+import { Link, useNavigate } from "react-router-dom";
 
 function Cart() {
   const cart = useSelector((state) => state.cart.cartItems);
-  const user = useSelector(state => state.auth.userInfo);
+  const user = useSelector((state) => state.auth.userInfo);
   const addresses = useSelector((state) => state.user?.addresses);
   const payments = useSelector((state) => state.user?.payments);
   const [Delivery, setDelivery] = useState(0);
   const [DeliveryAddress, setDeliveryAddress] = useState();
   const [payment, setPayment] = useState();
   const [must, setMust] = useState([]);
+  const navigate = useNavigate();
 
   const addDelivery = () => {
     setDelivery(50);
   };
   const removeDelivery = () => {
     setDelivery(0);
+  };
+  const handleAdress = () => {
+    navigate("/addressform");
+  };
+  const handlePayment = () => {
+    navigate("/paymentform");
   };
 
   return (
@@ -39,7 +47,7 @@ function Cart() {
         <div className="mb-5">
           {must?.map((item, index) => (
             <div key={index}>
-              <Messages item={item}  must={must} setMust={setMust} />
+              <Messages item={item} must={must} setMust={setMust} />
             </div>
           ))}
         </div>
@@ -153,6 +161,14 @@ function Cart() {
                             index={index}
                           />
                         ))}
+                        <div>
+                          <button
+                            onClick={handleAdress}
+                            className="btn btn-outline-light mt-5 custom-btn d-block"
+                          >
+                            Add Address
+                          </button>
+                        </div>
                       </div>
                     </div>
                   </form>
@@ -210,6 +226,15 @@ function Cart() {
                           index={index}
                         />
                       ))}
+                      <div>
+                        <button
+                          
+                          onClick={handlePayment}
+                          className="btn btn-outline-light m-3 mt-4 custom-btn d-block"
+                        >
+                          Add Card
+                        </button>
+                      </div>
                     </div>
 
                     {/* <div className="form-check">

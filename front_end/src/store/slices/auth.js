@@ -108,13 +108,30 @@ export const deleteUser = createAsyncThunk(
     async (userData, thunkAPI) => {
         try {
              const accessToken = thunkAPI.getState().auth.user.access
-            console.log("mohammed", accessToken);
             return await authService.deleteUser(accessToken, userData)
         } catch (error) {
             const message = (error.response && error.response.data
                 && error.response.data.message) ||
                 error.message || error.toString()
 
+            return thunkAPI.rejectWithValue(message)
+        }
+    }
+)
+
+
+
+export const editUser = createAsyncThunk(
+    "auth/editUser",
+    async (userData, thunkAPI) => {
+        try {
+             const accessToken = thunkAPI.getState().auth.user.access
+            console.log("hi1",accessToken, "hi 2", userData);
+            return await authService.editUser(accessToken, userData)
+        } catch (error) {
+            const message = (error.response && error.response.data
+                && error.response.data.message) ||
+                error.message || error.toString()
             return thunkAPI.rejectWithValue(message)
         }
     }
@@ -157,7 +174,6 @@ export const authSlice = createSlice({
             .addCase(register.fulfilled, (state, action) => {
                 state.isLoading = false
                 state.isSuccess = true
-                state.user = action.payload
             })
             .addCase(register.rejected, (state, action) => {
                 state.isLoading = false
@@ -191,7 +207,6 @@ export const authSlice = createSlice({
             .addCase(activate.fulfilled, (state, action) => {
                 state.isLoading = false
                 state.isSuccess = true
-                state.user = action.payload
             })
             .addCase(activate.rejected, (state, action) => {
                 state.isLoading = false
@@ -247,6 +262,22 @@ export const authSlice = createSlice({
                 state.isError = true
                 state.message = action.payload
 
+            })
+
+            .addCase(editUser.pending, (state) => {
+                state.isLoading = true
+            })
+            .addCase(editUser.fulfilled, (state, action) => {
+                state.isLoading = false
+                state.isSuccess = true
+                state.userInfo = action.payload
+
+            })
+            .addCase(editUser.rejected, (state, action) => {
+                state.isLoading = false
+                state.isSuccess = false
+                state.isError = true
+                state.message = action.payload
             })
 
     }

@@ -34,14 +34,14 @@ export default function ProfileComponent({ user }) {
         >
           <h5 className="card-title  text-start fw-bold mb-4">Security</h5>
           <div className="row">
-            <p className="card-text text-start col-4">Email: {user.email}</p>
+            <p className="card-text text-start col-4">Email: {user?.email}</p>
             {/* Add other user-related information here */}
           </div>
         </div>
       </div>
-      <a href="#" className="btn btn-outline-light mt-5 custom-btn">
+      <NavLink to="/profile/edit-user" className="btn btn-outline-light mt-5 custom-btn">
         Edit my info
-      </a>
+      </NavLink>
       <NavLink
           to="/delete-user"
          className="btn btn-outline-danger ms-5 mt-5 custom-btn">

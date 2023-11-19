@@ -9,6 +9,7 @@ const RESET_PASSWORD_URL = `${BACKEND_DOMAIN}/accounts/api/auth/users/reset_pass
 const RESET_PASSWORD_CONFIRM_URL = `${BACKEND_DOMAIN}/accounts/api/auth/users/reset_password_confirm/`
 const GET_USER_INFO = `${BACKEND_DOMAIN}/accounts/api/auth/users/me/`
 const DELETE_USER = `${BACKEND_DOMAIN}/accounts/api/auth/users/me/`
+const EDIT_USER = `${BACKEND_DOMAIN}/accounts/api/auth/users/me/`
 
 
 
@@ -20,9 +21,7 @@ const register = async (userData) => {
             "Content-type": "application/json"
         }
     }
-
     const response = await axios.post(REGISTER_URL, userData, config)
-
     return response.data
 }
 
@@ -109,25 +108,33 @@ const getUserInfo = async (accessToken) => {
     return response.data
 }
 // delete user
-
 const deleteUser = async (accessToken,userData) => {
-    // const user = JSON.parse(localStorage.getItem("user"));
-    // const accessToken = user.access;
-    // console.log("mohammed", accessToken);
     const config = {
         headers: {
             "Authorization": `JWT ${accessToken}`
         },
         data: userData,
-
     }
     const response = await axios.delete(DELETE_USER, config)
     return response.data
 }
 
 
+const editUser = async (accessToken,userData) => {
+    const config = {
+        headers: {
+            "Authorization": `JWT ${accessToken}`
+        },
+        // data: userData,
+    }
+    const response = await axios.put(EDIT_USER, userData ,config)
+    if (response.data) {
+        localStorage.setItem("userInfo", JSON.stringify(response.data));
+    }
+    return response.data
+}
 
-const authService = { register, login, logout, activate, resetPassword, resetPasswordConfirm, getUserInfo, deleteUser }
+const authService = { register, login, logout, activate, resetPassword, resetPasswordConfirm, getUserInfo, deleteUser, editUser }
 
 export default authService
 

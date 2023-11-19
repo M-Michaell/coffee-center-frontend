@@ -62,8 +62,8 @@ function Login() {
         if (isError) {
             toast.error("Enter correct Email & Password")
         }
-        if (isSuccess || user) {
-            toast.success("login succesfly")
+        if (isSuccess && user) {
+            toast.success("login successfully")
             dispatch(getUserInfo())
             navigate("/")
         }

@@ -26,13 +26,10 @@ const ActivatePage = () => {
         if (isError) {
             toast.error(message)
         }
-
         if (isSuccess) {
             navigate("/login")
         }
-
-        // dispatch(reset())
-
+        dispatch(reset())
     }, [isError, isSuccess, navigate, dispatch])
 
 

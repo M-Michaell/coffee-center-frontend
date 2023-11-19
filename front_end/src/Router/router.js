@@ -1,7 +1,8 @@
 // Router.js
 import React, { Suspense } from "react";
 import { Route, Routes } from "react-router-dom";
-import PrivateRoute from "../pages/Auth/PrivateRoute";
+
+const PrivateRoute = React.lazy(() => import("../pages/Auth/PrivateRoute"));
 const DeleteUser = React.lazy(() => import("../pages/delete_user/DeleteUser"));
 const ActivatePage = React.lazy(() =>
   import("../pages/registration/Activation")
@@ -26,7 +27,7 @@ const AddressForm = React.lazy(() =>
 const AddressEdit = React.lazy(() =>
   import("../pages/Profile/component/AddressEdit")
 );
-
+const EditForm = React.lazy(() => import("../pages/Auth/EditForm"));
 function Router() {
   return (
     <Suspense fallback={<Loader />}>
@@ -44,6 +45,7 @@ function Router() {
         <Route path="/activate/:uid/:token" element={<ActivatePage />} />
         <Route path="/reset-password" element={<SendMail />} />
         <Route path="/delete-user" element={<DeleteUser />} />
+        <Route path="/profile/edit-user" element={<EditForm />} />
         <Route path="/email/reset/confirm/:uid/:token" element={<Reset />} />
         <Route path="/" element={<Home />} />
         <Route path="order/" element={<Order />} />

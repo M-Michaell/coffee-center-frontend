@@ -1,4 +1,10 @@
 // Router.js
+import React, { Suspense } from "react";
+import { Route, Routes } from "react-router-dom";
+import TextDetails from "../pages/Details/text_details";
+import Order from "../pages/Order/OrderPage";
+import Checkout from "../pages/paypal/paypal";
+
 import React, {Suspense} from "react";
 import {Route, Routes} from "react-router-dom";
 
@@ -57,5 +63,22 @@ function Router() {
             </Routes>
         </Suspense>
     );
+  return (
+    <Suspense fallback={<Loader />}>
+      <Routes>
+        <Route path="/product/details/" element={<TextDetails />} />
+        <Route path="/cart" element={<Cart />} />
+        <Route path="/" element={<Home />} />
+        <Route path="order/" element={<Order />} />
+        <Route path="registration/" element={<Registration />} />
+        <Route path="login/" element={<Login />} />
+        <Route path="/profile/*" element={<Account />} />
+        <Route path="/order/tracking/" element={<Account />} />
+        <Route path="/search/:productname" element={<Search />} />
+        <Route path="/paypal/" element={<Checkout />} />
+        <Route path="*" element={<NotFound />} />
+      </Routes>
+    </Suspense>
+  );
 }
 export default Router;

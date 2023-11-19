@@ -59,7 +59,7 @@ function CartItems(props) {
 
       confirmOrder(data);
       console.log("Confirmation Data:", data);
-      (() => navigate("/home"))();
+      (() => navigate("/order"))();
 
       window.scrollTo({
         top: 0,

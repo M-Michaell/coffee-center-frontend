@@ -196,10 +196,28 @@ function Cart() {
                           setPayment({ payment: "cash" });
                         }}
                       />
+                      
                       <label className="form-check-label" htmlFor="upon">
                         Upon receipt of the items
                       </label>
                     </div>
+
+                    <div className="form-check ms-1">
+                      <input
+                        className="form-check-input "
+                        type="radio"
+                        name="flexRadioDefault"
+                        id="upon"
+                        onClick={() => {
+                          setPayment({ payment: "paypal" });
+                        }}
+                      />
+                      
+                      <label className="form-check-label" htmlFor="upon">
+                        PayPal
+                      </label>
+                    </div>
+
                     <div
                       className=" "
                       data-bs-toggle="collapse"

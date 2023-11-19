@@ -12,7 +12,7 @@ export function useUserData() {
         console.log(res);
       })
       .catch((err) => console.log(err));
-  }, []); 
+  }, []);
 
   return { detailsData };
 }

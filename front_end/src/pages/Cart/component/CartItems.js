@@ -30,7 +30,7 @@ function CartItems(props) {
 
   let toPay = totalPrice - totalDiscount;
 
-  const confirm = () => {
+  async function confirm(){
     const must = [];
 
     if (!cart || cart.length === 0) {
@@ -57,13 +57,20 @@ function CartItems(props) {
         Shopping_session_id: session,
       };
 
-      confirmOrder(data);
-      console.log("Confirmation Data:", data);
-      (() => navigate("/order"))();
+      try {
+        const order_id = await confirmOrder(data);
+        console.log('order ID : ', order_id);
+        
+        navigate(`/order/${order_id}`);
+        
+        window.scrollTo({
+          top: 0,
+        });
+      } catch (error) {
+        console.error("Error confirming order:", error);
+      }
 
-      window.scrollTo({
-        top: 0,
-      });
+
     } else {
       setMust(must);
 

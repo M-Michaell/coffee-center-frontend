@@ -69,50 +69,25 @@ function Router() {
                 <Route path="/addressform/:id" element={<AddressForm/>}/>
                 <Route path="/addressform" element={<AddressForm/>}/>
                 <Route path="/paypal/" element={<Checkout />} />
+                <Route path="/add-product" element={<Creator/>}/>
             </Routes>
         </Suspense>
     );
-  return (
-    <Suspense fallback={<Loader />}>
-      <Routes>
-        <Route path="/product/details/:id" element={<TextDetails />} />
-        <Route
-          path="/cart"
-          element={
-            <PrivateRoute>
-              <Cart />
-            </PrivateRoute>
-          }
-        />
-        <Route path="/home" element={<Home />} />
-        <Route path="/activate/:uid/:token" element={<ActivatePage />} />
-        <Route path="/reset-password" element={<SendMail />} />
-        <Route path="/delete-user" element={<DeleteUser />} />
-        <Route path="/profile/edit-user" element={<EditForm />} />
-        <Route path="/email/reset/confirm/:uid/:token" element={<Reset />} />
-        <Route path="/" element={<Home />} />
-        <Route path="order/" element={<Order />} />
-        <Route path="registration/" element={<Registration />} />
-        <Route path="login/" element={<Login />} />
-        <Route
-          path="/profile/*"
-          element={
-            <PrivateRoute>
-              <Account />
-            </PrivateRoute>
-          }
-        />
-        <Route path="/order/tracking/" element={<Account />} />
-        <Route path="/search/:productname" element={<Search />} />
-        <Route path="*" element={<NotFound />} />
-        <Route path="home/" element={<Home />} />
-        <Route path="registration/" element={<Registration />} />
-        <Route path="login/" element={<Login />} />
-        <Route path="/profile/*" element={<Account />} />
-        <Route path="/addressform/:id" element={<AddressForm />} />
-        <Route path="/addressform" element={<AddressForm />} />
-      </Routes>
-    </Suspense>
-  );
+  // return (
+  //   <Suspense fallback={<Loader />}>
+  //     <Routes>
+  //       <Route path="/product/details/" element={<TextDetails />} />
+  //       <Route path="/cart" element={<Cart />} />
+  //       <Route path="/" element={<Home />} />
+  //       <Route path="order/" element={<Order />} />
+  //       <Route path="registration/" element={<Registration />} />
+  //       <Route path="login/" element={<Login />} />
+  //       <Route path="/profile/*" element={<Account />} />
+  //       <Route path="/order/tracking/" element={<Account />} />
+  //       <Route path="/search/:productname" element={<Search />} />
+  //       <Route path="*" element={<NotFound />} />
+  //     </Routes>
+  //   </Suspense>
+  // );
 }
 export default Router;

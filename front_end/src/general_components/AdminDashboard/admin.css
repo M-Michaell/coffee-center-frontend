@@ -1,0 +1,43 @@
+.order-link {
+    position: relative;
+  }
+  
+  .arrow-icon {
+    color: var(--orange);
+    margin-left: 5px; /* Add some margin for better spacing */
+    opacity: 0;
+    transition: opacity 0.3s;
+    display: inline-block; /* Add this line */
+  }
+  
+  
+.order-link:hover .arrow-icon {
+    opacity: 1;
+  }
+
+.custom-btn {
+    transition: background-color 0.3s;
+  }
+  
+.custom-btn:hover {
+    background-color: var(--orange);
+    color: white;
+  }
+
+.active-link {
+    color: var(--orange);
+}
+
+.title-style{
+  font-family: Georgia, 'Times New Roman', Times, serif;
+  font-weight: 700;
+  font-size: 20px;
+  color: hsl(52, 0%, 98%);
+  }
+.title-quote{
+  font-family: Georgia, 'Times New Roman', Times, serif;
+  font-weight: 400;
+  color: hsl(0, 0%, 98%);
+  }
+
+

@@ -43,7 +43,6 @@ function Address(props) {
             <div className="col">Details: {address.address_line1}</div>
             <div className="col">City: {address.city}</div>
             <div className="col">postal_code: {address.postal_code}</div>
-            <div className="col">countery: {address.country}</div>
             <div className="col">Mobile: {address.mobile}</div>
 
 

@@ -27,6 +27,7 @@ const Search = React.lazy(() => import("../pages/Search/component/Search"));
 const AddressForm = React.lazy(() => import("../pages/Profile/component/AddressForm"));
 const AddressEdit = React.lazy(() => import("../pages/Profile/component/AddressEdit"))
 const EditForm=React.lazy(()=>import("../pages/Auth/EditForm"));
+const AdminDashboard = React.lazy(() => import("../general_components/AdminDashboard/adminhome"));
 function Router() {
     return (
         <Suspense fallback={<Loader/>}>
@@ -52,6 +53,12 @@ function Router() {
                         <Account/>
                     </PrivateRoute>
                     }/>
+                <Route path="/admin/*" element={
+                    <PrivateRoute>
+                      <AdminDashboard />
+                    </PrivateRoute>
+                    }
+                    />
                 <Route path="/order/tracking/" element={<Account/>}/>
                 <Route path="/search/:productname" element={<Search/>}/>
                 <Route path="*" element={<NotFound/>}/>
@@ -59,7 +66,7 @@ function Router() {
                 <Route path="registration/" element={<Registration/>}/>
                 <Route path="login/" element={<Login/>}/>
                 <Route path="/profile/*" element={<Account/>}/>
-                <Route path="/addressform/:id" element={<AddressForm/>}/>
+                <Route path="/addressform/:id" element={<AddressEdit/>}/>
                 <Route path="/addressform" element={<AddressForm/>}/>
                 <Route path="/paypal/" element={<Checkout />} />
                 <Route path="/add-product" element={<ProductForm/>}/>

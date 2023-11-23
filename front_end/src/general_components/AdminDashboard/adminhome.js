@@ -3,34 +3,31 @@ import React, { useState, startTransition, useEffect } from "react";
 import { Link } from "react-router-dom";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import {
-  faTableList,
-  faHeartCircleCheck,
-  faAddressBook,
-  faCreditCard,
-  faUser,
+  faUserTag,
+  faGlobe,
+  faMugHot,
+  faCirclePlus,
+  faPercent,
+  faBagShopping,
+  faFireBurner
 } from "@fortawesome/free-solid-svg-icons";
-import "./profile.css";
+import "./admin.css";
 import { useUserData } from "../../apis/profile";
 import { useSelector } from "react-redux";
 import { logout, deleteUser } from "../../store/slices/auth";
 import { useDispatch } from "react-redux";
 
-const OrdersComponent = React.lazy(() => import("./component/Orders"));
-const AddressesComponent = React.lazy(() => import("./component/Addresses"));
-const ProfileComponent = React.lazy(() => import("./component/Profile"));
-const WishlistComponent = React.lazy(() => import("./component/Wishlist"));
-const PaymentsComponent = React.lazy(() => import("./component/Payments"));
+const Caffeine = React.lazy(() => import("./components/CaffeinesComponent"));
+const CoffeeType = React.lazy(() => import("./components/CoffeetypesComponent"));
+const Creator = React.lazy(() => import("./components/CreatorsComponent"));
+const Discount = React.lazy(() => import("./components/DiscountsComponent"));
+const Origin = React.lazy(() => import("./components/OriginsComponent"));
+const Product = React.lazy(() => import("./components/ProductsComponent"));
+const RoastingDegree = React.lazy(() => import("./components/RoastingDegreeComponent"));
 
-export default function Account({ location = {} }) {
+export default function AdminDashboard() {
   const dispatch = useDispatch();
-  const { detailsData } = useUserData();
-  const [activeComponent, setActiveComponent] = useState("profile");
-  useEffect(() => {
-    // Check if location state is available and has activeComponent
-    if (location.state && location.state.activeComponent) {
-      setActiveComponent(location.state.activeComponent);
-    }
-  }, [location.state]);
+  const [activeComponent, setActiveComponent] = useState("caffeine");
 
   const handleLinkClick = (component) => {
     startTransition(() => {
@@ -38,11 +35,14 @@ export default function Account({ location = {} }) {
     });
   };
   const componentMap = {
-    orders: OrdersComponent,
-    addresses: AddressesComponent,
-    profile: ProfileComponent,
-    wishlist: WishlistComponent,
-    payments: PaymentsComponent,
+    caffeine: Caffeine,
+    coffeetype: CoffeeType,
+    creator: Creator,
+    discount: Discount,
+    origin: Origin,
+    product: Product,
+    roastingdegree: RoastingDegree,
+
   };
 
   const RenderComponent = componentMap[activeComponent];
@@ -63,83 +63,117 @@ export default function Account({ location = {} }) {
           <hr></hr>
           <ul className="text-start mt-5 " style={{ listStyleType: "none" }}>
             <Link
-              to={`/profile/orders`}
+              to={`/admin/caffeine`}
               className="order-link"
-              onClick={() => handleLinkClick("orders")}
+              onClick={() => handleLinkClick("caffeine")}
             >
               <li className="mb-3 text-light">
                 <FontAwesomeIcon
-                  icon={faTableList}
+                  icon={faMugHot}
                   className="me-2"
                   style={{ color: "var(--orange)" }}
                 />
-                Orders
+                Caffeine
                 <span className="arrow-icon">&#9654;</span>
               </li>
             </Link>
             <Link
-              to={`/profile/addresses`}
+              to={`/admin/coffeetypes`}
               className="order-link"
-              onClick={() => handleLinkClick("addresses")}
+              onClick={() => handleLinkClick("coffeetype")}
             >
               <li className="mb-3 text-light">
                 <FontAwesomeIcon
-                  icon={faAddressBook}
+                  icon={faCirclePlus}
                   className="me-2"
                   style={{ color: "var(--orange)" }}
                 />
-                Addresses
+                Coffee Type
                 <span className="arrow-icon" style={{ color: "var(--orange)" }}>
                   &#9654;
                 </span>
               </li>
             </Link>
             <Link
-              to={`/profile/wishlist`}
+              to={`/admin/creator`}
               className="order-link"
-              onClick={() => handleLinkClick("wishlist")}
+              onClick={() => handleLinkClick("creator")}
             >
               <li className="mb-3 text-light">
                 <FontAwesomeIcon
-                  icon={faHeartCircleCheck}
+                  icon={faUserTag}
                   className="me-2"
                   style={{ color: "var(--orange)" }}
                 />
-                Wishlist
+                Creator
                 <span className="arrow-icon" style={{ color: "var(--orange)" }}>
                   &#9654;
                 </span>
               </li>
             </Link>
             <Link
-              to={`/profile/payments`}
+              to={`/admin/discount`}
               className="order-link"
-              onClick={() => handleLinkClick("payments")}
+              onClick={() => handleLinkClick("discount")}
             >
               <li className="mb-3 text-light">
                 <FontAwesomeIcon
-                  icon={faCreditCard}
+                  icon={faPercent}
                   className="me-2"
                   style={{ color: "var(--orange)" }}
                 />
-                Payments
+                Discount
                 <span className="arrow-icon" style={{ color: "var(--orange)" }}>
                   &#9654;
                 </span>
               </li>
             </Link>
             <Link
-              to={`/profile/addresses`}
+              to={`/admin/origin`}
               className="order-link"
-              onClick={() => handleLinkClick("profile")}
+              onClick={() => handleLinkClick("origin")}
             >
               <li className="mb-3 text-light">
                 <FontAwesomeIcon
-                  icon={faUser}
+                  icon={faGlobe}
                   className="me-2"
                   style={{ color: "var(--orange)" }}
                 />
-                Profile
+                Origin
+                <span className="arrow-icon" style={{ color: "var(--orange)" }}>
+                  &#9654;
+                </span>
+              </li>
+            </Link>
+            <Link
+              to={`/admin/product`}
+              className="order-link"
+              onClick={() => handleLinkClick("product")}
+            >
+              <li className="mb-3 text-light">
+                <FontAwesomeIcon
+                  icon={faBagShopping}
+                  className="me-2"
+                  style={{ color: "var(--orange)" }}
+                />
+                Product
+                <span className="arrow-icon" style={{ color: "var(--orange)" }}>
+                  &#9654;
+                </span>
+              </li>
+            </Link>
+            <Link
+              to={`/admin/roastingdegree`}
+              className="order-link"
+              onClick={() => handleLinkClick("origin")}
+            >
+              <li className="mb-3 text-light">
+                <FontAwesomeIcon
+                  icon={faFireBurner}
+                  className="me-2"
+                  style={{ color: "var(--orange)" }}
+                />
+                Roasting Degree
                 <span className="arrow-icon" style={{ color: "var(--orange)" }}>
                   &#9654;
                 </span>

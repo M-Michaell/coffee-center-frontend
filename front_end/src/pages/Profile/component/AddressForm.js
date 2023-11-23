@@ -18,15 +18,15 @@ export default function AddressPage() {
   useEffect(() => {
     const truckIcon = document.getElementById("truck-icon");
     if (truckIcon) {
-      console.log("Adding Animation Classes");
-      truckIcon.classList.add("animate__animated", "animate__slideInLeft");
+      console.log("Adding Animation classNamees");
+      truckIcon.classNameList.add("animate__animated", "animate__slideInLeft");
     }
 
-    // Cleanup: Remove animation class when the component unmounts
+    // Cleanup: Remove animation className when the component unmounts
     return () => {
       if (truckIcon) {
-        console.log("Removing Animation Classes");
-        truckIcon.classList.remove("animate__animated", "animate__slideInLeft");
+        console.log("Removing Animation classNamees");
+        truckIcon.classNameList.remove("animate__animated", "animate__slideInLeft");
       }
     };
   }, []); // Empty dependency array ensures this effect runs once after the component mounts
@@ -117,47 +117,47 @@ export default function AddressPage() {
   ];
 
   return (
-    <div className="container py-5">
+    <div classNameName="container py-5">
       <Grid container justifyContent="center" alignItems="center">
         <Card
-          className="my-4"
+          classNameName="my-4"
           style={{ boxShadow: "0px 0px 20px var(--orange)" }}
         >
           <Grid container>
-            <Grid item xs={12} md={6} className="position-relative">
+            <Grid item xs={12} md={6} classNameName="position-relative">
               <img
                 src="https://mdbcdn.b-cdn.net/img/Others/extended-example/delivery.webp"
                 alt="Sample photo"
-                className="img-fluid h-100"
+                classNameName="img-fluid h-100"
               />
               <div
-                className="position-absolute top-0 start-0 end-0 bottom-0 "
+                classNameName="position-absolute top-0 start-0 end-0 bottom-0 "
                 style={{ backgroundColor: "rgba(0, 0, 0, 0.6)" }}
               ></div>
-              <div className=" position-absolute top-50 start-50 translate-middle text-center text-white">
+              <div classNameName=" position-absolute top-50 start-50 translate-middle text-center text-white">
                 <i
-                  className="fas fa-shipping-fast text-white fa-3x"
+                  classNameName="fas fa-shipping-fast text-white fa-3x"
                   id="truck-icon"
                 ></i>
-                <p className="text-white title-style">CoffeeGeek delivery</p>
+                <p classNameName="text-white title-style">CoffeeGeek delivery</p>
                 <Typography
                   variant="body1"
-                  className="text-white mb-0"
+                  classNameName="text-white mb-0"
                 ></Typography>
-                <figure className="text-center mb-0">
-                  <blockquote className="blockquote text-white">
-                    <p className="pb-3">
+                <figure classNameName="text-center mb-0">
+                  <blockquote classNameName="blockquote text-white">
+                    <p classNameName="pb-3">
                       <i
-                        className="fas fa-quote-left fa-xs text-primary"
+                        classNameName="fas fa-quote-left fa-xs text-primary"
                         style={{
                           color: "hsl(210, 100%, 50%)",
                         }}
                       ></i>
-                      <span className="lead font-italic">
+                      <span classNameName="lead font-italic">
                         What you love at your doorstep.
                       </span>
                       <i
-                        className="fas fa-quote-right fa-xs text-primary"
+                        classNameName="fas fa-quote-right fa-xs text-primary"
                         style={{
                           color: "hsl(210, 100%, 50%)",
                         }}
@@ -168,10 +168,10 @@ export default function AddressPage() {
               </div>
             </Grid>
             <Grid item xs={12} md={6}>
-              <CardContent className="p-md-5 text-black">
+              <CardContent classNameName="p-md-5 text-black">
                 <Typography
                   variant="h3"
-                  className="mb-4 text-uppercase"
+                  classNameName="mb-4 text-uppercase"
                   style={{ color: "var(--orange)" }}
                 >
                   Address Info
@@ -243,7 +243,7 @@ export default function AddressPage() {
                   onChange={(e) => setPostalCode(e.target.value)}
                 />
 
-                <div className="d-flex justify-content-center pt-3 text-dark ">
+                <div classNameName="d-flex justify-content-center pt-3 text-dark ">
                   <Button
                     variant="contained"
                     color="success"

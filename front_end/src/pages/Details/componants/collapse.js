@@ -24,7 +24,7 @@ export default function CollapsiblePanel({ collId, tab, details, title }) {
             >
               {tab}{" "}
               <i
-                class="bi bi-caret-down-fill"
+                className="bi bi-caret-down-fill"
                 style={{ position: "absolute", right: "10px" }}
               ></i>
             </a>

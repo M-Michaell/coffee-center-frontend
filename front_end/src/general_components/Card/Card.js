@@ -11,8 +11,10 @@ import {
 } from "../../store/slices/cart";
 import { toast } from "react-toastify";
 import { addToWishlist, removeFromWishlist } from "../../store/slices/wishlist";
+import { useNavigate } from "react-router-dom";
 
 export default function Card({ item }) {
+  const navigate=useNavigate()
   const disPatch = useDispatch();
   const isProductInWishlist = useSelector((state) =>
     state.wishlist.products.some((p) => p.id === item.id)
@@ -99,6 +101,13 @@ export default function Card({ item }) {
     setHeartClicked(!isHeartClicked);
   };
 
+
+const handleDetails= (id) => {
+  navigate(`product/details/${item.id}`)
+}
+
+
+
   return (
     <div className="mt-4">
       <div
@@ -113,9 +122,10 @@ export default function Card({ item }) {
       >
         <img
           src={`http://127.0.0.1:8000${item?.image}`}
-          className="mt-5 position-absolute top-0 start-50 translate-middle"
-          style={{ height: "250px" }}
+          className="mt-5 position-absolute top-0 start-50 translate-middle z-1"
+          style={{ height: "250px" ,cursor: "pointer" }}
           alt="..."
+          onClick={handleDetails}
         />
         <StyledBadge
           badgeContent={count}
@@ -136,11 +146,13 @@ export default function Card({ item }) {
               }}
               onClick={handleHeart}
             ></button>
-            <h3 className="card-title" style={{ color: "var(--orange)" }}>
+            <h3 className="card-title" style={{ color: "var(--orange)",cursor: "pointer"}}  
+            onClick={handleDetails}
+            >
               {item?.name}
             </h3>
             <p
-              className="card-text"
+              className="card-text p-1 h-auto"
               style={{ fontSize: "15px", height: "60px" }}
             >
               {item?.desc}

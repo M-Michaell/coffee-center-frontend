@@ -1,16 +1,25 @@
-import './rate.css'
+import * as React from "react";
+import Box from "@mui/material/Box";
+import Rating from "@mui/material/Rating";
+import StarIcon from '@mui/icons-material/Star';
 
-export default function Rate(){
-    return(
-    <div class="d-flex justify-content-between align-items-center flex-column">
-            <div class="ratings">
-                <i class="fa fa-star rating-color rating-star"></i>
-                <i class="fa fa-star rating-color rating-star"></i>
-                <i class="fa fa-star rating-color rating-star"></i>
-                <i class="fa fa-star rating-color rating-star"></i>
-                <i class="fa fa-star rating-star"></i>
-            </div>
-            <h5 class="review-count">12 Reviews</h5>
-        </div>
-    )
+export default function Rating2(props) {
+  const { rate } = props;
+
+  return (
+    <Box
+      sx={{
+        "& > legend": { mt: 2 },
+      }}
+    >
+      <Rating
+        name="read-only"
+        value={Number(rate) }
+        readOnly
+        precision={0.1}
+        style={{ color: "yellow" }}
+        emptyIcon={<StarIcon style={{ opacity: 0.1 ,color:"yellow"}} fontSize="inherit"  />}
+      />
+    </Box>
+  );
 }

@@ -62,7 +62,7 @@ function Router() {
                 <Route path="/addressform/:id" element={<AddressForm/>}/>
                 <Route path="/addressform" element={<AddressForm/>}/>
                 <Route path="/paypal/" element={<Checkout />} />
-                <Route path="/add-product" element={<Creator/>}/>
+                <Route path="/add-product" element={<ProductForm/>}/>
             </Routes>
         </Suspense>
     );

@@ -21,96 +21,90 @@ export default function ProductForm() {
         name: "",
         desc: "",
         quantity: "",
-        price : '',
+        price: '',
+        image: null,
         coffee_type: "",
         caffeine: '',
         creator: '',
         roasting_degree: '',
         origin: '',
-        discount: 'dis 1',
+        discount: '20.0',
     });
-
-
-    const handleFileChange = (e) => {
-    setSelectedFile(e.target.files[0]);
-    };
 
 
     const handleInput = (e) => {
-        if(e.target.name === 'name'){
+        if (e.target.name === 'name') {
             setFormInput({...formInput, name: e.target.value});
         }
-        if(e.target.name === 'Description'){
+        if (e.target.name === 'Description') {
             setFormInput({...formInput, desc: e.target.value});
         }
-        if(e.target.name === 'Quantity'){
+        if (e.target.name === 'Quantity') {
             setFormInput({...formInput, quantity: e.target.value});
         }
-        if(e.target.name === 'price'){
+        if (e.target.name === 'price') {
             setFormInput({...formInput, price: e.target.value});
         }
-        if(e.target.name === 'coffee_type'){
+        if (e.target.name === 'coffee_type') {
             setFormInput({...formInput, coffee_type: e.target.value});
         }
-        if(e.target.name === 'caffeine'){
+        if (e.target.name === 'caffeine') {
             setFormInput({...formInput, caffeine: e.target.value});
         }
-        if(e.target.name === 'creator'){
+        if (e.target.name === 'creator') {
             setFormInput({...formInput, creator: e.target.value});
         }
-        if(e.target.name === 'roastingDegree'){
+        if (e.target.name === 'roastingDegree') {
             setFormInput({...formInput, roasting_degree: e.target.value});
         }
-         if(e.target.name === 'origin'){
+        if (e.target.name === 'origin') {
             setFormInput({...formInput, origin: e.target.value});
+        }
+        if (e.target.name === 'image') {
+            setFormInput({...formInput, image: e.target.files[0]});
         }
 
     };
 
+
+
     const handleSubmit = async (e) => {
-  e.preventDefault();
+        e.preventDefault();
+        let form_data = new FormData();
+        form_data.append('image', formInput?.image || '');
+        form_data.append('name', formInput?.name || '');
+        form_data.append('desc', formInput?.desc || '');
+        form_data.append('quantity', formInput?.quantity || '');
+        form_data.append('price', formInput?.price || '');
+        form_data.append('coffee_type', formInput?.coffee_type || '');
+        form_data.append('caffeine', formInput?.caffeine || '');
+        form_data.append('creator', formInput?.creator || '');
+        form_data.append('roasting_degree', formInput?.roasting_degree || '');
+        form_data.append('origin', formInput?.origin || '');
 
-  try {
-    const formData = new FormData();
-    formData.append('image', selectedFile); // Verify the file is attached correctly
+        try {
+            const res = await axiosInstance.post('products/', form_data, {
+                headers: {
+                    'content-type': 'multipart/form-data'
+                }
+            });
+            console.log(res.data);
+            toast.success("Add origin");
+        } catch (error) {
+            if (error.response) {
 
-    for (const key in formInput) {
-      formData.append(key, formInput[key]);
-    }
+                console.error('Server Error:', error.response.data);
+                toast.error(error.response.data.name[0] || 'Server Error');
+            } else if (error.request) {
 
-    const response = await axiosInstance.post('products/', formData, {
-      headers: {
-        'content-type': 'multipart/form-data',
-      },
-    });
-
-    console.log('Product created:', response.data);
-    // Handle success or do something with the response
-  } catch (error) {
-    if (error.response) {
-      // Server responded with a non-2xx status code
-      console.error('Server Error:', error.response.data);
-    } else if (error.request) {
-      // Request was made but no response received
-      console.error('Request Error:', error.request);
-    } else {
-      // Something happened while setting up the request
-      console.error('Error:', error.message);
-    }
-  }
-};
-
-    //  useEffect(() => {
-    //     if (isError) {
-    //         toast.error(message)
-    //     }
-    //     if (isSuccess) {
-    //         navigate("/")
-    //         toast.success("An activation email has been sent to your email. Please check your email")
-    //     }
-    //     dispatch(reset())
-    // }, [isError, isSuccess, dispatch, message, navigate])
-
+                console.error('Request Error:', error.request);
+                toast.error('Request Error: No response received');
+            } else {
+                console.error('Error:', error.message);
+                toast.error('Error: Something went wrong');
+            }
+        }
+    };
 
     return (
         <div className="text-start" style={{color: "var(--gray1)"}}>
@@ -206,18 +200,18 @@ export default function ProductForm() {
                            style={{color: "var(--gray1)", fontSize: "18px"}}
                            className="form-label mt-3">Image</label>
                     <input value={formInput.last_name}
-                              style={{
-                                  backgroundColor: "var(--gray2)",
-                                  borderColor: "var(--orange)",
-                                  fontSize: "20px",
-                                  color: "var(--orange)"
-                              }}
-                              name="image"
-                              onChange={handleFileChange}
-                              type="file"
-                              className="form-control"
-                              id="validationDefault099"
-                              required/>
+                           style={{
+                               backgroundColor: "var(--gray2)",
+                               borderColor: "var(--orange)",
+                               fontSize: "20px",
+                               color: "var(--orange)"
+                           }}
+                           name="image"
+                           onChange={handleInput}
+                           type="file"
+                           className="form-control"
+                           id="validationDefault099"
+                           required/>
                 </div>
 
 
@@ -228,27 +222,27 @@ export default function ProductForm() {
 
                     <select
                         style={{
-                               backgroundColor: "var(--gray2)",
-                               borderColor: "var(--orange)",
-                               fontSize: "20px",
-                               color: "var(--orange)"
-                           }}
+                            backgroundColor: "var(--gray2)",
+                            borderColor: "var(--orange)",
+                            fontSize: "20px",
+                            color: "var(--orange)"
+                        }}
                         value={formInput.coffee_type}
                         name="coffee_type"
-                        id = "coffee_type"
+                        id="coffee_type"
                         className="form-select"
                         aria-label="Default select example"
                         onChange={handleInput}>
-                    <option selected>Open this select menu</option>
+                        <option selected>Open this select menu</option>
                         {
-                            coffeeTypes?.map((item)=>{
-                                return(
-                                     <option  value={item?.name}>{item?.name}</option>
+                            coffeeTypes?.map((item) => {
+                                return (
+                                    <option value={item?.name}>{item?.name}</option>
 
                                 );
                             })
                         }
-                </select>
+                    </select>
                 </div>
 
 
@@ -259,11 +253,11 @@ export default function ProductForm() {
 
                     <select
                         style={{
-                               backgroundColor: "var(--gray2)",
-                               borderColor: "var(--orange)",
-                               fontSize: "20px",
-                               color: "var(--orange)"
-                           }}
+                            backgroundColor: "var(--gray2)",
+                            borderColor: "var(--orange)",
+                            fontSize: "20px",
+                            color: "var(--orange)"
+                        }}
                         onChange={handleInput}
                         value={formInput.caffeine}
                         className="form-select"
@@ -271,15 +265,15 @@ export default function ProductForm() {
                         id="caffeine"
                         aria-label="Default select example"
                         required>
-                    <option selected>Open this select menu</option>
+                        <option selected>Open this select menu</option>
                         {
-                            caffeines?.map((item)=>{
-                                return(
-                                     <option value={item?.name}>{item?.name}</option>
+                            caffeines?.map((item) => {
+                                return (
+                                    <option value={item?.name}>{item?.name}</option>
                                 );
                             })
                         }
-                </select>
+                    </select>
                 </div>
 
                 <div className="col-md-4 w-75">
@@ -289,27 +283,27 @@ export default function ProductForm() {
 
                     <select
                         style={{
-                               backgroundColor: "var(--gray2)",
-                               borderColor: "var(--orange)",
-                               fontSize: "20px",
-                               color: "var(--orange)"
-                           }}
+                            backgroundColor: "var(--gray2)",
+                            borderColor: "var(--orange)",
+                            fontSize: "20px",
+                            color: "var(--orange)"
+                        }}
                         value={formInput.creators}
                         className="form-select"
                         onChange={handleInput}
                         name="creator"
                         id="creator"
                         aria-label="Default select example">
-                    <option selected>Open this select menu</option>
+                        <option selected>Open this select menu</option>
                         {
-                            creators?.map((item, index)=>{
-                                return(
-                                     <option value={item?.name}>{item?.name}</option>
+                            creators?.map((item, index) => {
+                                return (
+                                    <option value={item?.name}>{item?.name}</option>
 
                                 );
                             })
                         }
-                </select>
+                    </select>
                 </div>
 
 
@@ -320,27 +314,27 @@ export default function ProductForm() {
 
                     <select
                         style={{
-                               backgroundColor: "var(--gray2)",
-                               borderColor: "var(--orange)",
-                               fontSize: "20px",
-                               color: "var(--orange)"
-                           }}
+                            backgroundColor: "var(--gray2)",
+                            borderColor: "var(--orange)",
+                            fontSize: "20px",
+                            color: "var(--orange)"
+                        }}
                         value={formInput.origins}
                         className="form-select"
                         onChange={handleInput}
                         name="origin"
                         id="origin"
                         aria-label="Default select example">
-                    <option value="">Open this select menu</option>
+                        <option value="">Open this select menu</option>
                         {
-                            origins?.map((item, index)=>{
-                                return(
-                                     <option value={item?.name}>{item?.name}</option>
+                            origins?.map((item, index) => {
+                                return (
+                                    <option value={item?.name}>{item?.name}</option>
 
                                 );
                             })
                         }
-                </select>
+                    </select>
                 </div>
 
 
@@ -351,27 +345,27 @@ export default function ProductForm() {
 
                     <select
                         style={{
-                               backgroundColor: "var(--gray2)",
-                               borderColor: "var(--orange)",
-                               fontSize: "20px",
-                               color: "var(--orange)"
-                           }}
+                            backgroundColor: "var(--gray2)",
+                            borderColor: "var(--orange)",
+                            fontSize: "20px",
+                            color: "var(--orange)"
+                        }}
                         value={formInput.roastingDegrees}
                         onChange={handleInput}
                         name="roastingDegree"
                         id="roastingDegree"
                         className="form-select"
                         aria-label="Default select example">
-                    <option selected>Open this select menu</option>
+                        <option selected>Open this select menu</option>
                         {
-                            roastingDegrees?.map((item, index)=>{
-                                return(
-                                     <option value={item?.name}>{item?.name}</option>
+                            roastingDegrees?.map((item, index) => {
+                                return (
+                                    <option value={item?.name}>{item?.name}</option>
 
                                 );
                             })
                         }
-                </select>
+                    </select>
                 </div>
 
                 <div className="col-md-4 w-75">
@@ -381,25 +375,24 @@ export default function ProductForm() {
 
                     <select
                         style={{
-                               backgroundColor: "var(--gray2)",
-                               borderColor: "var(--orange)",
-                               fontSize: "20px",
-                               color: "var(--orange)"
-                           }}
+                            backgroundColor: "var(--gray2)",
+                            borderColor: "var(--orange)",
+                            fontSize: "20px",
+                            color: "var(--orange)"
+                        }}
                         className="form-select"
                         name="price"
                         aria-label="Default select example">
-                    <option selected>Open this select menu</option>
+                        <option selected>Open this select menu</option>
                         {
-                            creators?.map((item, index)=>{
-                                return(
-                                     <option value={item?.name}>{item?.name}</option>
+                            creators?.map((item, index) => {
+                                return (
+                                    <option value={item?.name}>{item?.name}</option>
                                 );
                             })
                         }
-                </select>
+                    </select>
                 </div>
-
 
 
                 <div className="col-12">

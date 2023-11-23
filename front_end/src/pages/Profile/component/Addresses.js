@@ -65,7 +65,6 @@ export default function AddressesComponent() {
                         "telephone",
                         "mobile",
                         "address_line1",
-                        "country",
                         "city",
                         "postal_code",
                       ];

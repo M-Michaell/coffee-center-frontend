@@ -10,23 +10,27 @@ import {
   faCartShopping,
   faMagnifyingGlass,
 } from "@fortawesome/free-solid-svg-icons";
-import {  NavLink, useNavigate } from "react-router-dom";
+import { NavLink, useNavigate } from "react-router-dom";
 import { useSelector } from "react-redux";
 import { toast } from "react-toastify";
 import { Button, FormControl } from "react-bootstrap";
-import {logout} from "../../store/slices/auth";
-import {useDispatch}  from "react-redux";
-import "../../pages/Cart/main.css"
+import { logout } from "../../store/slices/auth";
+import { useDispatch } from "react-redux";
+import "../../pages/Cart/main.css";
 
 export default function Navbarr() {
   const dispatch = useDispatch();
-  const wishlistCount = useSelector(state => state.wishlist.count);
-  const user = useSelector(state => state.auth.userInfo);
+  const wishlistCount = useSelector((state) => state.wishlist.count);
+  const user = useSelector((state) => state.auth.userInfo);
   const [searchTerm, setSearchTerm] = useState("");
   const handleSearchChange = (e) => {
     setSearchTerm(e.target.value);
   };
   const navigate = useNavigate();
+  const handleWishlistClick = () => {
+    // Navigate to profile page with activeComponent set to 'wishlist'
+    navigate("/profile", { state: { activeComponent: "wishlist" } });
+  };
   const handleSearchClick = () => {
     if (searchTerm.trim() === "") {
       toast.info("Enter Please enter a search input", {
@@ -44,11 +48,9 @@ export default function Navbarr() {
     }
   };
 
-
   const handleCart = () => {
     if (!user) {
-  
-      toast.info("You should login first" , {
+      toast.info("You should login first", {
         position: "top-center",
         autoClose: 5000,
         hideProgressBar: false,
@@ -61,7 +63,6 @@ export default function Navbarr() {
     }
   };
 
-
   const renderAuthLinks = () => {
     if (user) {
       return (
@@ -71,10 +72,13 @@ export default function Navbarr() {
           </NavLink>
 
           <a
-              href="/"
-              type="submit"
-              onClick={()=>{dispatch(logout());}}
-              className="m-3 text-light">
+            href="/"
+            type="submit"
+            onClick={() => {
+              dispatch(logout());
+            }}
+            className="m-3 text-light"
+          >
             Logout
           </a>
         </>
@@ -116,7 +120,7 @@ export default function Navbarr() {
             style={{ color: "var(--orange)" }}
           />
 
-          <Navbar.Collapse id="responsive-navbar-nav" >
+          <Navbar.Collapse id="responsive-navbar-nav">
             {/* <Nav className="mx-auto">
               <Nav.Link
                 href="#home"
@@ -136,7 +140,10 @@ export default function Navbarr() {
               </Nav.Link>
             </Nav> */}
 
-            <div className="d-flex ms-auto customSearch" style={{ maxWidth: "400px" }}>
+            <div
+              className="d-flex ms-auto customSearch"
+              style={{ maxWidth: "400px" }}
+            >
               <FormControl
                 type="text"
                 placeholder="Search"
@@ -151,27 +158,32 @@ export default function Navbarr() {
               </Button>
             </div>
 
-            
-
-              <strong className="fs-5 me-3 ">
-                <FontAwesomeIcon
-                  icon={faPhoneVolume}
-                  className="orange-icon me-2 mt-1 orange"
-                />
-                +20 120 912 2212
-              </strong>
-              <div className="d-flex my-3">
-
-              <NavLink to="" style={{ color: "var(--orange)" }}>
-                <FontAwesomeIcon icon={faHeart} className="me-3 fs-4" />
+            <strong className="fs-5 me-3 ">
+              <FontAwesomeIcon
+                icon={faPhoneVolume}
+                className="orange-icon me-2 mt-1 orange"
+              />
+              +20 120 912 2212
+            </strong>
+            <div className="d-flex my-3">
+            <NavLink to="/profile" onClick={handleWishlistClick} style={{ color: "var(--orange)" }} className="position-relative">
+  <FontAwesomeIcon icon={faHeart} className="me-1 fs-4" />
+  {wishlistCount > 0 && (
+    <span className="badge rounded-pill bg-danger position-absolute top-0 start-100 translate-middle">
+      {wishlistCount}
+      <span className="visually-hidden">wishlist items</span>
+    </span>
+  )}
+</NavLink>
+              <NavLink
+                to={user ? "/cart" : "/login"}
+                onClick={handleCart}
+                style={{ color: "var(--orange)" }}
+              >
+                <FontAwesomeIcon icon={faCartShopping} className="ms-3 fs-4" />
               </NavLink>
-              <NavLink to= {user?"/cart":"/login"} onClick={handleCart} style={{ color: "var(--orange)" }}>
-
-                <FontAwesomeIcon icon={faCartShopping}className=" fs-4"  />
-              </NavLink>
-              </div>
-              {renderAuthLinks()}
-
+            </div>
+            {renderAuthLinks()}
           </Navbar.Collapse>
         </Container>
       </Navbar>
@@ -180,8 +192,9 @@ export default function Navbarr() {
         className="container-fluid text-light row row-cols-1 row-cols-md-3 row-cols-xl-6 pt-2 px-5 gx-0 justify-content-center align-items-center "
         style={{ backgroundColor: "rgb(206, 134, 0)" }}
       >
-        
-          <p className="fs-5 mx-auto w-100">Unlock a 25% discount – Your savings, our treat!</p>
+        <p className="fs-5 mx-auto w-100">
+          Unlock a 25% discount – Your savings, our treat!
+        </p>
       </div>
     </Container>
   );

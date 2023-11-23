@@ -6,19 +6,19 @@ import Rate2 from "./rate";
 import Row from "./row";
 import { useSelector } from "react-redux";
 import { AddRate } from "../../../apis/product_details/createRate";
+import Buy from "./buyNow";
 
 export default function MoreData({ product }) {
   const user = useSelector((state) => state.auth.userInfo);
   const [rateValue, setRateValue] = useState(0);
   const handleRatingChange = (newValue) => {
     setRateValue(newValue);
+    window.location.reload();
   };
-
   useEffect(() => {
     const fetchData = async () => {
       if (user && product) {
         const data = await AddRate(user.id, product.id, rateValue);
-        console.log("", data);
 
         if (data > 0) {
           setRateValue(data);
@@ -58,18 +58,12 @@ export default function MoreData({ product }) {
         </span>
         <span style={{ fontWeight: "bolder" }}>{newPrice} EGP</span>
       </div>
-      <div>
-        <button
-          className="btn"
-          style={{
-            backgroundColor: "var(--orange)",
-            color: "white",
-            borderRadius: "20px",
-            width: "150px",
-          }}
-        >
-          Buy Now
-        </button>
+      <div className="w-50">
+        {/* buy now */}
+
+        <Buy item={product} />
+
+        {/*end buy now */}
       </div>
       <div>
         <table className="w-100 mt-5">
@@ -84,9 +78,9 @@ export default function MoreData({ product }) {
           <Row x={"Great For: "} y={"Espesso"} />
         </table>
       </div>
-      <div className="my-3">
-        <h4>Rate this product</h4>
-        <div>
+      <div className="row my-3">
+        <h4 className="col col-md-6">Rate this product</h4>
+        <div className="col col-md-6">
           <RatingSize value={rateValue} onChange={handleRatingChange} />
         </div>
       </div>

@@ -4,7 +4,7 @@ import image from "../../../assets/images/map.jpg";
 export default function Map(){
     return(
         <div>
-            <img src={image} alt="" width={600}/>
+            <img src={image} alt=""style={{maxWidth:"450px"}}/>
         </div>
     )
 }

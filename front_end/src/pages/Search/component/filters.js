@@ -1,11 +1,7 @@
 import React from "react";
 
-const FilterComponent = ({
-  filterType,
-  options,
-  onFilterChange,
-}) => (
-  <div>
+const FilterComponent = ({ filterType, options, onFilterChange }) => (
+  <>
     <div
       className="d-flex justify-content-between"
       data-bs-toggle="collapse"
@@ -36,7 +32,7 @@ const FilterComponent = ({
       ))}
     </div>
     <hr></hr>
-  </div>
+  </>
 );
 
 export default FilterComponent;

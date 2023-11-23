@@ -14,7 +14,7 @@ import { addToWishlist, removeFromWishlist } from "../../store/slices/wishlist";
 import { useNavigate } from "react-router-dom";
 
 export default function Card({ item }) {
-  const navigate=useNavigate()
+  const navigate = useNavigate();
   const disPatch = useDispatch();
   const isProductInWishlist = useSelector((state) =>
     state.wishlist.products.some((p) => p.id === item.id)
@@ -101,12 +101,10 @@ export default function Card({ item }) {
     setHeartClicked(!isHeartClicked);
   };
 
-
-const handleDetails= (id) => {
-  navigate(`product/details/${item.id}`)
-}
-
-
+  const handleDetails = (id) => {
+    navigate(`/product/details/${item.id}`);
+    window.location.reload();
+  };
 
   return (
     <div className="mt-4">
@@ -123,7 +121,7 @@ const handleDetails= (id) => {
         <img
           src={`http://127.0.0.1:8000${item?.image}`}
           className="mt-5 position-absolute top-0 start-50 translate-middle z-1"
-          style={{ height: "250px" ,cursor: "pointer" }}
+          style={{ height: "250px", cursor: "pointer" }}
           alt="..."
           onClick={handleDetails}
         />
@@ -146,8 +144,10 @@ const handleDetails= (id) => {
               }}
               onClick={handleHeart}
             ></button>
-            <h3 className="card-title" style={{ color: "var(--orange)",cursor: "pointer"}}  
-            onClick={handleDetails}
+            <h3
+              className="card-title"
+              style={{ color: "var(--orange)", cursor: "pointer" }}
+              onClick={handleDetails}
             >
               {item?.name}
             </h3>
@@ -157,11 +157,17 @@ const handleDetails= (id) => {
             >
               {item?.desc}
             </p>
+            <p className="text-decoration-line-through gray1">
+              {item.price}EGP
+            </p>
 
             {isCartVisible ? (
               <div className="d-flex justify-content-between mt-5 ">
                 <h3 style={{ color: "var(--fff)" }} className="mt-2">
-                  {item?.price}$
+                  {Math.ceil(
+                    (item?.price * (100 - item.discount_percentage)) / 100
+                  )}
+                  EGP
                 </h3>
 
                 <button
@@ -191,7 +197,13 @@ const handleDetails= (id) => {
                 >
                   -
                 </button>
-                <h3>{item?.price * count}$</h3>
+                <h4 className="text-center mt-2 mx-2">
+                  {Math.ceil(
+                    (item?.price * count * (100 - item.discount_percentage)) /
+                      100
+                  )}
+                  EGP
+                </h4>
                 <button
                   onClick={handleIncrease}
                   className="btn shadow  rounded btn rounded-pill"

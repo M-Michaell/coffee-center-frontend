@@ -13,7 +13,6 @@ export default function Counter(props) {
   const cart = useSelector((state) => state.cart.cartItems);
   const session = useSelector((state) => state?.user?.shoppingSession?.id);
 
-
   const exsisting = cart.find((item) => item.product.id === product.product.id);
   return (
     <>
@@ -21,20 +20,20 @@ export default function Counter(props) {
         <div className="d-flex align-items-center">
           <button
             className="fs-5 gray1 p-2 border-0 bg-transparent"
-            onClick={() => dispatch(decreaceQuantity({product,session}))}
+            onClick={() => dispatch(decreaceQuantity({ product, session }))}
           >
             <FontAwesomeIcon icon={faMinus} />
           </button>
-          <p className="fff fs-3 p-2 ">{exsisting.quantity}</p>
+          <p className="fff fs-3 p-2 mb-0 ">{exsisting.quantity}</p>
           <button
             className="fs-5 orange p-2 border-0 bg-transparent"
-            onClick={() => dispatch(increaseQuantity({product,session}))}
+            onClick={() => dispatch(increaseQuantity({ product, session }))}
           >
             <FontAwesomeIcon icon={faPlus} />
           </button>
           <button
             className="fs-4 px-3 gray1 border-0 bg-transparent"
-            onClick={() => dispatch(removeFromCart({product,session}))}
+            onClick={() => dispatch(removeFromCart({ product, session }))}
           >
             <FontAwesomeIcon icon={faX} />
           </button>

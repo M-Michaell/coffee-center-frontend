@@ -1,18 +1,11 @@
-import {useEffect, useState} from "react";
-import { axiosInstance } from '../config';
+import { axiosInstance } from "../config";
 
-export function ProductDetails(id){
-    const [product, setProduct] = useState([]);
+export function ProductDetails(id) {
+  return axiosInstance
+    .get(`/product/${id}`)
+    .then((res) => res.data)
 
-    useEffect(() => {
-        axiosInstance
-            .get(`/product/${id}`)
-            .then((res)=>{
-                setProduct(res.data);
-            
-            })
-            .catch((err)=>{console.log(err)})
-    }, [id]);
-    return{ product}
-
+    .catch((err) => {
+      console.log(err);
+    });
 }

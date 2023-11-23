@@ -25,6 +25,9 @@ const NotFound = React.lazy(() => import("../pages/NotFound"));
 const Registration = React.lazy(() =>
   import("../pages/registration/Registration")
 );
+const Registration = React.lazy(() =>
+  import("../pages/registration/Registration")
+);
 const Account = React.lazy(() => import("../pages/Profile/ProfilePage"));
 const Search = React.lazy(() => import("../pages/Search/component/Search"));
 const AddressForm = React.lazy(() =>
@@ -34,51 +37,62 @@ const AddressEdit = React.lazy(() =>
   import("../pages/Profile/component/AddressEdit")
 );
 const EditForm = React.lazy(() => import("../pages/Auth/EditForm"));
+const AdminDashboard = React.lazy(() =>
+  import("../general_components/AdminDashboard/adminhome")
+);
 function Router() {
-    return (
-        <Suspense fallback={<Loader/>}>
-            <Routes>
-                <Route path="/product/details/" element={<TextDetails/>}/>
-                <Route path="/cart" element={
-                    <PrivateRoute>
-                        <Cart/>
-                    </PrivateRoute>
-                    }/>
-                <Route path="/home" element={<Home/>}/>
-                <Route path="/activate/:uid/:token" element={<ActivatePage/>}/>
-                <Route path="/reset-password" element={<SendMail/>}/>
-                <Route path="/delete-user" element={<DeleteUser/>}/>
-                <Route path="/profile/edit-user" element={<EditForm/>}/>
-                <Route path="/email/reset/confirm/:uid/:token" element={<Reset/>}/>
-                <Route path="/" element={<Home/>}/>
-                <Route path="order/:order_id" element={<Order/>}/>
-                <Route path="registration/" element={<Registration/>}/>
-                <Route path="login/" element={<Login/>}/>
-                <Route path="/profile/*" element={
-                    <PrivateRoute>
-                        <Account/>
-                    </PrivateRoute>
-                    }/>
-                <Route path="/admin/*" element={
+  return (
+    <Suspense fallback={<Loader />}>
+      <Routes>
+        <Route path="/product/details/:id" element={<TextDetails />} />
+        <Route
+          path="/cart"
+          element={
+            <PrivateRoute>
+              <Cart />
+            </PrivateRoute>
+          }
+        />
+        <Route path="/home" element={<Home />} />
+        <Route path="/activate/:uid/:token" element={<ActivatePage />} />
+        <Route path="/reset-password" element={<SendMail />} />
+        <Route path="/delete-user" element={<DeleteUser />} />
+        <Route path="/profile/edit-user" element={<EditForm />} />
+        <Route path="/email/reset/confirm/:uid/:token" element={<Reset />} />
+        <Route path="/" element={<Home />} />
+        <Route path="order/:order_id" element={<Order />} />
+        <Route path="registration/" element={<Registration />} />
+        <Route path="login/" element={<Login />} />
+        <Route
+          path="/profile/*"
+          element={
+            <PrivateRoute>
+              <Account />
+            </PrivateRoute>
+          }
+        />
+        <Route
+          path="/admin/*"
+          element={
                     <PrivateRoute>
                       <AdminDashboard />
                     </PrivateRoute>
                     }
                     />
-                <Route path="/order/tracking/" element={<Account/>}/>
-                <Route path="/search/:productname" element={<Search/>}/>
-                <Route path="*" element={<NotFound/>}/>
-                <Route path="home/" element={<Home/>}/>
-                <Route path="registration/" element={<Registration/>}/>
-                <Route path="login/" element={<Login/>}/>
-                <Route path="/profile/*" element={<Account/>}/>
-                <Route path="/addressform/:id" element={<AddressEdit/>}/>
-                <Route path="/addressform" element={<AddressForm/>}/>
+        <Route path="/order/tracking/" element={<Account />} />
+        <Route path="/search/:productname" element={<Search />} />
+        <Route path="*" element={<NotFound />} />
+        <Route path="home/" element={<Home />} />
+        <Route path="registration/" element={<Registration />} />
+        <Route path="login/" element={<Login />} />
+        <Route path="/profile/*" element={<Account />} />
+        <Route path="/addressform/:id" element={<AddressEdit />} />
+        <Route path="/addressform" element={<AddressForm />} />
                 <Route path="/paypal/" element={<Checkout />} />
-                <Route path="/add-product" element={<Creator/>}/>
-            </Routes>
-        </Suspense>
-    );
+        <Route path="/add-product" element={<Creator />} />
+      </Routes>
+    </Suspense>
+  );
   // return (
   //   <Suspense fallback={<Loader />}>
   //     <Routes>

@@ -59,6 +59,12 @@ function Router() {
                         <Account/>
                     </PrivateRoute>
                     }/>
+                <Route path="/admin/*" element={
+                    <PrivateRoute>
+                      <AdminDashboard />
+                    </PrivateRoute>
+                    }
+                    />
                 <Route path="/order/tracking/" element={<Account/>}/>
                 <Route path="/search/:productname" element={<Search/>}/>
                 <Route path="*" element={<NotFound/>}/>
@@ -66,7 +72,7 @@ function Router() {
                 <Route path="registration/" element={<Registration/>}/>
                 <Route path="login/" element={<Login/>}/>
                 <Route path="/profile/*" element={<Account/>}/>
-                <Route path="/addressform/:id" element={<AddressForm/>}/>
+                <Route path="/addressform/:id" element={<AddressEdit/>}/>
                 <Route path="/addressform" element={<AddressForm/>}/>
                 <Route path="/paypal/" element={<Checkout />} />
                 <Route path="/add-product" element={<Creator/>}/>

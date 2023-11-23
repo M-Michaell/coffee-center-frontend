@@ -73,15 +73,15 @@ export default function MoreData({ product }) {
       </div>
       <div>
         <table className="w-100 mt-5">
-          <Row x={"Roasting Stage"} y={product.roasting_degree_name} />
-          <Row x={"Coffee type"} y={product.coffee_type} />
-          <Row x={"Caffeiene degree"} y={product.caffeine_name} />
-          <Row x={"corriposation"} y={product.creator_name} />
+          <Row x={"Roasting Stage: "} y={product.roasting_degree_name} />
+          <Row x={"Coffee type: "} y={product.coffee_type} />
+          <Row x={"Caffeiene degree: "} y={product.caffeine_name} />
+          <Row x={"corriposation: "} y={product.creator_name} />
           <Row
-            x={"Taste"}
+            x={"Taste: "}
             y={"Beautiful cream caramel havor with hints of molasses"}
           />
-          <Row x={"Great For"} y={"Espesso"} />
+          <Row x={"Great For: "} y={"Espesso"} />
         </table>
       </div>
       <div className="my-3">

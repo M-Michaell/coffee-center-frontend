@@ -113,6 +113,19 @@ export default function Navbarr() {
             >
               Coffee<span style={{ color: "var(--orange)" }}>Geek</span>
             </NavLink>
+            {
+              user?.is_staff ?
+              <NavLink
+              to="/admin"
+              className="btn border border-warning rounded-pill ms-5"
+              style={{ fontFamily: "Brush Script, cursive" }}
+            >
+              add product
+              </NavLink> : <div></div>
+
+            }
+
+
           </div>
 
           <Navbar.Toggle

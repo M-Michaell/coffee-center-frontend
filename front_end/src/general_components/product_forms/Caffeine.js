@@ -5,7 +5,7 @@ import {useNavigate} from "react-router-dom";
 
 import {toast} from 'react-toastify'
 
-export default function Caffeine() {
+export default function CaffeineForm({submitAdd}) {
     const navigate = useNavigate()
     const [formInput, setFormInput] = useState({
 
@@ -25,7 +25,10 @@ export default function Caffeine() {
         try {
             const res = await axiosInstance.post('caffeines/', formInput);
             toast.success("Add caffeine");
+            window.location.reload();
+            submitAdd(1);
         } catch (error) {
+
             if (error.response) {
 
                 console.error('Server Error:', error.response.data);
@@ -39,6 +42,7 @@ export default function Caffeine() {
                 toast.error('Error: Something went wrong');
             }
         }
+
     };
 
     return (
@@ -74,10 +78,16 @@ export default function Caffeine() {
                         required/>
                 </div>
 
-                <div className=" d-flex justify-content-center">
-                    <button className="btn rounded-pill btn-block mb-4 mt-5 w-50"
+                <div className=" d-flex justify-content-around">
+                    <button className="btn rounded-pill btn-block mb-4 mt-5 w-25"
+
                             style={{backgroundColor: " var(--orange) ", color: "var(--fff)", fontSize: "18px"}}
                             type="submit">Add
+                    </button>
+                    <button className="btn rounded-pill btn-block mb-4 mt-5 w-25"
+                            onClick={()=> submitAdd(1)}
+                            style={{backgroundColor: " var(--orange) ", color: "var(--fff)", fontSize: "18px"}}
+                            type="submit">Cansel
                     </button>
                 </div>
             </form>

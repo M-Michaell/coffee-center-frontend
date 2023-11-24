@@ -1,12 +1,9 @@
 // Router.js
 import React, { Suspense } from "react";
 import { Route, Routes } from "react-router-dom";
-import ProductForm from "../general_components/product_forms/ProductForm";
-import Origin from "../general_components/product_forms/Origin";
-import Caffeine from "../general_components/product_forms/Caffeine";
-import CoffeeType from "../general_components/product_forms/CoffieType";
-import RoastingDegree from "../general_components/product_forms/RoastingDegree";
-import Creator from "../general_components/product_forms/Creator";
+import CoffeeTypeEdit from "../general_components/product_forms/CoffeeTypeEdit";
+
+
 
 const PrivateRoute = React.lazy(()=> import("../pages/Auth/PrivateRoute"));
 const DeleteUser= React.lazy(()=> import("../pages/delete_user/DeleteUser"));
@@ -53,7 +50,19 @@ function Router() {
                         <Account/>
                     </PrivateRoute>
                     }/>
-                <Route path="/admin/*" element={
+                <Route path={`admin/`} element={
+                    <PrivateRoute>
+                      <AdminDashboard />
+                    </PrivateRoute>
+                    }
+                    />
+                <Route path={`admin/:name`} element={
+                    <PrivateRoute>
+                      <AdminDashboard />
+                    </PrivateRoute>
+                    }
+                    />
+                <Route path={`admin/:category/:name/:id/`} element={
                     <PrivateRoute>
                       <AdminDashboard />
                     </PrivateRoute>
@@ -69,7 +78,6 @@ function Router() {
                 <Route path="/addressform/:id" element={<AddressEdit/>}/>
                 <Route path="/addressform" element={<AddressForm/>}/>
                 <Route path="/paypal/" element={<Checkout />} />
-                <Route path="/add-product" element={<ProductForm/>}/>
             </Routes>
         </Suspense>
     );

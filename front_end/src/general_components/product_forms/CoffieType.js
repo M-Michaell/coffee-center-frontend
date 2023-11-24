@@ -1,11 +1,10 @@
 import React, {useState, useEffect} from "react";
-import {useDispatch, useSelector} from 'react-redux';
 import {axiosInstance} from "../../apis/config";
 import {useNavigate} from "react-router-dom";
 
 import {toast} from 'react-toastify'
 
-export default function CoffeeType() {
+export default function CoffeeTypeForm({submitAdd}) {
     const navigate = useNavigate()
     const [formInput, setFormInput] = useState({
 
@@ -25,7 +24,11 @@ export default function CoffeeType() {
         try {
             const res = await axiosInstance.post('coffeeTypes/', formInput);
             toast.success("Add Coffee Type");
+             window.location.reload();
+             submitAdd(1);
+
         } catch (error) {
+
             if (error.response) {
 
                 console.error('Server Error:', error.response.data);
@@ -39,8 +42,8 @@ export default function CoffeeType() {
                 toast.error('Error: Something went wrong');
             }
         }
-    };
 
+    };
     return (
         <div className="text-start" style={{color: "var(--gray1)"}}>
             <form className="p-5 mb-5 mx-auto my-5"
@@ -74,10 +77,16 @@ export default function CoffeeType() {
                         required/>
                 </div>
 
-                <div className=" d-flex justify-content-center">
-                    <button className="btn rounded-pill btn-block mb-4 mt-5 w-50"
+                <div className=" d-flex justify-content-around">
+                    <button className="btn rounded-pill btn-block mb-4 mt-5 w-25"
+
                             style={{backgroundColor: " var(--orange) ", color: "var(--fff)", fontSize: "18px"}}
                             type="submit">Add
+                    </button>
+                    <button className="btn rounded-pill btn-block mb-4 mt-5 w-25"
+                            onClick={()=> submitAdd(1)}
+                            style={{backgroundColor: " var(--orange) ", color: "var(--fff)", fontSize: "18px"}}
+                            type="submit">Cansel
                     </button>
                 </div>
             </form>

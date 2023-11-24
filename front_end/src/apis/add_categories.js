@@ -84,21 +84,23 @@ export function Origins() {
 
   return  origins ;
 }
-//
-//
-//
-// export function CreatorsData() {
-//   const [creators, setCreators] = useState();
-//
-//   useEffect(() => {
-//     axiosInstance
-//       .get(`/creators/`)
-//       .then((res) => {
-//         setCreators(res.data);
-//         console.log(res);
-//       })
-//       .catch((err) => console.log(err));
-//   }, []);
-//
-//   return  creators ;
-// }
+
+
+export function Products() {
+  const [origins, setOrigins] = useState();
+
+  useEffect(() => {
+    axiosInstance
+      .get(`products/`)
+      .then((res) => {
+        setOrigins(res.data.products);
+        console.log(res);
+      })
+      .catch((err) => console.log(err));
+  }, []);
+
+  return  origins ;
+}
+
+
+

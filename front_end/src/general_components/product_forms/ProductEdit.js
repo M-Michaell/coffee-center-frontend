@@ -7,7 +7,7 @@ import {toast} from 'react-toastify'
 import Loader from "../../general_components/Loader/Loader";
 import {CreatorsData, CaffeinesData, CoffeeTypes, RoastingDegrees, Origins} from "../../apis/add_categories";
 
-export default function ProductForm({submitAdd}) {
+export default function ProductEdit() {
     const creators = CreatorsData();
     const caffeines = CaffeinesData();
     const coffeeTypes = CoffeeTypes();
@@ -94,8 +94,6 @@ export default function ProductForm({submitAdd}) {
             });
             console.log(res.data);
             toast.success("Add origin");
-             window.location.reload();
-            submitAdd(1);
         } catch (error) {
             if (error.response) {
 
@@ -417,16 +415,10 @@ export default function ProductForm({submitAdd}) {
                     </div>
                 </div>
                 {isLoading && <Loader/>}
-                <div className=" d-flex justify-content-around">
-                    <button className="btn rounded-pill btn-block mb-4 mt-5 w-25"
-
+                <div className="d-flex justify-content-center">
+                    <button className="btn rounded-pill btn-block mb-4 mt-5 w-50"
                             style={{backgroundColor: " var(--orange) ", color: "var(--fff)", fontSize: "18px"}}
-                            type="submit">Add
-                    </button>
-                    <button className="btn rounded-pill btn-block mb-4 mt-5 w-25"
-                            onClick={()=> submitAdd(1)}
-                            style={{backgroundColor: " var(--orange) ", color: "var(--fff)", fontSize: "18px"}}
-                            type="submit">Cansel
+                            type="submit">Sign Up
                     </button>
                 </div>
             </form>

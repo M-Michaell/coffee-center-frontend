@@ -20,6 +20,7 @@ export default function EditForm() {
         first_name: userInfo.first_name,
         phone: userInfo.phone,
         last_name: userInfo.last_name,
+        // is_staff: userInfo.is_staff,
     });
 
     const [err, setErr] = useState({

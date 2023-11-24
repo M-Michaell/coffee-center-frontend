@@ -78,7 +78,7 @@ export default function AdminDashboard() {
               </li>
             </Link>
             <Link
-              to={`/admin/coffeetypes`}
+              to={`/admin/coffeetypes/`}
               className="order-link"
               onClick={() => handleLinkClick("coffeetype")}
             >
@@ -165,7 +165,7 @@ export default function AdminDashboard() {
             <Link
               to={`/admin/roastingdegree`}
               className="order-link"
-              onClick={() => handleLinkClick("origin")}
+              onClick={() => handleLinkClick("roastingdegree")}
             >
               <li className="mb-3 text-light">
                 <FontAwesomeIcon

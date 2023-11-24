@@ -5,7 +5,7 @@ import {useNavigate} from "react-router-dom";
 
 import {toast} from 'react-toastify'
 
-export default function RoastingDegree() {
+export default function RoastingDegreeForm({submitAdd}) {
     const navigate = useNavigate()
     const [formInput, setFormInput] = useState({
 
@@ -25,6 +25,8 @@ export default function RoastingDegree() {
         try {
             const res = await axiosInstance.post('roastingDegrees/', formInput);
             toast.success("Add roasting Degree");
+            window.location.reload();
+            submitAdd(1);
         } catch (error) {
             if (error.response) {
 
@@ -74,10 +76,16 @@ export default function RoastingDegree() {
                         required/>
                 </div>
 
-                <div className=" d-flex justify-content-center">
-                    <button className="btn rounded-pill btn-block mb-4 mt-5 w-50"
+                <div className=" d-flex justify-content-around">
+                    <button className="btn rounded-pill btn-block mb-4 mt-5 w-25"
+
                             style={{backgroundColor: " var(--orange) ", color: "var(--fff)", fontSize: "18px"}}
                             type="submit">Add
+                    </button>
+                    <button className="btn rounded-pill btn-block mb-4 mt-5 w-25"
+                            onClick={()=> submitAdd(1)}
+                            style={{backgroundColor: " var(--orange) ", color: "var(--fff)", fontSize: "18px"}}
+                            type="submit">Cansel
                     </button>
                 </div>
             </form>

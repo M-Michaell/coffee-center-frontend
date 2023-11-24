@@ -6,7 +6,7 @@ import {useNavigate} from "react-router-dom";
 import {toast} from 'react-toastify'
 
 
-export default function Origin() {
+export default function OriginForm({submitAdd}) {
     let success = false;
     const navigate = useNavigate()
     const [formInput, setFormInput] = useState({
@@ -27,6 +27,8 @@ export default function Origin() {
         try {
             const res = await axiosInstance.post('origins/', formInput);
             toast.success("Add origin");
+            window.location.reload();
+            submitAdd(1);
         } catch (error) {
             if (error.response) {
 
@@ -76,10 +78,16 @@ export default function Origin() {
                         required/>
                 </div>
 
-                <div className=" d-flex justify-content-center">
-                    <button className="btn rounded-pill btn-block mb-4 mt-5 w-50"
+                <div className=" d-flex justify-content-around">
+                    <button className="btn rounded-pill btn-block mb-4 mt-5 w-25"
+
                             style={{backgroundColor: " var(--orange) ", color: "var(--fff)", fontSize: "18px"}}
                             type="submit">Add
+                    </button>
+                    <button className="btn rounded-pill btn-block mb-4 mt-5 w-25"
+                            onClick={()=> submitAdd(1)}
+                            style={{backgroundColor: " var(--orange) ", color: "var(--fff)", fontSize: "18px"}}
+                            type="submit">Cansel
                     </button>
                 </div>
             </form>

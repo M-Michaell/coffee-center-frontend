@@ -1,20 +1,20 @@
 import React, {useState, useEffect} from "react";
-import {useDispatch, useSelector} from 'react-redux';
 import {axiosInstance} from "../../apis/config";
-import {useNavigate} from "react-router-dom";
-
+import {useNavigate, useParams} from "react-router-dom";
 import {toast} from 'react-toastify'
 
-export default function CreatorForm({submitAdd}) {
+
+export default function CreatorEditForm({submitAdd}) {
+    const {id, name} = useParams();
     const navigate = useNavigate()
     const [formInput, setFormInput] = useState({
 
-        name: "",
+        name: name,
 
     });
 
     const handleInput = (e) => {
-        if (e.target.name === 'creator') {
+        if (e.target.name === 'coffeeType') {
             setFormInput({...formInput, name: e.target.value});
 
         }
@@ -23,15 +23,16 @@ export default function CreatorForm({submitAdd}) {
     const handleSubmit = async (e) => {
         e.preventDefault();
         try {
-            const res = await axiosInstance.post('creators/', formInput);
-            toast.success("Add creator");
-            window.location.reload();
-            submitAdd(1);
+            const res = await axiosInstance.put(`creator/${id}/`, formInput);
+            toast.success("Edit Sucessfully");
+             window.location.reload();
+             submitAdd(1);
         } catch (error) {
+
             if (error.response) {
 
                 console.error('Server Error:', error.response.data);
-                toast.error(error.response.data.name[0] || 'Server Error');
+                toast.error(error.response.data.name || 'Server Error');
             } else if (error.request) {
 
                 console.error('Request Error:', error.request);
@@ -41,8 +42,8 @@ export default function CreatorForm({submitAdd}) {
                 toast.error('Error: Something went wrong');
             }
         }
-    };
 
+    };
     return (
         <div className="text-start" style={{color: "var(--gray1)"}}>
             <form className="p-5 mb-5 mx-auto my-5"
@@ -54,10 +55,10 @@ export default function CreatorForm({submitAdd}) {
                       boxShadow: "1px 1px 40px var(--orange)",
                   }}
             >
-                <h1 className="text-center">Add creator</h1>
+                <h1 className="text-center">Edit creator</h1>
 
                 <div className="col-md-4 w-100">
-                    <label htmlFor="creator"
+                    <label htmlFor="coffeeType"
                            style={{color: "var(--gray1)", fontSize: "18px"}}
                            className="form-label text-start mt-2">name</label>
                     <input
@@ -67,12 +68,12 @@ export default function CreatorForm({submitAdd}) {
                             fontSize: "20px",
                             color: "var(--orange)"
                         }}
-                        name="creator"
+                        name="coffeeType"
                         value={formInput.name}
                         onChange={handleInput}
                         type="text"
                         className="form-control"
-                        id="creator"
+                        id="coffeeType"
                         required/>
                 </div>
 
@@ -80,7 +81,7 @@ export default function CreatorForm({submitAdd}) {
                     <button className="btn rounded-pill btn-block mb-4 mt-5 w-25"
 
                             style={{backgroundColor: " var(--orange) ", color: "var(--fff)", fontSize: "18px"}}
-                            type="submit">Add
+                            type="submit">Edit
                     </button>
                     <button className="btn rounded-pill btn-block mb-4 mt-5 w-25"
                             onClick={()=> submitAdd(1)}

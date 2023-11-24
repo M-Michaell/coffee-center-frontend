@@ -1,21 +1,30 @@
 import "./TrackOrder.css";
 
-export default function TrackOrder() {
+export default function TrackOrder({ tracing }) {
+
+  const tracingDict = {
+    "o":'Ordered',
+    "s":'Shipped',
+    "w":'On the way',
+    "d":'Delivered',
+  } 
+  tracing = tracingDict[tracing]
+
+  const steps = ["Ordered", "Shipped", "On the way", "Delivered"];
+
   return (
     <div className="progress-track">
       <ul id="progressbar">
-        <li className="step0 active " id="step1">
-          Ordered
-        </li>
-        <li className="step0 active text-center" id="step2">
-          Shipped
-        </li>
-        <li className="step0 active text-right" id="step3">
-          On the way
-        </li>
-        <li className="step0 text-right orange" id="step4">
-          Delivered
-        </li>
+        {steps.map((step, index) => (
+          <li
+            key={`step${index + 1}`}
+            className={`step${index} ${
+              tracing === step ? "active" : ""
+            } ${index < steps.indexOf(tracing) ? "active" : ""}`}
+          >
+            {step}
+          </li>
+        ))}
       </ul>
     </div>
   );

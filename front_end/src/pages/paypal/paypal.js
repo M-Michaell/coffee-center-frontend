@@ -25,15 +25,9 @@ const Checkout = ({order}) => {
 
     const [error,setError] = useState(false);
     const handleApprove = (orderId) => {
-        console.log('handleApprove',order.id)
-        alert(order.id)
 
-        console.log('order id from paypal',orderId)
         OrderPaid(order.id)
 
-
-        // if response is error 
-        // setError 
 
     };
 

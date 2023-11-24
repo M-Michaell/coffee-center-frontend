@@ -30,7 +30,7 @@ function CartItems(props) {
 
   let toPay = totalPrice - totalDiscount;
 
-  async function confirm(){
+  async function confirm() {
     const must = [];
 
     if (!cart || cart.length === 0) {
@@ -59,18 +59,16 @@ function CartItems(props) {
 
       try {
         const order_id = await confirmOrder(data);
-        console.log('order ID : ', order_id);
-        
+        console.log("order ID : ", order_id);
+
         navigate(`/order/${order_id}`);
-        
+
         window.scrollTo({
           top: 0,
         });
       } catch (error) {
         console.error("Error confirming order:", error);
       }
-
-
     } else {
       setMust(must);
 
@@ -79,17 +77,18 @@ function CartItems(props) {
         behavior: "smooth",
       });
     }
-  };
+  }
 
   return (
     <>
       <div className="p-3">
-        <div className="d-flex justify-content-between align-items-center">
+        {/* <div className="d-flex justify-content-between align-items-center">
           <p className="fff mb-0">Promo code</p>
           <a className="orange btn btn-outline-warning rounded-pill px-5 py-0">
             Add
           </a>
-        </div>
+        </div> */}
+        <h3 className="text-center">items on your cart</h3>
         <hr className="fff" />
         <div>
           <div className="d-flex gray1 w-75 justify-content-evenly fs-5">

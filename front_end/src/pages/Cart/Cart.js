@@ -123,7 +123,18 @@ function Cart() {
                     </div>
                     <div className="collapse" id="mapstore">
                       <div className="mb-5">
-                        <img className="img-fluid" src={map} alt=".." />
+                        {/* <img className="img-fluid" src={map} alt=".." /> */}
+                        <div className="videowrap">
+                        <iframe
+                            title="mapstore"
+                            src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3453.608035877899!2d31.352869!3d31.040000!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x145838d0f1c327ed%3A0x533395a3a9dd06d7!2sCairo%2C%20Egypt!5e0!3m2!1sen!2sus!4v1662384760663!5m2!1sen!2sus"
+                            width="600"
+                            height="450"
+                            allowFullScreen=""
+                            loading="lazy"
+                          ></iframe>
+                          </div>
+
                       </div>
                     </div>
                     {/* end first */}
@@ -207,13 +218,13 @@ function Cart() {
                         className="form-check-input "
                         type="radio"
                         name="flexRadioDefault"
-                        id="upon"
+                        id="paypal"
                         onClick={() => {
                           setPayment({ payment: "paypal" });
                         }}
                       />
                       
-                      <label className="form-check-label" htmlFor="upon">
+                      <label className="form-check-label" htmlFor="paypal">
                         PayPal
                       </label>
                     </div>

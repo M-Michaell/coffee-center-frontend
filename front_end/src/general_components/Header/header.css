@@ -61,7 +61,27 @@
       margin-block: 10px;
     }
   
-    /* Additional styles for screens wider than 991px */
-    /* Add your styles here */
   }
+
+
+  
+  .custom-search {
+      border: 1px solid #Bd712b !important;
+      background-color: var(--gray2) !important;
+      color: #Bd712b !important;
+    }
+    
+  
+    .custom-search:focus, .custom-search:focus {
+      border: 1px solid #Bd712b !important;
+      background-color: transparent !important;
+      box-shadow: 0 0 0 0.25rem rgba(189, 113, 43, 0.25) !important; 
+    }
+    
+    .custom-search::after{
+      background-color: transparent ; 
+    }
+
+  
+  
   

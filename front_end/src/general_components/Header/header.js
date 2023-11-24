@@ -14,9 +14,8 @@ import { NavLink, useNavigate } from "react-router-dom";
 import { useSelector } from "react-redux";
 import { toast } from "react-toastify";
 import { Button, FormControl } from "react-bootstrap";
-import { logout } from "../../store/slices/auth";
-import { useDispatch } from "react-redux";
-import "../../pages/Cart/main.css";
+import {logout} from "../../store/slices/auth";
+import {useDispatch}  from "react-redux";
 
 export default function Navbarr() {
   const dispatch = useDispatch();
@@ -160,7 +159,7 @@ export default function Navbarr() {
               <FormControl
                 type="text"
                 placeholder="Search"
-                className="mr-2"
+                className="mr-2   custom-search"
                 onChange={handleSearchChange}
               />
               <Button variant="bg-transparent" onClick={handleSearchClick}>

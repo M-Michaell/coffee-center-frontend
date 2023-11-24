@@ -29,7 +29,7 @@ function Router() {
     return (
         <Suspense fallback={<Loader/>}>
             <Routes>
-                <Route path="/product/details/" element={<TextDetails/>}/>
+                <Route path="/product/details/:id" element={<TextDetails/>}/>
                 <Route path="/cart" element={
                     <PrivateRoute>
                         <Cart/>

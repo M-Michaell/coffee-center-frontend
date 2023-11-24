@@ -28,7 +28,7 @@ export default function ProductForm({submitAdd}) {
         creator: '',
         roasting_degree: '',
         origin: '',
-        discount: '20.0',
+        discount: '20',
     });
 
 
@@ -71,16 +71,17 @@ export default function ProductForm({submitAdd}) {
     const handleSubmit = async (e) => {
         e.preventDefault();
         let form_data = new FormData();
-        form_data.append('image', formInput?.image || '');
-        form_data.append('name', formInput?.name || '');
-        form_data.append('desc', formInput?.desc || '');
-        form_data.append('quantity', formInput?.quantity || '');
-        form_data.append('price', formInput?.price || '');
-        form_data.append('coffee_type', formInput?.coffee_type || '');
-        form_data.append('caffeine', formInput?.caffeine || '');
-        form_data.append('creator', formInput?.creator || '');
-        form_data.append('roasting_degree', formInput?.roasting_degree || '');
-        form_data.append('origin', formInput?.origin || '');
+        form_data.append('image', formInput?.image);
+        form_data.append('name', formInput?.name);
+        form_data.append('desc', formInput?.desc);
+        form_data.append('quantity', formInput?.quantity);
+        form_data.append('price', formInput?.price);
+        form_data.append('coffee_type', formInput?.coffee_type);
+        form_data.append('caffeine', formInput?.caffeine);
+        form_data.append('creator', formInput?.creator);
+        form_data.append('roasting_degree', formInput?.roasting_degree);
+        form_data.append('origin', formInput?.origin);
+        form_data.append('discount', formInput?.discount);
 
         for (const entry of form_data.entries()) {
              console.log(entry);
@@ -100,7 +101,7 @@ export default function ProductForm({submitAdd}) {
             if (error.response) {
 
                 console.error('Server Error:', error.response.data);
-                toast.error(error.response.data.name[0] || 'Server Error');
+                toast.error(error.response.data.name || 'Server Error');
             } else if (error.request) {
 
                 console.error('Request Error:', error.request);
@@ -374,31 +375,31 @@ export default function ProductForm({submitAdd}) {
                     </select>
                 </div>
 
-                <div className="col-md-4 w-75">
-                    <label htmlFor="validationDefault02"
-                           style={{color: "var(--gray1)", fontSize: "18px"}}
-                           className="form-label text-start mt-2">Discount</label>
+                {/*<div className="col-md-4 w-75">*/}
+                {/*    <label htmlFor="validationDefault02"*/}
+                {/*           style={{color: "var(--gray1)", fontSize: "18px"}}*/}
+                {/*           className="form-label text-start mt-2">Discount</label>*/}
 
-                    <select
-                        style={{
-                            backgroundColor: "var(--gray2)",
-                            borderColor: "var(--orange)",
-                            fontSize: "20px",
-                            color: "var(--orange)"
-                        }}
-                        className="form-select"
-                        name="price"
-                        aria-label="Default select example">
-                        <option selected>Open this select menu</option>
-                        {
-                            creators?.map((item, index) => {
-                                return (
-                                    <option value={item?.name}>{item?.name}</option>
-                                );
-                            })
-                        }
-                    </select>
-                </div>
+                {/*    <select*/}
+                {/*        style={{*/}
+                {/*            backgroundColor: "var(--gray2)",*/}
+                {/*            borderColor: "var(--orange)",*/}
+                {/*            fontSize: "20px",*/}
+                {/*            color: "var(--orange)"*/}
+                {/*        }}*/}
+                {/*        className="form-select"*/}
+                {/*        name="price"*/}
+                {/*        aria-label="Default select example">*/}
+                {/*        <option selected>Open this select menu</option>*/}
+                {/*        {*/}
+                {/*            creators?.map((item, index) => {*/}
+                {/*                return (*/}
+                {/*                    <option value={item?.name}>{item?.name}</option>*/}
+                {/*                );*/}
+                {/*            })*/}
+                {/*        }*/}
+                {/*    </select>*/}
+                {/*</div>*/}
 
 
                 <div className="col-12">

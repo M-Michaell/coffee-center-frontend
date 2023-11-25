@@ -161,63 +161,78 @@ export default function Card({ item }) {
               {item.price}EGP
             </p>
 
-            {isCartVisible ? (
-              <div className="d-flex justify-content-between mt-5 ">
-                <h3 style={{ color: "var(--fff)" }} className="mt-2">
-                  {Math.ceil(
-                    (item?.price * (100 - item.discount_percentage)) / 100
-                  )}
-                  EGP
-                </h3>
+            {item.quantity > 0 ? (
+              isCartVisible ? (
+                <div className="d-flex justify-content-between mt-5 ">
+                  <h3 style={{ color: "var(--fff)" }} className="mt-2">
+                    {Math.ceil(
+                      (item?.price * (100 - item.discount_percentage)) / 100
+                    )}
+                    EGP
+                  </h3>
 
-                <button
-                  style={{
-                    backgroundColor: "var(--orange)",
-                    color: "var(----fff)",
-                    fontSize: "18px",
-                  }}
-                  onClick={handleAddToCart}
-                  className="shadow  rounded-pill btn "
-                >
-                  Cart <i className="bi bi-cart3"></i>
-                </button>
-              </div>
+                  <button
+                    style={{
+                      backgroundColor: "var(--orange)",
+                      color: "var(--fff)",
+                      fontSize: "15px",
+                    }}
+                    onClick={handleAddToCart}
+                    className="shadow rounded-pill btn "
+                  >
+                    Cart <i className="bi bi-cart3"></i>
+                  </button>
+                </div>
+              ) : (
+                <div className="d-flex justify-content-around mt-5">
+                  <button
+                    onClick={handleDecrease}
+                    className="btn shadow rounded rounded-pill"
+                    style={{
+                      height: "44px",
+                      width: "62px",
+                      backgroundColor: "var(--orange)",
+                      fontSize: "20px",
+                      color: "var(--fff)",
+                    }}
+                  >
+                    -
+                  </button>
+                  <h4 className="text-center mt-2 mx-2 text-nowrap">
+                    {Math.ceil(
+                      (item?.price * count * (100 - item.discount_percentage)) /
+                        100
+                    )}
+                    EGP
+                  </h4>
+                  <button
+                    onClick={handleIncrease}
+                    className="btn shadow rounded btn rounded-pill"
+                    style={{
+                      height: "44px",
+                      width: "62px",
+                      backgroundColor: "var(--orange)",
+                      fontSize: "20px",
+                      color: "var(--fff)",
+                    }}
+                  >
+                    +
+                  </button>
+                </div>
+              )
             ) : (
-              <div className="d-flex justify-content-around mt-5">
-                <button
-                  onClick={handleDecrease}
-                  className="btn shadow  rounded rounded-pill "
-                  style={{
-                    height: "44px",
-                    width: "62px",
-                    backgroundColor: "var(--orange)",
-                    fontSize: "20px",
-                    color: "var(--fff)",
-                  }}
-                >
-                  -
-                </button>
-                <h4 className="text-center mt-2 mx-2">
-                  {Math.ceil(
-                    (item?.price * count * (100 - item.discount_percentage)) /
-                      100
-                  )}
-                  EGP
-                </h4>
-                <button
-                  onClick={handleIncrease}
-                  className="btn shadow  rounded btn rounded-pill"
-                  style={{
-                    height: "44px",
-                    width: "62px",
-                    backgroundColor: "var(--orange)",
-                    fontSize: "20px",
-                    color: "var(--fff)",
-                  }}
-                >
-                  +
-                </button>
-              </div>
+              <button
+                className="btn shadow rounded rounded-pill mx-auto d-flex mt-5  "
+                style={{
+                  cursor: "text",
+
+                  backgroundColor: "var(--orange)",
+
+                  color: "var(--fff)",
+                }}
+              >
+                out of stock
+              </button>
             )}
           </div>
         </StyledBadge>

@@ -26,6 +26,8 @@ export default function OrderProducts({order_items}) {
                   count={key}
                   product={value.product_details}
                   quantity={value.quantity}
+                  price={value.productStaticPrice}
+                  discount={value.productStaticDiscount}
                 />
               ))}
             </tbody>

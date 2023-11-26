@@ -1,13 +1,14 @@
 import React, {useState, useEffect} from "react";
 import {useDispatch, useSelector} from 'react-redux';
 import {axiosInstance} from "../../apis/config";
-import {useNavigate} from "react-router-dom";
+import {useNavigate, useParams} from "react-router-dom";
 import {register, reset} from "../../store/slices/auth";
 import {toast} from 'react-toastify'
 import Loader from "../../general_components/Loader/Loader";
 import {CreatorsData, CaffeinesData, CoffeeTypes, RoastingDegrees, Origins} from "../../apis/add_categories";
 
-export default function ProductEdit() {
+export default function ProductEdit({submitAdd}) {
+    const {id, name, image} = useParams();
     const creators = CreatorsData();
     const caffeines = CaffeinesData();
     const coffeeTypes = CoffeeTypes();
@@ -18,7 +19,7 @@ export default function ProductEdit() {
     const navigate = useNavigate()
     const [selectedFile, setSelectedFile] = useState(null);
     const [formInput, setFormInput] = useState({
-        name: "",
+        name: name,
         desc: "",
         quantity: "",
         price: '',
@@ -87,7 +88,7 @@ export default function ProductEdit() {
         }
         console.log(formInput);
         try {
-            const res = await axiosInstance.post('products/', form_data, {
+            const res = await axiosInstance.put(`product/${id}`, form_data, {
                 headers: {
                     'content-type': 'multipart/form-data'
                 }
@@ -415,10 +416,16 @@ export default function ProductEdit() {
                     </div>
                 </div>
                 {isLoading && <Loader/>}
-                <div className="d-flex justify-content-center">
-                    <button className="btn rounded-pill btn-block mb-4 mt-5 w-50"
+                <div className=" d-flex justify-content-around">
+                    <button className="btn rounded-pill btn-block mb-4 mt-5 w-25"
+
                             style={{backgroundColor: " var(--orange) ", color: "var(--fff)", fontSize: "18px"}}
-                            type="submit">Sign Up
+                            type="submit">Edit
+                    </button>
+                    <button className="btn rounded-pill btn-block mb-4 mt-5 w-25"
+                            onClick={()=> submitAdd(1)}
+                            style={{backgroundColor: " var(--orange) ", color: "var(--fff)", fontSize: "18px"}}
+                            type="submit">Cansel
                     </button>
                 </div>
             </form>

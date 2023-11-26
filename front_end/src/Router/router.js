@@ -68,6 +68,12 @@ function Router() {
                     </PrivateRoute>
                     }
                     />
+                <Route path={`admin/:category/:name/:id/:desc/:price/:quantity/`} element={
+                    <PrivateRoute>
+                      <AdminDashboard />
+                    </PrivateRoute>
+                    }
+                    />
                 <Route path="/order/tracking/" element={<Account/>}/>
                 <Route path="/search/:productname" element={<Search/>}/>
                 <Route path="*" element={<NotFound/>}/>

@@ -7,8 +7,12 @@ export default function CardList({cards}) {
                 cards?.map((product, index)=>{
 
                     return (<div className="col" key={index}>
+                            {
+                                <Card key={product.id} item={product}/>
 
-                    <Card key={product.id} item={product}/>
+                            }
+
+
                     </div>
                     );
                 })

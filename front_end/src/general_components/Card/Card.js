@@ -132,9 +132,7 @@ export default function Card({ item }) {
         >
           <div className="card-body " style={{ marginTop: "150px" }}>
             <button
-              className={`border border-0 m-2 bi position-absolute ${
-                isProductInWishlist ? "bi-heart-fill" : "bi-heart"
-              } `}
+              className={`border border-0 m-2 bi position-absolute ${isProductInWishlist ? "bi-heart-fill" : "bi-heart"} `}
               style={{
                 top: "0px",
                 left: "0px",
@@ -164,9 +162,10 @@ export default function Card({ item }) {
             {isCartVisible ? (
               <div className="d-flex justify-content-between mt-5 ">
                 <h3 style={{ color: "var(--fff)" }} className="mt-2">
-                  {Math.ceil(
-                    (item?.price * (100 - item.discount_percentage)) / 100
-                  )}
+                  {
+                    item.discount_percentage ?
+                    Math.ceil((item?.price * (100 - item.discount_percentage)) / 100) : item?.price
+                  }
                   EGP
                 </h3>
 
@@ -198,10 +197,11 @@ export default function Card({ item }) {
                   -
                 </button>
                 <h4 className="text-center mt-2 mx-2">
-                  {Math.ceil(
-                    (item?.price * count * (100 - item.discount_percentage)) /
-                      100
-                  )}
+                  {
+                    item.discount_percentage ?
+                    Math.ceil((item?.price * (100 - item.discount_percentage)) / 100) : item?.price
+                  }
+
                   EGP
                 </h4>
                 <button

@@ -1,18 +1,16 @@
-import OrderProducts from "./componants/OrderProducts";
-import { OrderDetailsApi } from "../../apis/order_details";
+import OrderProducts from "../../../pages/Order/componants/OrderProducts";
+import { OrderDetailsApi } from "../../../apis/order_details";
 import React, { useEffect, useState } from "react";
-import TrackOrder from "./componants/TrackOrder";
-import "./../Cart/main.css";
-import TotalPrice from "./componants/TotalPrice";
-import Checkout from "../paypal/paypal";
+import TrackOrder from "../../../pages/Order/componants/TrackOrder";
+import "../../../pages/Cart/main.css";
+// import "./../../pages/Cart/main.css";
+import TotalPrice from "../../../pages/Order/componants/TotalPrice";
 import { useParams } from "react-router-dom";
-import { useSelector } from "react-redux";
 
-export default function Order() {
+export default function AdminOrder() {
   const { order_id } = useParams();
-  console.log();
-  const user = useSelector((state) => state.auth.userInfo);
-  const orderDetailsInstance = OrderDetailsApi(order_id,user.id);
+  console.log(order_id);
+  const orderDetailsInstance = OrderDetailsApi(order_id);
   const [orderDetails, setOrderDetails] = useState(null);
 
   useEffect(() => {
@@ -42,10 +40,7 @@ export default function Order() {
 
           {orderDetails.payment_method.provider !== "cash" &&
           orderDetails.payment_method.status == "NP" ? (
-            <div className="d-flex align-items-center flex-column pt-5 mt-5">
-              <h1 className="orange">Confirm Your Payment</h1>
-              <Checkout order={orderDetails} />
-            </div>
+            <div className="orange" style={{marginTop:'150px',fontSize:'42px'}}>UNPAID</div>
           ) : (
             <div className="pt-5 mt-5">
               <h1 className="orange">Tracking</h1>

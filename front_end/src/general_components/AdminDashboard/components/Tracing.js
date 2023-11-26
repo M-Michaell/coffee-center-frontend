@@ -19,8 +19,8 @@ export default function Tracing({ user }) {
   }
 
   const handleFromChange = function(){
-    const startDate = document.getElementById('startDate')
-    const endDate = document.getElementById('endDate')
+    const startDate = document.getElementById('startDateForTracing')
+    const endDate = document.getElementById('endDateForTracing')
     endDate.min = startDate.value
     if (endDate.value && endDate.value < startDate.value){
       endDate.value = startDate.value
@@ -43,8 +43,8 @@ export default function Tracing({ user }) {
 
 
   const handleSearchByDate = () => {
-    const startDate = document.getElementById("startDate").value
-    const endDate = document.getElementById("endDate").value
+    const startDate = document.getElementById("startDateForTracing").value
+    const endDate = document.getElementById("endDateForTracing").value
     const userOrdersDetails = UserOrdersApi(user.id,startDate,endDate,true);
     fetchData(userOrdersDetails);
   }
@@ -67,14 +67,14 @@ export default function Tracing({ user }) {
             <div className="input-group-prepend">
               <span className="input-group-text border-0">From</span>
             </div>
-            <input className="form-control bg-dark border-0 text-light" id="startDate" type="date" max={maxDate} onChange={handleFromChange} />
+            <input className="form-control bg-dark border-0 text-light" id="startDateForTracing" type="date" max={maxDate} onChange={handleFromChange} />
           </div>
 
           <div className="col input-group me-3" style={{'border':'gray solid 1px'}}>
             <div className="input-group-prepend">
               <span className="input-group-text border-0">To</span>
             </div>
-            <input className="form-control bg-dark border-0 text-light" id="endDate" type="date" max={maxDate} />
+            <input className="form-control bg-dark border-0 text-light" id="endDateForTracing" type="date" max={maxDate} />
           </div>
 
           <button className="col btn btn-dark" onClick={handleSearchByDate}>Search</button>

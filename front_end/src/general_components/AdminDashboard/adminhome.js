@@ -12,6 +12,7 @@ import {
   faFireBurner,
   faStar,
   faTruck,
+  faDollar,
 } from "@fortawesome/free-solid-svg-icons";
 import "./admin.css";
 import { useUserData } from "../../apis/profile";
@@ -32,6 +33,7 @@ const RoastingDegree = React.lazy(() =>
 );
 const Rates = React.lazy(() => import("./components/rates"));
 const Tracing = React.lazy(() => import("./components/Tracing"));
+const Income = React.lazy(() => import("./components/Income"));
 
 export default function AdminDashboard() {
   const dispatch = useDispatch();
@@ -52,6 +54,7 @@ export default function AdminDashboard() {
     roastingdegree: RoastingDegree,
     rates: Rates,
     tracing:Tracing,
+    income:Income,
   };
 
   const RenderComponent = componentMap[activeComponent];
@@ -219,6 +222,24 @@ export default function AdminDashboard() {
                   style={{ color: "var(--orange)" }}
                 />
                 tracing
+                <span className="arrow-icon" style={{ color: "var(--orange)" }}>
+                  &#9654;
+                </span>
+              </li>
+            </Link>
+            <hr></hr>
+            <Link
+              to={`/admin/rates`}
+              className="order-link"
+              onClick={() => handleLinkClick("income")}
+            >
+              <li className="mb-3 text-light">
+                <FontAwesomeIcon
+                   icon={faDollar}
+                  className="me-2"
+                  style={{ color: "var(--orange)" }}
+                />
+                Income
                 <span className="arrow-icon" style={{ color: "var(--orange)" }}>
                   &#9654;
                 </span>

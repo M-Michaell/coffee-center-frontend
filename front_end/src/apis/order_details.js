@@ -41,3 +41,21 @@ export const AdminSetOrderTracingApi = () => {
 
   return { setOrderTracing };
 };
+
+
+
+
+
+export const totalIncomeApi = (userID,startDate,endDate) => {
+  console.log('userID',userID)
+  
+  return axios.create({
+    baseURL: `http://127.0.0.1:8000/order/admin/income/`,
+    withCredentials: true,
+    params: {
+      startDate: startDate,
+      endDate: endDate,
+      userID: userID,
+    },
+  });
+};

@@ -2,8 +2,23 @@ import { useNavigate } from "react-router-dom";
 
 
 export default function OrderComponent({order}){
+  const traceMapper = {
+    o: "Ordered",
+    s: "Shipped",
+    w: "On the way",
+    d: "Delivered",
+  };
+
+  const traceColorMapper = {
+    o: "text-secondary",
+    s: "text-primary",
+    w: "text-danger",
+    d: "text-success",
+  };
+
     const navigate = useNavigate()
     const handleOrderDetails = () => {
+      console.log('orderComponent')
         navigate(`/order/${order.id}/`)
     }
   return (
@@ -22,10 +37,13 @@ export default function OrderComponent({order}){
             </span>
             {order.created_at}
           </div>
-          <div className="col-4">
+          <div className="col-2 text-center">
             <span className="fw-bold">Total: </span> <br></br>{order.price}$
           </div>
-          <div className="col-4">
+          <div className="col-2 text-center">
+            <span className={'fw-bold'}>Tracing: </span> <br></br><span className= {`${traceColorMapper[order.tracing]}`}>{traceMapper[order.tracing]}</span>
+          </div>
+          <div className="col-4 text-center">
             <button className="btn btn-secondary" onClick={handleOrderDetails}>view order details</button>
           </div>
         </div>

@@ -11,6 +11,7 @@ const ActivatePage= React.lazy(()=> import("../pages/registration/Activation"));
 const SendMail= React.lazy(()=> import("../pages/registration/SendMail"));
 const Reset= React.lazy(()=> import("../pages/registration/Reset"));
 const Order= React.lazy(()=> import("../pages/Order/OrderPage"));
+const AdminOrder= React.lazy(()=> import("../general_components/AdminDashboard/components/OrderDetails"));
 const Checkout= React.lazy(()=> import("../pages/paypal/paypal"));
 const TextDetails= React.lazy(()=> import("../pages/Details/text_details"));
 const Home = React.lazy(() => import("../pages/Home/Home"));
@@ -43,6 +44,7 @@ function Router() {
                 <Route path="/email/reset/confirm/:uid/:token" element={<Reset/>}/>
                 <Route path="/" element={<Home/>}/>
                 <Route path="order/:order_id" element={<Order/>}/>
+                <Route path="admin/order/:order_id" element={<AdminOrder/>}/>
                 <Route path="registration/" element={<Registration/>}/>
                 <Route path="login/" element={<Login/>}/>
                 <Route path="/profile/*" element={

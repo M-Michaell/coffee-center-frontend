@@ -84,7 +84,6 @@ export default function ProductEdit({submitAdd, item}) {
         form_data.append('origin', formInput?.origin);
         form_data.append('discount', formInput?.discount);
 
-
         try {
             const res = await axiosInstance.put(`product/${item.id}/`, form_data, {
                 headers: {

@@ -353,7 +353,7 @@ export default function ProductForm({submitAdd}) {
                             fontSize: "20px",
                             color: "var(--orange)"
                         }}
-                        value={formInput.roastingDegrees}
+                        value={formInput.roasting_degree}
                         onChange={handleInput}
                         name="roastingDegree"
                         id="roastingDegree"

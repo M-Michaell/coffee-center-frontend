@@ -8,7 +8,7 @@ import Loader from "../../general_components/Loader/Loader";
 import {CreatorsData, CaffeinesData, CoffeeTypes, RoastingDegrees, Origins} from "../../apis/add_categories";
 
 export default function ProductEdit({submitAdd, item}) {
-    console.log("mohammed", item);
+    console.log("mohammedhanaa", item);
     const creators = CreatorsData();
     const caffeines = CaffeinesData();
     const coffeeTypes = CoffeeTypes();
@@ -24,11 +24,11 @@ export default function ProductEdit({submitAdd, item}) {
         quantity: item.quantity,
         price: item.price,
         image: null,
-        coffee_type: '',
-        caffeine: '',
-        creator: '',
-        roasting_degree: '',
-        origin: '',
+        coffee_type: item.coffee_type,
+        caffeine: item.caffeine,
+        creator: item.creator,
+        roasting_degree: item.roasting_degree,
+        origin: item.origin,
         discount: '1',
     });
 
@@ -83,7 +83,6 @@ export default function ProductEdit({submitAdd, item}) {
         form_data.append('roasting_degree', formInput?.roasting_degree);
         form_data.append('origin', formInput?.origin);
         form_data.append('discount', formInput?.discount);
-
 
         try {
             const res = await axiosInstance.put(`product/${item.id}/`, form_data, {
@@ -233,7 +232,7 @@ export default function ProductEdit({submitAdd, item}) {
                             fontSize: "20px",
                             color: "var(--orange)"
                         }}
-                        value={item.coffee_type_name}
+                        value={formInput.coffee_type}
                         name="coffee_type"
                         id="coffee_type"
                         className="form-select"
@@ -265,7 +264,7 @@ export default function ProductEdit({submitAdd, item}) {
                             color: "var(--orange)"
                         }}
                         onChange={handleInput}
-                        value={item.caffeine_name}
+                        value={formInput.caffeine}
                         className="form-select"
                         name="caffeine"
                         id="caffeine"
@@ -294,7 +293,7 @@ export default function ProductEdit({submitAdd, item}) {
                             fontSize: "20px",
                             color: "var(--orange)"
                         }}
-                        value={item.creators_name}
+                        value={formInput.creators}
                         className="form-select"
                         onChange={handleInput}
                         name="creator"
@@ -325,7 +324,7 @@ export default function ProductEdit({submitAdd, item}) {
                             fontSize: "20px",
                             color: "var(--orange)"
                         }}
-                        value={item.origins_name}
+                        value={formInput.origins}
                         className="form-select"
                         onChange={handleInput}
                         name="origin"
@@ -356,7 +355,7 @@ export default function ProductEdit({submitAdd, item}) {
                             fontSize: "20px",
                             color: "var(--orange)"
                         }}
-                        value={item.roastingDegrees_name}
+                        value={formInput.roasting_degree}
                         onChange={handleInput}
                         name="roastingDegree"
                         id="roastingDegree"

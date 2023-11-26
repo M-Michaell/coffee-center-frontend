@@ -3,6 +3,7 @@ import { useSelector } from "react-redux";
 import Oneproduct from "./oneproduct";
 import { confirmOrder } from "../../../apis/cartOperations/confirm";
 import { useNavigate } from "react-router-dom";
+import { EmptyCart } from "../../../apis/cartOperations/emptyCart";
 
 function CartItems(props) {
   const { Delivery, payment, DeliveryAddress, setMust, user } = props;
@@ -59,10 +60,10 @@ function CartItems(props) {
 
       try {
         const order_id = await confirmOrder(data);
-        console.log("order ID : ", order_id);
+        EmptyCart(session);
 
         navigate(`/order/${order_id}`);
-
+        window.location.reload();
         window.scrollTo({
           top: 0,
         });

@@ -1,6 +1,8 @@
 import React, { useEffect, useState } from "react";
 import OrderComponent from "./Order";
 import { UserOrdersApi } from "../../../apis/order_details";
+import { Link } from "react-router-dom";
+import RemoveShoppingCartIcon from "@mui/icons-material/RemoveShoppingCart";
 
 export default function OrdersComponent({ user }) {
 
@@ -56,39 +58,34 @@ export default function OrdersComponent({ user }) {
   }, []);
 
   return (
-    <div className="">
-      <div className="">
-        <h1 className="text-start fw-bold mb-3" style={{ color: "white" }}>
-          Your Orders
-        </h1>
-        
-        <div className="pt-5 pb-3 me-0 d-flex flex-row border-2" >
-
-          <div className="col input-group me-3 " style={{'border':'gray solid 1px'}}>
-            <div className="input-group-prepend">
-              <span className="input-group-text border-0">From</span>
-            </div>
-            <input className="form-control bg-dark border-0 text-light" id="startDate" type="date" max={maxDate} onChange={handleFromChange} />
-          </div>
-
-          <div className="col input-group me-3" style={{'border':'gray solid 1px'}}>
-            <div className="input-group-prepend">
-              <span className="input-group-text border-0">To</span>
-            </div>
-            <input className="form-control bg-dark border-0 text-light" id="endDate" type="date" max={maxDate} />
-          </div>
-
-          <button className="col btn btn-dark" onClick={handleSearchByDate}>Search</button>
-        </div>
-        
-      </div>
-      {userOrders
+    
+    <div>
+      <h1 className="text-start fw-bold mb-3" style={{ color: "white" }}>
+        Your Orders
+      </h1>
+      {userOrders.length
         ? userOrders.map((order, index) => (
             <div className="pb-5">
               <OrderComponent key={order.id} order={order}/>
             </div>
           ))
-        : "Loading..."}
+        : <div>
+        <RemoveShoppingCartIcon sx={{ fontSize: 200 }} className="my-5"/>
+        <div className="d-flex flex-column mt-5">
+          <h2>Your Orders List is Feeling a Bit Lonely</h2>
+          <p>
+            Uh-oh! It seems like your orders list is empty. Time to fill it up with
+            delightful goodies!
+          </p>
+          <p>
+            Explore our amazing products and treat yourself to something special.
+          </p>
+          <Link to="/" className="btn w-25 mx-auto my-5 btn-outline-light custom-btn fs-6 px-auto">
+            Start Shopping <i className="bi bi-cart fs-4 ms-2"></i>
+          </Link>
+        </div>
+      </div>
+      }
     </div>
   );
 }

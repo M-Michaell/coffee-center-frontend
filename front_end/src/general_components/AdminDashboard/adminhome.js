@@ -30,6 +30,7 @@ const RoastingDegree = React.lazy(() =>
   import("./components/RoastingDegreeComponent")
 );
 const Rates = React.lazy(() => import("./components/rates"));
+const Tracing = React.lazy(() => import("./components/Tracing"));
 
 export default function AdminDashboard() {
   const dispatch = useDispatch();
@@ -49,6 +50,7 @@ export default function AdminDashboard() {
     product: Product,
     roastingdegree: RoastingDegree,
     rates: Rates,
+    tracing:Tracing,
   };
 
   const RenderComponent = componentMap[activeComponent];
@@ -198,6 +200,24 @@ export default function AdminDashboard() {
                   style={{ color: "var(--orange)" }}
                 />
                 rates
+                <span className="arrow-icon" style={{ color: "var(--orange)" }}>
+                  &#9654;
+                </span>
+              </li>
+            </Link>
+            <hr></hr>
+            <Link
+              to={`/admin/rates`}
+              className="order-link"
+              onClick={() => handleLinkClick("tracing")}
+            >
+              <li className="mb-3 text-light">
+                <FontAwesomeIcon
+                   icon={faStar}
+                  className="me-2"
+                  style={{ color: "var(--orange)" }}
+                />
+                tracing
                 <span className="arrow-icon" style={{ color: "var(--orange)" }}>
                   &#9654;
                 </span>

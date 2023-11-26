@@ -9,7 +9,6 @@ export function CreatorsData() {
       .get(`/creators/`)
       .then((res) => {
         setCreators(res.data);
-        console.log(res);
       })
       .catch((err) => console.log(err));
   }, []);
@@ -26,7 +25,6 @@ export function CaffeinesData() {
       .get(`/caffeines/`)
       .then((res) => {
         setcaffeines(res.data);
-        console.log(res);
       })
       .catch((err) => console.log(err));
   }, []);
@@ -43,7 +41,6 @@ export function CoffeeTypes() {
       .get(`/coffeeTypes/`)
       .then((res) => {
         setCoffeeTypes(res.data);
-        console.log(res);
       })
       .catch((err) => console.log(err));
   }, []);
@@ -60,7 +57,6 @@ export function RoastingDegrees() {
       .get(`/roastingDegrees/`)
       .then((res) => {
         setRoastingDegrees(res.data);
-        console.log(res);
       })
       .catch((err) => console.log(err));
   }, []);
@@ -77,7 +73,6 @@ export function Origins() {
       .get(`/origins/`)
       .then((res) => {
         setOrigins(res.data);
-        console.log(res);
       })
       .catch((err) => console.log(err));
   }, []);
@@ -94,12 +89,27 @@ export function Products() {
       .get(`products/`)
       .then((res) => {
         setOrigins(res.data.all_product);
-        console.log(res);
       })
       .catch((err) => console.log(err));
   }, []);
 
   return  origins ;
+
+}
+export function Discounts() {
+  const [discounts, setDiscounts] = useState();
+
+  useEffect(() => {
+    axiosInstance
+      .get(`discount_list/`)
+      .then((res) => {
+        setDiscounts(res.data);
+        console.log(res);
+      })
+      .catch((err) => console.log(err));
+  }, []);
+
+  return  discounts ;
 }
 
 

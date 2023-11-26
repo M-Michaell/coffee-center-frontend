@@ -11,6 +11,7 @@ import {
   faBagShopping,
   faFireBurner,
   faStar,
+  faTruck,
 } from "@fortawesome/free-solid-svg-icons";
 import "./admin.css";
 import { useUserData } from "../../apis/profile";
@@ -213,7 +214,7 @@ export default function AdminDashboard() {
             >
               <li className="mb-3 text-light">
                 <FontAwesomeIcon
-                   icon={faStar}
+                   icon={faTruck}
                   className="me-2"
                   style={{ color: "var(--orange)" }}
                 />

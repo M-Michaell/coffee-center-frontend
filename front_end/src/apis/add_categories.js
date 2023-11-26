@@ -93,7 +93,7 @@ export function Products() {
     axiosInstance
       .get(`products/`)
       .then((res) => {
-        setOrigins(res.data.products);
+        setOrigins(res.data.all_product);
         console.log(res);
       })
       .catch((err) => console.log(err));

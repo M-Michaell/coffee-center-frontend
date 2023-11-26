@@ -10,6 +10,7 @@ import {toast} from "react-toastify";
 export default function Product() {
 
     const [show, setShow] = useState(1);
+    const [item , setItem] = useState();
     const coffeeTypes = Products();
 
     const deleteItem = async (e, id)=>{
@@ -64,9 +65,11 @@ export default function Product() {
 
     const submitAdd = (num) => {
         setShow(num);
+
     }
+
     return (
-        show === 2? <ProductForm submitAdd={submitAdd}/> : show === 3? <ProductEdit submitAdd={submitAdd}/> :
+        show === 2? <ProductForm submitAdd={submitAdd}/> : show === 3? <ProductEdit submitAdd={submitAdd} item={item}/> :
             <div>
                 <div className="d-flex justify-content-between">
                     <h1 className=""
@@ -82,12 +85,7 @@ export default function Product() {
                 </div>
 
                 <table className="table table-borderless ">
-                    {/*<thead>*/}
-                    {/*<tr>*/}
-                    {/*    <th scope="col-2" style={{color: "var(--gray1)", fontSize:"20px"}} > <h1>Coffee Type</h1></th>*/}
-                    {/*    <th scope="col-4" style={{color: "var(--gray1)", fontSize:"20px"}}> <button className="btn border border-warning rounded-pill mb-2">add new type</button></th>*/}
-                    {/*</tr>*/}
-                    {/*</thead>*/}
+
                     <tbody>
                     {
                         coffeeTypes?.map((item, index) => {
@@ -99,8 +97,8 @@ export default function Product() {
                                         style={{color: "var(--gray1)", fontSize: "20px"}}>{item?.name}</td>
                                     <td>
                                         <NavLink
-                                            to = {`/admin/product/${item?.name}/${item?.id}/${item?.desc}/${item?.price}/${item?.quantity}/`}
-                                            onClick={()=>{submitAdd(3)}}
+                                            to = {`/admin/product/`}
+                                            onClick={()=>{submitAdd(3); setItem(item)}}
                                             className={`btn btn-outline-light custom-btn ${item.deleted ? "text-decoration-line-through disabled" : ""}`}>
                                             Edit
                                         </NavLink>

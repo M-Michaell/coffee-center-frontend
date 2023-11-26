@@ -7,8 +7,8 @@ import {toast} from 'react-toastify'
 import Loader from "../../general_components/Loader/Loader";
 import {CreatorsData, CaffeinesData, CoffeeTypes, RoastingDegrees, Origins} from "../../apis/add_categories";
 
-export default function ProductEdit({submitAdd}) {
-    const {id, name, image} = useParams();
+export default function ProductEdit({submitAdd, item}) {
+    console.log("mohammed", item);
     const creators = CreatorsData();
     const caffeines = CaffeinesData();
     const coffeeTypes = CoffeeTypes();
@@ -19,17 +19,17 @@ export default function ProductEdit({submitAdd}) {
     const navigate = useNavigate()
     const [selectedFile, setSelectedFile] = useState(null);
     const [formInput, setFormInput] = useState({
-        name: name,
-        desc: "",
-        quantity: "",
-        price: '',
+        name: item.name,
+        desc: item.desc,
+        quantity: item.quantity,
+        price: item.price,
         image: null,
-        coffee_type: "",
+        coffee_type: '',
         caffeine: '',
         creator: '',
         roasting_degree: '',
         origin: '',
-        discount: '20.0',
+        discount: '1',
     });
 
 
@@ -72,34 +72,34 @@ export default function ProductEdit({submitAdd}) {
     const handleSubmit = async (e) => {
         e.preventDefault();
         let form_data = new FormData();
-        form_data.append('image', formInput?.image || '');
-        form_data.append('name', formInput?.name || '');
-        form_data.append('desc', formInput?.desc || '');
-        form_data.append('quantity', formInput?.quantity || '');
-        form_data.append('price', formInput?.price || '');
-        form_data.append('coffee_type', formInput?.coffee_type || '');
-        form_data.append('caffeine', formInput?.caffeine || '');
-        form_data.append('creator', formInput?.creator || '');
-        form_data.append('roasting_degree', formInput?.roasting_degree || '');
-        form_data.append('origin', formInput?.origin || '');
+        form_data.append('image', formInput?.image);
+        form_data.append('name', formInput?.name);
+        form_data.append('desc', formInput?.desc);
+        form_data.append('quantity', formInput?.quantity);
+        form_data.append('price', formInput?.price);
+        form_data.append('coffee_type', formInput?.coffee_type);
+        form_data.append('caffeine', formInput?.caffeine);
+        form_data.append('creator', formInput?.creator);
+        form_data.append('roasting_degree', formInput?.roasting_degree);
+        form_data.append('origin', formInput?.origin);
+        form_data.append('discount', formInput?.discount);
 
-        for (const entry of form_data.entries()) {
-             console.log(entry);
-        }
-        console.log(formInput);
+
         try {
-            const res = await axiosInstance.put(`product/${id}`, form_data, {
+            const res = await axiosInstance.put(`product/${item.id}/`, form_data, {
                 headers: {
                     'content-type': 'multipart/form-data'
                 }
             });
             console.log(res.data);
-            toast.success("Add origin");
+            toast.success("edit product successfully");
+             window.location.reload();
+            submitAdd(1);
         } catch (error) {
             if (error.response) {
 
                 console.error('Server Error:', error.response.data);
-                toast.error(error.response.data.name[0] || 'Server Error');
+                toast.error(error.response.data.name || 'Server Error');
             } else if (error.request) {
 
                 console.error('Request Error:', error.request);
@@ -122,7 +122,7 @@ export default function ProductEdit({submitAdd}) {
                       boxShadow: "1px 1px 40px var(--orange)",
                   }}
             >
-                <h1 className="text-center">Add Product</h1>
+                <h1 className="text-center">Edit Product</h1>
                 <div className="col-md-4 w-75">
                     <label htmlFor="validationDefault01"
                            style={{color: "var(--gray1)", fontSize: "18px"}}
@@ -145,7 +145,7 @@ export default function ProductEdit({submitAdd}) {
                     <label htmlFor="validationDefault02"
                            style={{color: "var(--gray1)", fontSize: "18px"}}
                            className="form-label mt-3">Description</label>
-                    <textarea value={formInput.Description}
+                    <textarea value={formInput.desc}
                               style={{
                                   backgroundColor: "var(--gray2)",
                                   borderColor: "var(--orange)",
@@ -193,7 +193,7 @@ export default function ProductEdit({submitAdd}) {
                                color: "var(--orange)"
                            }}
                            name="Quantity"
-                           value={formInput.Quantity}
+                           value={formInput.quantity}
                            type="number"
                            className="form-control"
                            id="validationDefault02"
@@ -204,7 +204,8 @@ export default function ProductEdit({submitAdd}) {
                     <label htmlFor="validationDefault099"
                            style={{color: "var(--gray1)", fontSize: "18px"}}
                            className="form-label mt-3">Image</label>
-                    <input value={formInput.last_name}
+                    <input
+                        // value={formInput.image}
                            style={{
                                backgroundColor: "var(--gray2)",
                                borderColor: "var(--orange)",
@@ -232,17 +233,17 @@ export default function ProductEdit({submitAdd}) {
                             fontSize: "20px",
                             color: "var(--orange)"
                         }}
-                        value={formInput.coffee_type}
+                        value={item.coffee_type_name}
                         name="coffee_type"
                         id="coffee_type"
                         className="form-select"
                         aria-label="Default select example"
                         onChange={handleInput}>
-                        <option selected>Open this select menu</option>
+                        {/*<option selected>Open this select menu</option>*/}
                         {
                             coffeeTypes?.map((item) => {
                                 return (
-                                    <option value={item?.name}>{item?.name}</option>
+                                    <option value={item?.id}>{item?.name}</option>
 
                                 );
                             })
@@ -264,17 +265,17 @@ export default function ProductEdit({submitAdd}) {
                             color: "var(--orange)"
                         }}
                         onChange={handleInput}
-                        value={formInput.caffeine}
+                        value={item.caffeine_name}
                         className="form-select"
                         name="caffeine"
                         id="caffeine"
                         aria-label="Default select example"
                         required>
-                        <option selected>Open this select menu</option>
+
                         {
                             caffeines?.map((item) => {
                                 return (
-                                    <option value={item?.name}>{item?.name}</option>
+                                    <option value={item?.id}>{item?.name}</option>
                                 );
                             })
                         }
@@ -293,17 +294,17 @@ export default function ProductEdit({submitAdd}) {
                             fontSize: "20px",
                             color: "var(--orange)"
                         }}
-                        value={formInput.creators}
+                        value={item.creators_name}
                         className="form-select"
                         onChange={handleInput}
                         name="creator"
                         id="creator"
                         aria-label="Default select example">
-                        <option selected>Open this select menu</option>
+
                         {
                             creators?.map((item, index) => {
                                 return (
-                                    <option value={item?.name}>{item?.name}</option>
+                                    <option value={item?.id}>{item?.name}</option>
 
                                 );
                             })
@@ -324,17 +325,17 @@ export default function ProductEdit({submitAdd}) {
                             fontSize: "20px",
                             color: "var(--orange)"
                         }}
-                        value={formInput.origins}
+                        value={item.origins_name}
                         className="form-select"
                         onChange={handleInput}
                         name="origin"
                         id="origin"
                         aria-label="Default select example">
-                        <option value="">Open this select menu</option>
+
                         {
                             origins?.map((item, index) => {
                                 return (
-                                    <option value={item?.name}>{item?.name}</option>
+                                    <option value={item?.id}>{item?.name}</option>
 
                                 );
                             })
@@ -355,17 +356,17 @@ export default function ProductEdit({submitAdd}) {
                             fontSize: "20px",
                             color: "var(--orange)"
                         }}
-                        value={formInput.roastingDegrees}
+                        value={item.roastingDegrees_name}
                         onChange={handleInput}
                         name="roastingDegree"
                         id="roastingDegree"
                         className="form-select"
                         aria-label="Default select example">
-                        <option selected>Open this select menu</option>
+
                         {
                             roastingDegrees?.map((item, index) => {
                                 return (
-                                    <option value={item?.name}>{item?.name}</option>
+                                    <option value={item?.id}>{item?.name}</option>
 
                                 );
                             })
@@ -388,7 +389,7 @@ export default function ProductEdit({submitAdd}) {
                         className="form-select"
                         name="price"
                         aria-label="Default select example">
-                        <option selected>Open this select menu</option>
+
                         {
                             creators?.map((item, index) => {
                                 return (

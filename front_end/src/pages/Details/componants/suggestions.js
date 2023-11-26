@@ -11,7 +11,7 @@ export default function Suggestions(props) {
       const data = await Samilar(product);
       window.scrollTo({
         top: 0,
-        behavior:"auto",
+        behavior: "auto",
       });
       setSamilars(data);
     };
@@ -20,7 +20,8 @@ export default function Suggestions(props) {
 
   return (
     <>
-      <div className="mt-3"
+      <div
+        className="mt-3"
         style={{
           display: "flex",
           flexDirection: "column",
@@ -34,11 +35,8 @@ export default function Suggestions(props) {
           <div className="row row-cols-1 row-cols-md-2 row-cols-xl-3 g-4 justify-content-center align-items-center w-100 h-100">
             {samilars?.length > 0 ? (
               samilars.map((product, index) => (
-                <div>
-                  <div
-                    className="col d-flex justify-content-center"
-                    key={product+index}
-                  >
+                <div key={product.name + product.id + index}>
+                  <div className="col d-flex justify-content-center">
                     <Card item={product} />
                   </div>
                 </div>

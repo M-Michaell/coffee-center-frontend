@@ -28,7 +28,7 @@ export default function ProductForm({submitAdd}) {
         creator: '',
         roasting_degree: '',
         origin: '',
-        discount: '20',
+        discount: '1',
     });
 
 
@@ -83,10 +83,6 @@ export default function ProductForm({submitAdd}) {
         form_data.append('origin', formInput?.origin);
         form_data.append('discount', formInput?.discount);
 
-        for (const entry of form_data.entries()) {
-             console.log(entry);
-        }
-        console.log(formInput);
         try {
             const res = await axiosInstance.post('products/', form_data, {
                 headers: {
@@ -240,11 +236,11 @@ export default function ProductForm({submitAdd}) {
                         className="form-select"
                         aria-label="Default select example"
                         onChange={handleInput}>
-                        <option selected>Open this select menu</option>
+
                         {
                             coffeeTypes?.map((item) => {
                                 return (
-                                    <option value={item?.name}>{item?.name}</option>
+                                    <option value={item?.id}>{item?.name}</option>
 
                                 );
                             })
@@ -272,11 +268,11 @@ export default function ProductForm({submitAdd}) {
                         id="caffeine"
                         aria-label="Default select example"
                         required>
-                        <option selected>Open this select menu</option>
+
                         {
                             caffeines?.map((item) => {
                                 return (
-                                    <option value={item?.name}>{item?.name}</option>
+                                    <option value={item?.id}>{item?.name}</option>
                                 );
                             })
                         }
@@ -301,11 +297,11 @@ export default function ProductForm({submitAdd}) {
                         name="creator"
                         id="creator"
                         aria-label="Default select example">
-                        <option selected>Open this select menu</option>
+
                         {
                             creators?.map((item, index) => {
                                 return (
-                                    <option value={item?.name}>{item?.name}</option>
+                                    <option value={item?.id}>{item?.name}</option>
 
                                 );
                             })
@@ -332,11 +328,11 @@ export default function ProductForm({submitAdd}) {
                         name="origin"
                         id="origin"
                         aria-label="Default select example">
-                        <option value="">Open this select menu</option>
+
                         {
                             origins?.map((item, index) => {
                                 return (
-                                    <option value={item?.name}>{item?.name}</option>
+                                    <option value={item?.id}>{item?.name}</option>
 
                                 );
                             })
@@ -363,11 +359,11 @@ export default function ProductForm({submitAdd}) {
                         id="roastingDegree"
                         className="form-select"
                         aria-label="Default select example">
-                        <option selected>Open this select menu</option>
+
                         {
                             roastingDegrees?.map((item, index) => {
                                 return (
-                                    <option value={item?.name}>{item?.name}</option>
+                                    <option value={item?.id}>{item?.name}</option>
 
                                 );
                             })

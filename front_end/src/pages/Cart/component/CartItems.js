@@ -4,6 +4,7 @@ import Oneproduct from "./oneproduct";
 import { confirmOrder } from "../../../apis/cartOperations/confirm";
 import { useNavigate } from "react-router-dom";
 import { EmptyCart } from "../../../apis/cartOperations/emptyCart";
+import { toast } from "react-toastify";
 
 function CartItems(props) {
   const { Delivery, payment, DeliveryAddress, setMust, user } = props;
@@ -35,14 +36,26 @@ function CartItems(props) {
     const must = [];
 
     if (!cart || cart.length === 0) {
+      toast.error("You should add items first", {
+        position: "top-center",
+        autoClose: 3000,
+      });
       must.push({ message: "You should add items first" });
     }
 
     if (!payment) {
+      toast.error("You must choose a payment method", {
+        position: "top-center",
+        autoClose: 3000,
+      });
       must.push({ message: "You must choose a payment method" });
     }
 
     if (!DeliveryAddress) {
+      toast.error("You must choose an address first", {
+        position: "top-center",
+        autoClose: 3000,
+      });
       must.push({ message: "You must choose an address first" });
     }
 

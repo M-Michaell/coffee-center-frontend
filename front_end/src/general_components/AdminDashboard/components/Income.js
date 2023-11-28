@@ -59,8 +59,8 @@ export default function Income({ user }) {
   return (
     <div className="">
       <div className="">
-        <h1 className="text-start fw-bold mb-3" style={{ color: "white" }}>
-          Your Orders
+        <h1 className="text-start fw-bold mb-3" style={{ color: "white" ,color: "var(--fff)"  }}>
+         Total income
         </h1>
 
         <div className="pt-5 pb-3 me-0 d-flex flex-row border-2">

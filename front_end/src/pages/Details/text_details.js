@@ -15,10 +15,6 @@ export default function TextDetails() {
   useEffect(() => {
     const fetchData = async () => {
       const data = await ProductDetails(id);
-      // window.scrollTo({
-      //   top: 0,
-      //   behavior:"instant"
-      // });
       setProduct(data);
 
     };
@@ -32,7 +28,7 @@ export default function TextDetails() {
           <div className="container pt-5 ">
             <div className="row">
               <div className="col col-xl-6 d-flex flex-column align-items-center mb-4">
-                {product.image && <DetailsImage image={product.image} />}
+                {product.image && <DetailsImage image={product.image} item={product}/>}
 
                 <div
                   className="panel-group text-start rounded-1 mt-5 "

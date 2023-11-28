@@ -2,7 +2,6 @@ import { toast } from "react-toastify";
 import { axiosInstance } from "../config";
 
 export function increaseAPI(data, session) {
-    // console.log("Increasing",data)
     axiosInstance.put(`cart/shopping-sessions/${session}/update_cart_item/`, data)
       .then((response) => {
         toast.success('Quantity increased successfully', 

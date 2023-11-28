@@ -16,11 +16,12 @@ import { toast } from "react-toastify";
 import { Button, FormControl } from "react-bootstrap";
 import { logout } from "../../store/slices/auth";
 import { useDispatch } from "react-redux";
-import AdminDashboard from "../AdminDashboard/adminhome";
+import { Badge } from "@mui/material";
 
 export default function Navbarr() {
   const dispatch = useDispatch();
-  const wishlistCount = useSelector((state) => state.wishlist.count);
+  const wishlistCount = useSelector((state) => state.wishlist.products.length);
+  const cartCount = useSelector((state) => state.cart.cartItems.length);
   const user = useSelector((state) => state.auth.userInfo);
   const [searchTerm, setSearchTerm] = useState("");
   const handleSearchChange = (e) => {
@@ -28,8 +29,7 @@ export default function Navbarr() {
   };
   const navigate = useNavigate();
   const handleWishlistClick = () => {
-    // Navigate to profile page with activeComponent set to 'wishlist'
-    navigate("/profile", { state: { activeComponent: "wishlist" } });
+    navigate("/profile/", { state: { activeComponent: "wishlist" } });
   };
   const handleSearchClick = () => {
     if (searchTerm.trim() === "") {
@@ -67,7 +67,11 @@ export default function Navbarr() {
     if (user) {
       return (
         <>
-          <NavLink to="/profile" className="m-3 text-light fs-5 orange">
+          <NavLink
+            to="/profile"
+            className="m-3 fs-5 "
+            style={{ color: "var(--orange)" }}
+          >
             {user.username}
           </NavLink>
 
@@ -113,7 +117,6 @@ export default function Navbarr() {
             >
               Coffee<span style={{ color: "var(--orange)" }}>Geek</span>
             </NavLink>
-           
           </div>
 
           <Navbar.Toggle
@@ -140,7 +143,7 @@ export default function Navbarr() {
                 Personal Area
               </Nav.Link>
             </Nav> */}
-             {user?.is_staff ? (
+            {user?.is_staff ? (
               <NavLink
                 to="/admin"
                 className="btn border border-warning rounded-pill mx-auto "
@@ -186,7 +189,10 @@ export default function Navbarr() {
               >
                 <FontAwesomeIcon icon={faHeart} className="me-1 fs-4" />
                 {wishlistCount > 0 && (
-                  <span className="badge rounded-pill bg-danger position-absolute top-0 start-100 translate-middle">
+                  <span
+                    className="badge rounded-pill position-absolute top-0 start-100 translate-middle"
+                    style={{ backgroundColor: "var(--orange)" }}
+                  >
                     {wishlistCount}
                     <span className="visually-hidden">wishlist items</span>
                   </span>
@@ -197,7 +203,13 @@ export default function Navbarr() {
                 onClick={handleCart}
                 style={{ color: "var(--orange)" }}
               >
-                <FontAwesomeIcon icon={faCartShopping} className="ms-3 fs-4" />
+            
+                <Badge color="warning" badgeContent={cartCount} max={9}>
+                  <FontAwesomeIcon
+                    icon={faCartShopping}
+                    className="ms-3 fs-4"
+                  />
+                </Badge>
               </NavLink>
             </div>
             {renderAuthLinks()}

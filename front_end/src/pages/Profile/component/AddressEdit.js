@@ -54,6 +54,8 @@ export default function AddressEdit() {
     "Suez",
   ];
 
+  window.location.reload();
+
   const validateForm = () => {
     let isValid = true;
 

@@ -1,6 +1,4 @@
 import { createSlice } from "@reduxjs/toolkit";
-import { useDispatch, useSelector } from "react-redux";
-import { axiosInstance } from "../../apis/config";
 import { increaseAPI } from "../../apis/cartOperations/increase";
 import { decreaseAPI } from "../../apis/cartOperations/decrease";
 import { deleteAPI } from "../../apis/cartOperations/remove";
@@ -24,7 +22,6 @@ const cart = createSlice({
 
     addToCart: (state, action) => {
       const { product,session } = action.payload;
-      console.log(product);
 
       if (state.cartItems.length < state.maxItems) {
         const item={ product: { ...product }, quantity: 1 }
@@ -89,7 +86,6 @@ const cart = createSlice({
 
     decreaceQuantity: (state, action) => {
       const { product, session } = action.payload;
-      console.log("product",action.payload);
       const exsistItem = state.cartItems.find(
         (item) => item.product.id === product.product.id
       );

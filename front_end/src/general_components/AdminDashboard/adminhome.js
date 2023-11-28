@@ -1,5 +1,5 @@
 // ProfilePage.js
-import React, { useState, startTransition, useEffect } from "react";
+import React, { useState, startTransition } from "react";
 import { Link } from "react-router-dom";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import {
@@ -15,9 +15,8 @@ import {
   faDollar,
 } from "@fortawesome/free-solid-svg-icons";
 import "./admin.css";
-import { useUserData } from "../../apis/profile";
 import { useSelector } from "react-redux";
-import { logout, deleteUser } from "../../store/slices/auth";
+import { logout } from "../../store/slices/auth";
 import { useDispatch } from "react-redux";
 
 const Caffeine = React.lazy(() => import("./components/CaffeinesComponent"));
@@ -61,9 +60,6 @@ export default function AdminDashboard() {
 
   const RenderComponent = componentMap[activeComponent];
 
-  // if (!detailsData || !detailsData.Users || detailsData.Users.length === 0) {
-  //   return <p>Loading...</p>;
-  // }
   const user = useSelector((state) => state.auth.userInfo);
 
   return (

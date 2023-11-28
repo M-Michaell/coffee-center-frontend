@@ -26,6 +26,7 @@ const AddressForm = React.lazy(() => import("../pages/Profile/component/AddressF
 const AddressEdit = React.lazy(() => import("../pages/Profile/component/AddressEdit"))
 const EditForm=React.lazy(()=>import("../pages/Auth/EditForm"));
 const AdminDashboard = React.lazy(() => import("../general_components/AdminDashboard/adminhome"));
+const UserDetailsComponent = React.lazy(() => import("../general_components/AdminDashboard/components/UsersDetails")) 
 function Router() {
     return (
         <Suspense fallback={<Loader/>}>
@@ -80,6 +81,7 @@ function Router() {
                 <Route path="/addressform/:id" element={<AddressEdit/>}/>
                 <Route path="/addressform" element={<AddressForm/>}/>
                 <Route path="/paypal/" element={<Checkout />} />
+                <Route path="/admin/user/:id" element={<UserDetailsComponent />} />
             </Routes>
         </Suspense>
     );

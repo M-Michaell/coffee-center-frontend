@@ -59,6 +59,9 @@ export default function Card({ item }) {
       disPatch(decreaceQuantity({ product, session }));
       setCartVisibility(false);
     }
+    if (isProductInWishlist) {
+      disPatch(removeFromWishlist(item.id));
+    }
   };
   const handleIncrease = () => {
     const product = existing;
@@ -92,14 +95,25 @@ export default function Card({ item }) {
   };
 
   const handleHeart = () => {
+    if (!user) {
+      // User is not logged in, handle accordingly
+      return;
+    }
+  
+    const wishlistData = {
+      user: user.id,
+      product: item.id,
+    };
+  
     if (isProductInWishlist) {
       disPatch(removeFromWishlist(item.id));
     } else {
-      disPatch(addToWishlist(item));
+      disPatch(addToWishlist(wishlistData));
     }
-
+  
     setHeartClicked(!isHeartClicked);
   };
+  
 
   const handleDetails = (id) => {
     navigate(`/product/details/${item.id}`);

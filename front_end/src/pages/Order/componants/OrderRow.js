@@ -19,8 +19,21 @@ export default function OrderRow({ count, product, quantity,price,discount}) {
       </td>
       <td><a onClick={handelProductDetails} id={product.id}>{product.name}</a></td>
       <td>{quantity}</td>
-      <td><span className="px-2 text-decoration-line-through text-secondary">{price}</span>{priceWithDiscount}</td>
-      <td><span className="px-2 text-decoration-line-through text-secondary">{price*quantity}</span>{totalPriceWithDiscount}</td>
+      {discount == 0 ? (
+                <>
+                  <td>{priceWithDiscount}</td>
+                  <td>{totalPriceWithDiscount}</td>
+                </>
+
+                ):(
+                  <>
+                    <td><span className="px-2 text-decoration-line-through text-secondary">{price}</span>{priceWithDiscount}</td>
+                    <td><span className="px-2 text-decoration-line-through text-secondary">{price*quantity}</span>{totalPriceWithDiscount}</td>
+                  </>
+
+                )}
+      {/* <td><span className="px-2 text-decoration-line-through text-secondary">{price}</span>{priceWithDiscount}</td>
+      <td><span className="px-2 text-decoration-line-through text-secondary">{price*quantity}</span>{totalPriceWithDiscount}</td> */}
       
     </tr>
   );

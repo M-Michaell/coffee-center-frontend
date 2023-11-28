@@ -59,3 +59,13 @@ export const totalIncomeApi = (userID,startDate,endDate) => {
     },
   });
 };
+
+
+export const getOrderDetail = (userID) => {
+  return axios.create({
+    baseURL: 'http://127.0.0.1:8000/order/orders/',
+    params: {
+      'userID': userID
+    }
+  });
+};

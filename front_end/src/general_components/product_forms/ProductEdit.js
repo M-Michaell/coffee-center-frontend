@@ -5,7 +5,7 @@ import {useNavigate, useParams} from "react-router-dom";
 import {register, reset} from "../../store/slices/auth";
 import {toast} from 'react-toastify'
 import Loader from "../../general_components/Loader/Loader";
-import {CreatorsData, CaffeinesData, CoffeeTypes, RoastingDegrees, Origins} from "../../apis/add_categories";
+import {CreatorsData, CaffeinesData, CoffeeTypes, RoastingDegrees, Origins, Discounts} from "../../apis/add_categories";
 
 export default function ProductEdit({submitAdd, item}) {
     console.log("mohammedhanaa", item);
@@ -14,6 +14,8 @@ export default function ProductEdit({submitAdd, item}) {
     const coffeeTypes = CoffeeTypes();
     const roastingDegrees = RoastingDegrees();
     const origins = Origins();
+    const discounts = Discounts();
+
     const {user, isLoading, isError, isSuccess, message} = useSelector((state) => state.auth);
     const dispatch = useDispatch();
     const navigate = useNavigate()
@@ -29,7 +31,7 @@ export default function ProductEdit({submitAdd, item}) {
         creator: item.creator,
         roasting_degree: item.roasting_degree,
         origin: item.origin,
-        discount: '1',
+        discount: item.discount,
     });
 
 
@@ -63,6 +65,9 @@ export default function ProductEdit({submitAdd, item}) {
         }
         if (e.target.name === 'image') {
             setFormInput({...formInput, image: e.target.files[0]});
+        }
+        if (e.target.name === 'discount') {
+            setFormInput({...formInput, discount: e.target.value});
         }
 
     };
@@ -373,11 +378,10 @@ export default function ProductEdit({submitAdd, item}) {
                     </select>
                 </div>
 
-                <div className="col-md-4 w-75">
-                    <label htmlFor="validationDefault02"
+                 <div className="col-md-4 w-75">
+                    <label htmlFor="discount"
                            style={{color: "var(--gray1)", fontSize: "18px"}}
                            className="form-label text-start mt-2">Discount</label>
-
                     <select
                         style={{
                             backgroundColor: "var(--gray2)",
@@ -385,14 +389,16 @@ export default function ProductEdit({submitAdd, item}) {
                             fontSize: "20px",
                             color: "var(--orange)"
                         }}
+                        value={formInput.discount}
+                        onChange={handleInput}
                         className="form-select"
-                        name="price"
+                        name="discount"
+                        id="discount"
                         aria-label="Default select example">
-
                         {
-                            creators?.map((item, index) => {
+                            discounts?.map((item, index) => {
                                 return (
-                                    <option value={item?.name}>{item?.name}</option>
+                                    <option value={item?.id}>{item?.name}</option>
                                 );
                             })
                         }

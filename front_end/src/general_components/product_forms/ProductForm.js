@@ -5,7 +5,7 @@ import {useNavigate} from "react-router-dom";
 import {register, reset} from "../../store/slices/auth";
 import {toast} from 'react-toastify'
 import Loader from "../../general_components/Loader/Loader";
-import {CreatorsData, CaffeinesData, CoffeeTypes, RoastingDegrees, Origins} from "../../apis/add_categories";
+import {CreatorsData, CaffeinesData, CoffeeTypes, RoastingDegrees, Origins, Discounts} from "../../apis/add_categories";
 
 export default function ProductForm({submitAdd}) {
     const creators = CreatorsData();
@@ -13,6 +13,7 @@ export default function ProductForm({submitAdd}) {
     const coffeeTypes = CoffeeTypes();
     const roastingDegrees = RoastingDegrees();
     const origins = Origins();
+    const discounts = Discounts();
     const {user, isLoading, isError, isSuccess, message} = useSelector((state) => state.auth);
     const dispatch = useDispatch();
     const navigate = useNavigate()
@@ -28,7 +29,7 @@ export default function ProductForm({submitAdd}) {
         creator: '',
         roasting_degree: '',
         origin: '',
-        discount: '1',
+        discount: '',
     });
 
 
@@ -62,6 +63,9 @@ export default function ProductForm({submitAdd}) {
         }
         if (e.target.name === 'image') {
             setFormInput({...formInput, image: e.target.files[0]});
+        }
+        if (e.target.name === 'discount') {
+            setFormInput({...formInput, discount: e.target.value});
         }
 
     };
@@ -248,7 +252,6 @@ export default function ProductForm({submitAdd}) {
                     </select>
                 </div>
 
-
                 <div className="col-md-4 w-75">
                     <label htmlFor="Caffeine"
                            style={{color: "var(--gray1)", fontSize: "18px"}}
@@ -322,7 +325,7 @@ export default function ProductForm({submitAdd}) {
                             fontSize: "20px",
                             color: "var(--orange)"
                         }}
-                        value={formInput.origins}
+                        value={formInput.origin}
                         className="form-select"
                         onChange={handleInput}
                         name="origin"
@@ -330,7 +333,7 @@ export default function ProductForm({submitAdd}) {
                         aria-label="Default select example">
 
                         {
-                            origins?.map((item, index) => {
+                            origins?.map((item) => {
                                 return (
                                     <option value={item?.id}>{item?.name}</option>
 
@@ -371,31 +374,32 @@ export default function ProductForm({submitAdd}) {
                     </select>
                 </div>
 
-                {/*<div className="col-md-4 w-75">*/}
-                {/*    <label htmlFor="validationDefault02"*/}
-                {/*           style={{color: "var(--gray1)", fontSize: "18px"}}*/}
-                {/*           className="form-label text-start mt-2">Discount</label>*/}
-
-                {/*    <select*/}
-                {/*        style={{*/}
-                {/*            backgroundColor: "var(--gray2)",*/}
-                {/*            borderColor: "var(--orange)",*/}
-                {/*            fontSize: "20px",*/}
-                {/*            color: "var(--orange)"*/}
-                {/*        }}*/}
-                {/*        className="form-select"*/}
-                {/*        name="price"*/}
-                {/*        aria-label="Default select example">*/}
-                {/*        <option selected>Open this select menu</option>*/}
-                {/*        {*/}
-                {/*            creators?.map((item, index) => {*/}
-                {/*                return (*/}
-                {/*                    <option value={item?.name}>{item?.name}</option>*/}
-                {/*                );*/}
-                {/*            })*/}
-                {/*        }*/}
-                {/*    </select>*/}
-                {/*</div>*/}
+                <div className="col-md-4 w-75">
+                    <label htmlFor="discount"
+                           style={{color: "var(--gray1)", fontSize: "18px"}}
+                           className="form-label text-start mt-2">Discount</label>
+                    <select
+                        style={{
+                            backgroundColor: "var(--gray2)",
+                            borderColor: "var(--orange)",
+                            fontSize: "20px",
+                            color: "var(--orange)"
+                        }}
+                        value={formInput.discount}
+                        onChange={handleInput}
+                        className="form-select"
+                        name="discount"
+                        id="discount"
+                        aria-label="Default select example">
+                        {
+                            discounts?.map((item, index) => {
+                                return (
+                                    <option value={item?.id}>{item?.name}</option>
+                                );
+                            })
+                        }
+                    </select>
+                </div>
 
 
                 <div className="col-12">

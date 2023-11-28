@@ -6,8 +6,8 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faHeartCircleXmark } from '@fortawesome/free-solid-svg-icons';
 
 export default function WishlistComponent() {
-  const wishlist = useSelector(state => state.wishlist.products);
-
+  const wishlist = useSelector((state) => state.wishlist.products);
+  
   return (
     <div className="text-light text-center">
       <h1 className="text-start fw-bold">Your Exceptional Coffees</h1>
@@ -33,11 +33,14 @@ export default function WishlistComponent() {
         </div>
       ) : (
         <div className="row row-cols-1 row-cols-md-3 g-4 d-flex justify-content-center">
-          {wishlist.map(product => (
-            <div key={product.id} className="col-12 col-sm-6 col-md-4 p-2">
-              <Card item={product} />
-            </div>
-          ))}
+{wishlist.map(product => {
+  console.log(product); // Log each product to inspect its properties
+  return (
+    <div key={product.id} className="col-12 col-sm-6 col-md-4 p-2">
+      <Card item={product} />
+    </div>
+  );
+})}
         </div>
       )}
     </div>

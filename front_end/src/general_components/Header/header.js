@@ -14,8 +14,9 @@ import { NavLink, useNavigate } from "react-router-dom";
 import { useSelector } from "react-redux";
 import { toast } from "react-toastify";
 import { Button, FormControl } from "react-bootstrap";
-import {logout} from "../../store/slices/auth";
-import {useDispatch}  from "react-redux";
+import { logout } from "../../store/slices/auth";
+import { useDispatch } from "react-redux";
+import AdminDashboard from "../AdminDashboard/adminhome";
 
 export default function Navbarr() {
   const dispatch = useDispatch();
@@ -112,19 +113,7 @@ export default function Navbarr() {
             >
               Coffee<span style={{ color: "var(--orange)" }}>Geek</span>
             </NavLink>
-            {
-              user?.is_staff ?
-              <NavLink
-              to="/admin"
-              className="btn border border-warning rounded-pill ms-5"
-              style={{ fontFamily: "Brush Script, cursive" }}
-            >
-              add product
-              </NavLink> : <div></div>
-
-            }
-
-
+           
           </div>
 
           <Navbar.Toggle
@@ -151,9 +140,20 @@ export default function Navbarr() {
                 Personal Area
               </Nav.Link>
             </Nav> */}
+             {user?.is_staff ? (
+              <NavLink
+                to="/admin"
+                className="btn border border-warning rounded-pill mx-auto "
+                style={{ fontFamily: "Brush Script, cursive" }}
+              >
+                AdminDashboard
+              </NavLink>
+            ) : (
+              <div></div>
+            )}
 
             <div
-              className="d-flex ms-auto customSearch"
+              className="d-flex ms-auto ms-5 customSearch"
               style={{ maxWidth: "400px" }}
             >
               <FormControl
@@ -178,15 +178,20 @@ export default function Navbarr() {
               +20 120 912 2212
             </strong>
             <div className="d-flex my-3">
-            <NavLink to="/profile" onClick={handleWishlistClick} style={{ color: "var(--orange)" }} className="position-relative">
-  <FontAwesomeIcon icon={faHeart} className="me-1 fs-4" />
-  {wishlistCount > 0 && (
-    <span className="badge rounded-pill bg-danger position-absolute top-0 start-100 translate-middle">
-      {wishlistCount}
-      <span className="visually-hidden">wishlist items</span>
-    </span>
-  )}
-</NavLink>
+              <NavLink
+                to="/profile"
+                onClick={handleWishlistClick}
+                style={{ color: "var(--orange)" }}
+                className="position-relative"
+              >
+                <FontAwesomeIcon icon={faHeart} className="me-1 fs-4" />
+                {wishlistCount > 0 && (
+                  <span className="badge rounded-pill bg-danger position-absolute top-0 start-100 translate-middle">
+                    {wishlistCount}
+                    <span className="visually-hidden">wishlist items</span>
+                  </span>
+                )}
+              </NavLink>
               <NavLink
                 to={user ? "/cart" : "/login"}
                 onClick={handleCart}

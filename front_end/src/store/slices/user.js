@@ -6,6 +6,7 @@ const userSlice = createSlice({
     addresses: [],
     payments: [],
     shoppingSession: [],
+    wishlist:[]
   },
   reducers: {
     addAddresses: (state, action) => {
@@ -17,9 +18,12 @@ const userSlice = createSlice({
     addShoppingSession: (state, action) => {
       state.shoppingSession = action.payload;
     },
+    addWishList: (state, action) => {
+      state.wishlist = action.payload;
+    },
   },
 });
 
-export const { addAddresses, addPayments, addShoppingSession } = userSlice.actions;
+export const { addAddresses, addPayments, addShoppingSession,addWishList } = userSlice.actions;
 
 export default userSlice.reducer;

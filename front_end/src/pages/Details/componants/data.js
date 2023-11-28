@@ -1,5 +1,4 @@
 import { useEffect, useState } from "react";
-import MyCheckBox from "./checkbox";
 import RatingSize from "./createRating";
 import Map from "./map";
 import Rate2 from "./rate";
@@ -27,7 +26,7 @@ export default function MoreData({ product }) {
     };
 
     fetchData();
-  }, [user, product.id, rateValue]);
+  }, [user, product, rateValue]);
 
   const newPrice = Math.ceil(
     (product.price * (100 - product.discount_percentage)) / 100

@@ -1,8 +1,13 @@
-// UserDataAPI.js
 import { axiosInstance } from "../config";
 import { toast } from "react-toastify";
-import { addAddresses, addPayments, addShoppingSession } from "../../store/slices/user";
+import {
+  addAddresses,
+  addPayments,
+  addShoppingSession,
+  addWishList,
+} from "../../store/slices/user";
 import { initialCart } from "../../store/slices/cart";
+import { initialWishList } from "../../store/slices/wishlist";
 
 export async function UserDataAPI(userId, dispatch) {
   try {
@@ -12,17 +17,23 @@ export async function UserDataAPI(userId, dispatch) {
     const addresses = userData.addresses;
     const payments = userData.payments;
     const shoppingSession = userData.session;
-
+    const wishlist = userData.wishlist;
     dispatch(addAddresses(addresses));
     dispatch(addPayments(payments));
     dispatch(addShoppingSession(shoppingSession));
+    dispatch(addWishList(wishlist));
 
     const transformedCartItems = shoppingSession.cart_items.map((cartItem) => ({
       product: cartItem.product,
-      quantity: cartItem.quantity >= cartItem.product.quantity
-        ? cartItem.product.quantity
-        : cartItem.quantity,
+      quantity:
+        cartItem.quantity >= cartItem.product.quantity
+          ? cartItem.product.quantity
+          : cartItem.quantity,
     }));
+
+    const wishlistItems = wishlist.wishlist_item;
+    const wishlistProducts = wishlistItems.map((item) => item.product);
+    dispatch(initialWishList(wishlistProducts));
 
     dispatch(initialCart(transformedCartItems));
   } catch (error) {

@@ -46,7 +46,7 @@ export default function Origin() {
             <div>
                 <div className="d-flex justify-content-between">
                     <h1 className=""
-                        style={{marginLeft:"100px"}}
+                        style={{marginLeft:"100px",color: "var(--fff)" }}
 
                     >Origin</h1>
                     <button className="btn border border-warning rounded-pill mb-5"

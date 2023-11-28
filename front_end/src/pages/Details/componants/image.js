@@ -1,20 +1,19 @@
-import React, { useState } from "react";
+import Toggle from "../../../general_components/Card/toggle";
 
-export default function DetailsImage({image}) {
-  const [isHeartClicked, setHeartClicked] = useState(false);
-
-  const handleHeart = () => {
-    setHeartClicked(!isHeartClicked);
-  };
+export default function DetailsImage({ image, item }) {
 
   return (
     <div className="p-auto position-relative" style={{ width: "500px" }}>
-      <i
-        className={`bi ${isHeartClicked ? "bi-heart-fill" : "bi-heart"} position-absolute`}
-        style={{ top: "0px", right: "0px", color: "#BD712B", fontSize: "30px" }}
-        onClick={handleHeart}
-      ></i>
       <img src={`http://127.0.0.1:8000${image}`} alt="" />
+      <div
+        className=" position-absolute fs-2"
+        style={{
+          top: "0px",
+          right: "0px",
+        }}
+      >
+        <Toggle item={item} />
+      </div>
     </div>
   );
 }

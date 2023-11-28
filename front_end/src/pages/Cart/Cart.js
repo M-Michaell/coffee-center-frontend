@@ -1,12 +1,11 @@
 import CartItems from "./component/CartItems";
 import "./main.css";
-import map from "../../assets/map.png";
 import { useState } from "react";
 import { useSelector } from "react-redux";
 import Address from "./component/address";
 import Payment from "./component/payment";
 import Messages from "./component/errorMessages";
-import { Link, useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import Empty from "./component/empty";
 
 function Cart() {
@@ -46,13 +45,13 @@ function Cart() {
             className=" orange mb-5"
             style={{ backgroundColor: "var(--orange)", height: "3px" }}
           />
-          <div className="mb-5">
+          {/* <div className="mb-5">
             {must?.map((item, index) => (
               <div key={index}>
                 <Messages item={item} must={must} setMust={setMust} />
               </div>
             ))}
-          </div>
+          </div> */}
           <div className="row g-4">
             {/* Cart Items (order-1 on small screens) */}
             <div className="col-xl-5 col order-2 order-md-2">

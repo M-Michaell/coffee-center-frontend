@@ -10,17 +10,35 @@ import { useSelector } from "react-redux";
 
 export default function Order() {
   const { order_id } = useParams();
-  console.log();
   const user = useSelector((state) => state.auth.userInfo);
   const orderDetailsInstance = OrderDetailsApi(order_id,user.id);
   const [orderDetails, setOrderDetails] = useState(null);
+  // let [endIN,setEndIN] = useState(null)
+  const [endIN,setEndIN] = useState('null')
+
+  
 
   useEffect(() => {
     const fetchData = async () => {
       try {
         const response = await orderDetailsInstance.get();
         setOrderDetails(response.data);
-        console.log(response.data);
+        let expired_at = response.data.expired_at
+
+        let originalDate = new Date(expired_at); 
+
+        let day = originalDate.getUTCDate();
+        let month = originalDate.getUTCMonth(); 
+        let year = originalDate.getUTCFullYear();
+        let hours = originalDate.getUTCHours();
+        let minutes = originalDate.getUTCMinutes();
+
+        let formattedDate = `${day}-${month < 10 ? '0' + month : month}-${year} at ${hours}:${minutes < 10 ? '0' + minutes : minutes}:00`;
+
+        setEndIN(formattedDate)
+
+        // setEndIN(orderDetails.expired_at)
+        
       } catch (error) {
         console.error("Error fetching order details:", error);
       }
@@ -44,6 +62,7 @@ export default function Order() {
           orderDetails.payment_method.status == "NP" ? (
             <div className="d-flex align-items-center flex-column pt-5 mt-5">
               <h1 className="orange">Confirm Your Payment</h1>
+              <span>Please confirm payment before {endIN} or your order will be expired</span>
               <Checkout order={orderDetails} />
             </div>
           ) : (

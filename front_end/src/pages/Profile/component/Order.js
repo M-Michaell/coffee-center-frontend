@@ -46,7 +46,7 @@ export default function OrderComponent({order}){
           <div className="col-4 text-center">
             <button className="btn btn-secondary" onClick={handleOrderDetails}>view order details</button>
           </div>
-        </div>
+        </div>  
         {/* <div className="card-body text-start row">
           <div className="col-8">
             <img src="" alt="order item image" />

@@ -51,7 +51,7 @@ export default function Account({ location = {} }) {
   //   return <p>Loading...</p>;
   // }
   const user = useSelector((state) => state.auth.userInfo);
-
+  const userId = user?.id;
   return (
     <div className="container">
       <div className="row">
@@ -161,7 +161,7 @@ export default function Account({ location = {} }) {
           </a>
         </div>
         <div className="col-lg-10 shadow-lg p-3 mt-3 mb-5 p-4">
-          <RenderComponent user={user} />
+          <RenderComponent user={user} userId={userId}/>
         </div>
       </div>
     </div>

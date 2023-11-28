@@ -17,12 +17,12 @@ export function useUserData() {
   return { detailsData };
 }
 
-export const useAddressData = () => {
+export const useAddressData = (userId) => {
   const [addressData, setAddressData] = useState();
 
   const fetchData = async () => {
     try {
-      const response = await axiosInstance.get('/accounts/api/address');
+      const response = await axiosInstance.get(`/accounts/api/address/${userId}`);
       setAddressData(response.data.Users);
     } catch (error) {
       console.error('Error fetching address data:', error);
@@ -31,7 +31,7 @@ export const useAddressData = () => {
 
   useEffect(() => {
     fetchData();
-  }, []); // Run the effect only once
+  }, [userId]); // Now, the effect will run whenever userId changes
 
   const refetchAddresses = () => {
     fetchData();
@@ -39,6 +39,16 @@ export const useAddressData = () => {
 
   return { addressData, refetchAddresses };
 };
+
+export const deleteAddress = async (userId, addressId) => {
+  try {
+    const response = await axiosInstance.delete(`/accounts/api/address/${userId}/${addressId}`);
+    return response.data;
+  } catch (error) {
+    throw error;
+  }
+};
+
 
 export function usePaymentData() {
   const [paymentData, setPaymentData] = useState();
@@ -59,14 +69,56 @@ export function usePaymentData() {
 
 
 
-export const deleteAddress = async (id) => {
-  try {
-    const response = await axiosInstance.delete(`/accounts/api/address/${id}`);
-    return response.data;
-  } catch (error) {
-    throw error;
-  }
+// export const deleteAddress = async (id) => {
+//   try {
+//     const response = await axiosInstance.delete(`/accounts/api/address/${id}`);
+//     return response.data;
+//   } catch (error) {
+//     throw error;
+//   }
+// };
+
+
+
+// specified hooks
+
+export const useUserDataSpecific = (id) => {
+  const [detailsData, setDetailsData] = useState();
+
+  useEffect(() => {
+    if (id) {
+      axiosInstance
+        .get(`/accounts/api/${id}`)
+        .then((res) => {
+          setDetailsData(res.data.User);
+          console.log(res);
+        })
+        .catch((err) => console.log(err));
+    }
+  }, [id]);
+
+  return { detailsData };
 };
 
+export const useAddressDataSpecific = (userId) => {
+  const [addressData, setAddressData] = useState();
 
+  const fetchData = async () => {
+    try {
+      const response = await axiosInstance.get(`/accounts/api/address/${userId}`);
+      setAddressData(response.data.Users); // Update this line
+    } catch (error) {
+      console.error('Error fetching address data:', error);
+    }
+  };
 
+  useEffect(() => {
+    fetchData();
+  }, [userId]);
+
+  const refetchAddresses = () => {
+    fetchData();
+  };
+
+  return { addressData, refetchAddresses };
+};

@@ -10,8 +10,8 @@ import { useSelector } from "react-redux";
 
 export default function Order() {
   const { order_id } = useParams();
-  console.log();
   const user = useSelector((state) => state.auth.userInfo);
+  console.log('user',user)
   const orderDetailsInstance = OrderDetailsApi(order_id,user.id);
   const [orderDetails, setOrderDetails] = useState(null);
 

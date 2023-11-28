@@ -157,9 +157,12 @@ export default function Card({ item }) {
             >
               {item?.desc}
             </p>
-            <p className="text-decoration-line-through gray1">
-              {item.price}EGP
-            </p>
+            {
+              item.discount_percentage != 0 ?
+              <p className="text-decoration-line-through gray1">{item.price}EGP</p>
+            :
+                  <></>
+            }
 
             {item.quantity > 0 ? (
               isCartVisible ? (

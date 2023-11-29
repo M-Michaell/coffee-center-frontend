@@ -43,7 +43,10 @@ export default function Rates() {
         </thead>
         <tbody>
           {allProducts?.map((item, index) => (
-            <tr key={item.name + item.id}>
+            <tr
+              key={item.name + item.id}
+              style={{ boxShadow: "0 0 10px var(--orange)" }}
+            >
               <td style={{ color: "var(--gray1)", fontSize: "20px" }}>
                 {item.id}
               </td>

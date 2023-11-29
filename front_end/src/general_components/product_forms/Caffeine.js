@@ -1,12 +1,9 @@
-import React, {useState, useEffect} from "react";
-import {useDispatch, useSelector} from 'react-redux';
+import React, {useState} from "react";
 import {axiosInstance} from "../../apis/config";
-import {useNavigate} from "react-router-dom";
 
 import {toast} from 'react-toastify'
 
 export default function CaffeineForm({submitAdd}) {
-    const navigate = useNavigate()
     const [formInput, setFormInput] = useState({
 
         name: "",
@@ -23,6 +20,7 @@ export default function CaffeineForm({submitAdd}) {
     const handleSubmit = async (e) => {
         e.preventDefault();
         try {
+            // eslint-disable-next-line
             const res = await axiosInstance.post('caffeines/', formInput);
             toast.success("Add caffeine");
             window.location.reload();

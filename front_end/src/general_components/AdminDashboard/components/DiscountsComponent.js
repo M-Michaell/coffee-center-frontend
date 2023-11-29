@@ -67,7 +67,7 @@ export default function Product() {
   ) : (
     <div>
       <div className="d-flex justify-content-between">
-        <h1 className="" style={{ marginLeft: "100px" }}>
+        <h1 className="" style={{ marginLeft: "100px",color: "var(--fff)"  }}>
           Discount
         </h1>
         <button

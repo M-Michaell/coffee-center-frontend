@@ -61,7 +61,7 @@ const UserDetailsComponent = () => {
 
     return (
         <div>
-            <div className='card w-100 bg-transparent text-start m-5 '>
+            <div className='card w-100 bg-transparent text-start my-5 ps-5 '>
                 <h2 className='text-light card-title'><FontAwesomeIcon icon={faCircleUser} style={{
                     color: "var(--orange)",
                     marginRight: "3px"
@@ -86,7 +86,7 @@ const UserDetailsComponent = () => {
             </div>
 
             <hr className='fs-4' style={{color: "var(--orange)"}}/>
-            <div className='card w-100 bg-transparent text-start m-5 '>
+            <div className='card w-100 bg-transparent text-start my-5 ps-5 '>
                 <h2 className='text-light card-title'>
                     <FontAwesomeIcon icon={faAddressBook}
                                      style={{color: 'var(--orange)', marginRight: '3px'}}/> Addresses
@@ -176,6 +176,8 @@ const UserDetailsComponent = () => {
                                 {order.payment_method && order.payment_method.amount && (
                                     <TotalPrice
                                         price={order.payment_method.amount}
+                                        address={order.payment_method.address_to_send}
+                                        phone={order.payment_method.address_phone}
                                         price_before={order.payment_method.total_price}
                                     />
                                 )}

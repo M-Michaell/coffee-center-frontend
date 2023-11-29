@@ -53,12 +53,7 @@ export default function CardSlider({ cards }) {
           {cards?.map((product, index) => {
             return <Card key={product.id} item={product} />;
           })}
-          {cards?.map((product, index) => {
-            return <Card key={product.id} item={product} />;
-          })}
-          {cards?.map((product, index) => {
-            return <Card key={product.id} item={product} />;
-          })}
+
         </Slider>
       </div>
     </>

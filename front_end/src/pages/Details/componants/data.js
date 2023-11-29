@@ -6,6 +6,7 @@ import Row from "./row";
 import { useSelector } from "react-redux";
 import { AddRate } from "../../../apis/product_details/createRate";
 import Buy from "./buyNow";
+import MyCheckBox from './checkbox';
 
 export default function MoreData({ product }) {
   const user = useSelector((state) => state.auth.userInfo);
@@ -48,10 +49,10 @@ export default function MoreData({ product }) {
         </div>
       </div>
 
-      <div className="mt-4 mb-3 ">
+      <div className="my-0 ">
         <span
           className="text-secondary text-decoration-line-through me-4"
-          style={{ fontSize: "12px" }}
+          style={{ fontSize: "18px" }}
         >
           {product.price} $
         </span>
@@ -66,6 +67,7 @@ export default function MoreData({ product }) {
       </div>
       <div>
         <table className="w-100 mt-5">
+          <Row x={"Weight: "} y={"250 gm"} />
           <Row x={"Roasting Stage: "} y={product.roasting_degree_name} />
           <Row x={"Coffee type: "} y={product.coffee_type_name} />
           <Row x={"Caffeiene degree: "} y={product.caffeine_name} />

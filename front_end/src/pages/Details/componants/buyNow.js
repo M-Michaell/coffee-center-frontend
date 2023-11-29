@@ -74,7 +74,7 @@ export default function Buy({ item }) {
   return (
     <>
       {isCartVisible ? (
-        <div className="d-flex justify-content-between mt-5 ">
+        <div className="d-flex justify-content-between mt-3 ">
           <h3 style={{ color: "var(--fff)" }} className="mt-2">
             {Math.ceil((item?.price * (100 - item.discount_percentage)) / 100)}{" "}
             $

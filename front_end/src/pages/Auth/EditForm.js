@@ -172,21 +172,6 @@ export default function EditForm() {
                 {err.username && (<h6 className="form-text text-danger fs-5">{err.username}</h6>)}
 
 
-                <div className="col-12">
-                    <div className="form-check">
-                        <input className="form-check-input mt-3"
-                               style={{backgroundColor: "var(--orange)"}}
-                               type="checkbox"
-                               value=""
-                               id="invalidCheck2"
-                               required/>
-                        <label className="form-check-label mt-2"
-                               style={{borderColor: "var(--orange)", fontSize: "20px", color: "var(--orange)"}}
-                               htmlFor="invalidCheck2">
-                            Agree to terms and conditions
-                        </label>
-                    </div>
-                </div>
                 <div className="d-flex justify-content-center">
                     <button className="btn rounded-pill btn-block mb-4 mt-5 w-50"
                             style={{backgroundColor: " var(--orange) ", color: "var(--fff)", fontSize: "18px"}}

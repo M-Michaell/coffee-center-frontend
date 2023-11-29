@@ -63,7 +63,7 @@ export default function Order() {
 
 
           {orderDetails.payment_method.provider !== "cash" &&
-          orderDetails.payment_method.status == "NP" ? (
+          orderDetails.payment_method.status === "NP" ? (
             <div className="d-flex align-items-center flex-column pt-5 mt-5">
               <h1 className="orange">Confirm Your Payment</h1>
               <span>

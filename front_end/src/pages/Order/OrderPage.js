@@ -56,6 +56,9 @@ export default function Order() {
           <TotalPrice
             price={orderDetails.payment_method.amount}
             price_before={orderDetails.payment_method.total_price}
+            address = {orderDetails.payment_method.address_to_send}
+            phone = {orderDetails.payment_method.address_phone}
+            
           />
 
           {orderDetails.payment_method.provider !== "cash" &&
@@ -68,7 +71,9 @@ export default function Order() {
           ) : (
             <div className="pt-5 mt-5">
               <h1 className="orange">Tracking</h1>
-              <TrackOrder tracing={orderDetails.payment_method.tracing} />
+              <TrackOrder tracing={orderDetails.payment_method.tracing}
+              
+              />
             </div>
           )}
 

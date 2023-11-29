@@ -1,6 +1,6 @@
 import "./TrackOrder.css";
 
-export default function TrackOrder({ tracing }) {
+export default function TrackOrder({ tracing,address,phone }) {
 
   const tracingDict = {
     "o":'Ordered',
@@ -13,19 +13,27 @@ export default function TrackOrder({ tracing }) {
   const steps = ["Ordered", "Shipped", "On the way", "Delivered"];
 
   return (
-    <div className="progress-track">
-      <ul id="progressbar">
-        {steps.map((step, index) => (
-          <li
-            key={`step${index + 1}`}
-            className={`step${index} ${
-              tracing === step ? "active" : ""
-            } ${index < steps.indexOf(tracing) ? "active" : ""}`}
-          >
-            {step}
-          </li>
-        ))}
-      </ul>
+    <div>
+      <div className="progress-track">
+        <ul id="progressbar">
+          {steps.map((step, index) => (
+            <li
+              key={`step${index + 1}`}
+              className={`step${index} ${
+                tracing === step ? "active" : ""
+              } ${index < steps.indexOf(tracing) ? "active" : ""} pt-2 fs-6`}
+            >
+              {step}
+            </li>
+          ))}
+        </ul>
+
+      </div>
+
+      
     </div>
+
+
+
   );
 }

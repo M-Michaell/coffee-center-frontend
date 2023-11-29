@@ -16,7 +16,6 @@ import Toggle from "./toggle";
 
 export default function Card({item}) {
 
-    console.log("mpza", item);
     const navigate = useNavigate();
     const disPatch = useDispatch();
     const [count, setCount] = useState(1);

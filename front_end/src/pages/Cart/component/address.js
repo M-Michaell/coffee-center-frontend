@@ -1,11 +1,12 @@
 import React, { useState } from "react";
 
 function Address(props) {
-  const { address, setDeliveryAddress, index } = props;
+  const { address, setDeliveryAddress, index,addDelivery } = props;
 
 
   const handleSetAddress = () => {
     setDeliveryAddress(address);
+    addDelivery()
   };
   return (
     <>

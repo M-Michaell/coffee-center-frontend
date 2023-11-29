@@ -102,3 +102,7 @@
 #progressbar li.active:after {
     background: rgb(252, 103, 49);
 }
+
+td, tr, th{
+    color:var(--fff) !important;
+}

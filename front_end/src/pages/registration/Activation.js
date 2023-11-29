@@ -35,8 +35,8 @@ const ActivatePage = () => {
 
     return (
         <div className="m-5">
-            <div className="container auth__container m-5">
-                <h1 className="main__title m-5">Activate Account  </h1>
+            <div className="container  m-5 mx-auto">
+                <h1 className=" m-5">Activate Account  </h1>
                 {isLoading && <Loader />}
                 <button className="btn border border-warning rounded-pill mb-5 btn-activate-account" type="submit" onClick={handleSubmit}>Activate Account</button>
             </div>

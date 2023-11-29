@@ -76,12 +76,12 @@ function Cart() {
                   <p className="ms-3 fff fs-5 text-start">Personal Details</p>
                   <div className="row g-4 text-nowrap fs-5 gray1">
                     <div className="col-xl-6 col">
-                      {" "}
-                      UserName:{user.username}
+                      
+                      UserName:{" "}{user.username}
                     </div>
                     <div className="col-xl-6 col">
-                      {" "}
-                      navigate("/addressform"); Name:{user.first_name}{" "}
+                     
+                      Name:{" "}{user.first_name}{" "}
                       {user.last_name}
                     </div>
                     <div className="col-xl-6 col"> Email: {user.email}</div>
@@ -155,7 +155,7 @@ function Cart() {
                           <span
                             className="orange fs-3 ps-0"
                             style={{ color: "var(--orange)" }}
-                            onClick={addDelivery}
+                            
                           >
                             &#9660;
                           </span>
@@ -172,6 +172,7 @@ function Cart() {
                           {addresses?.map((address, index) => (
                             <Address
                               address={address}
+                              addDelivery={addDelivery}
                               setDeliveryAddress={setDeliveryAddress}
                               key={index}
                               index={index}

@@ -36,7 +36,8 @@ function Oneproduct(props) {
                   </h4>
                 </div>
 
-                <p className="gray1 fw-bold mb-1">{item.product.desc}</p>
+                <p className="gray1 fw-bold mb-1 text-truncate text-wrap"
+                  style={{ width: "200px", height: "55px" }}>{item.product.desc}</p>
                 <p className="gray1 py-0 my-0 ">250 g</p>
                 {/* controls */}
                 <Counter product={item} />

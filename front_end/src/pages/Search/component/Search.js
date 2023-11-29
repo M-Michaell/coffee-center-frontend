@@ -9,7 +9,6 @@ import PaginationControlled from "../../../general_components/Pagination/Paginat
 function Search() {
   const { productname } = useParams();
 
-  console.log("Search word:", productname);
   const searchWord = productname;
   const [page, setPage] = useState(1);
   const [filters, setFilters] = useState({

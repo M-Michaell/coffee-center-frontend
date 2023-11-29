@@ -3,14 +3,15 @@ import { useAddressData } from "../../../apis/profile";
 import image from "../../../assets/images/addresspt4.png";
 import "bootstrap/dist/css/bootstrap.min.css";
 import { useNavigate } from "react-router-dom";
-import { deleteAddress } from '../../../apis/profile';
+import { deleteAddress } from "../../../apis/profile";
 
 export default function AddressesComponent({ userId }) {
   const { addressData, refetchAddresses } = useAddressData(userId);
   const navigate = useNavigate();
 
-  const handleAddAddressClick = () => {
+  const handleAddAddressClick = async () => {
     navigate("/addressform");
+    await window.location.reload();
   };
 
   const handleDeleteClick = async (addressId) => {
@@ -18,14 +19,14 @@ export default function AddressesComponent({ userId }) {
       await deleteAddress(userId, addressId);
       refetchAddresses();
     } catch (error) {
-      console.error('Error deleting address:', error);
+      console.error("Error deleting address:", error);
     }
   };
 
-  const handleEditClick = (addressId) => {
+  const handleEditClick = async (addressId) => {
     navigate(`/addressform/${addressId}`);
+    await window.location.reload();
   };
-
 
   return (
     <div className="container p-3" style={{ height: "90%" }}>
@@ -79,7 +80,10 @@ export default function AddressesComponent({ userId }) {
                             key={key}
                             className="d-flex justify-content-start mb-2"
                           >
-                            <div className="me-3 col-2" style={{color:"var(--orange)"}}>
+                            <div
+                              className="me-3 col-2"
+                              style={{ color: "var(--orange)" }}
+                            >
                               <span className="fw-bold">{formattedKey}:</span>
                             </div>
                             <div className="col-2 text-light">
@@ -95,14 +99,14 @@ export default function AddressesComponent({ userId }) {
                   <div className="col-3 d-flex align-items-end">
                     <button
                       type="button"
-                      className="btn btn-primary me-4"
+                      className="btn btn-outline-light mt-5 custom-btn"
                       onClick={() => handleEditClick(address.id)}
                     >
                       Edit
                     </button>
                     <button
                       type="button"
-                      className="btn btn-danger"
+                      className="btn btn-outline-danger ms-5 mt-5 custom-btn"
                       onClick={() => handleDeleteClick(address.id)}
                     >
                       Delete
@@ -116,7 +120,7 @@ export default function AddressesComponent({ userId }) {
       )}
       <button
         type="button"
-        className="btn btn-primary fw-bold mt-3 d-inline-block"
+        className="btn btn-outline-light mt-5 custom-btn"
         onClick={handleAddAddressClick}
       >
         ADD NEW ADDRESS
@@ -124,3 +128,5 @@ export default function AddressesComponent({ userId }) {
     </div>
   );
 }
+
+

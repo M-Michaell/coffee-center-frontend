@@ -53,9 +53,9 @@ export default function AdminDashboard() {
     product: Product,
     roastingdegree: RoastingDegree,
     rates: Rates,
-    tracing:Tracing,
-    income:Income,
-    users: Users
+    tracing: Tracing,
+    income: Income,
+    users: Users,
   };
 
   const RenderComponent = componentMap[activeComponent];
@@ -183,7 +183,7 @@ export default function AdminDashboard() {
                   className="me-2"
                   style={{ color: "var(--orange)" }}
                 />
-                Roasting Degree
+                Roasting
                 <span className="arrow-icon" style={{ color: "var(--orange)" }}>
                   &#9654;
                 </span>
@@ -197,7 +197,7 @@ export default function AdminDashboard() {
             >
               <li className="mb-3 text-light">
                 <FontAwesomeIcon
-                   icon={faStar}
+                  icon={faStar}
                   className="me-2"
                   style={{ color: "var(--orange)" }}
                 />
@@ -215,7 +215,7 @@ export default function AdminDashboard() {
             >
               <li className="mb-3 text-light">
                 <FontAwesomeIcon
-                   icon={faTruck}
+                  icon={faTruck}
                   className="me-2"
                   style={{ color: "var(--orange)" }}
                 />
@@ -233,7 +233,7 @@ export default function AdminDashboard() {
             >
               <li className="mb-3 text-light">
                 <FontAwesomeIcon
-                   icon={faDollar}
+                  icon={faDollar}
                   className="me-2"
                   style={{ color: "var(--orange)" }}
                 />
@@ -250,7 +250,7 @@ export default function AdminDashboard() {
             >
               <li className="mb-3 text-light">
                 <FontAwesomeIcon
-                   icon={faStar}
+                  icon={faStar}
                   className="me-2"
                   style={{ color: "var(--orange)" }}
                 />

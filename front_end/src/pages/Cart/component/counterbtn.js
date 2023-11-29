@@ -40,14 +40,14 @@ export default function Counter(props) {
         </div>
         <div className="d-flex flex-column">
           <p className="fff text-decoration-line-through">
-            {exsisting.product.price * exsisting.quantity} EGP
+            {exsisting.product.price * exsisting.quantity} $
           </p>
           <p className="fff">
             {(exsisting.product.price *
               exsisting.quantity *
               (100 - exsisting.product.discount_percentage)) /
               100}{" "}
-            EGP
+            $
           </p>
         </div>
       </div>

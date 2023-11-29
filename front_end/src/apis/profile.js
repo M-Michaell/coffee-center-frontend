@@ -9,7 +9,7 @@ export function useUserData() {
       .get(`/accounts/api/`)
       .then((res) => {
         setDetailsData(res.data);
-        console.log(res);
+        
       })
       .catch((err) => console.log(err));
   }, []);
@@ -58,7 +58,7 @@ export function usePaymentData() {
       .get(`/accounts/api/payment`)
       .then((res) => {
         setPaymentData(res.data.Users);
-        console.log(res);
+       
       })
       .catch((err) => console.log(err));
   }, []); // Provide an empty dependency array to run the effect only once
@@ -91,7 +91,6 @@ export const useUserDataSpecific = (id) => {
         .get(`/accounts/api/${id}`)
         .then((res) => {
           setDetailsData(res.data.User);
-          console.log(res);
         })
         .catch((err) => console.log(err));
     }

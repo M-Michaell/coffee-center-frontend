@@ -25,8 +25,9 @@ function Cart() {
   const removeDelivery = () => {
     setDelivery(0);
   };
-  const handleAdress = () => {
+  const handleAdress = async () => {
     navigate("/addressform");
+    await window.location.reload();
   };
   const handlePayment = () => {
     navigate("/paymentform");
@@ -34,7 +35,7 @@ function Cart() {
 
   return (
     <>
-      { cart.length? (
+      {cart.length ? (
         <div
           className="container text-start"
           style={{ backgroundColor: "var(--background)" }}
@@ -75,12 +76,13 @@ function Cart() {
                   <p className="ms-3 fff fs-5 text-start">Personal Details</p>
                   <div className="row g-4 text-nowrap fs-5 gray1">
                     <div className="col-xl-6 col">
-                      {" "}
-                      UserName:{user.username}
+                      
+                      UserName:{" "}{user.username}
                     </div>
                     <div className="col-xl-6 col">
-                      {" "}
-                      Name:{user.first_name} {user.last_name}
+                     
+                      Name:{" "}{user.first_name}{" "}
+                      {user.last_name}
                     </div>
                     <div className="col-xl-6 col"> Email: {user.email}</div>
                     <div className="col-xl-6 col"> Phone: {user.phone}</div>
@@ -122,7 +124,7 @@ function Cart() {
                           >
                             Pick it from our store
                           </label>
-                          <p className="justify-self-end ms-5 fff"> 0 EGP</p>
+                          <p className="justify-self-end ms-5 fff"> 0 $</p>
                         </div>
                       </div>
                       <div className="collapse" id="mapstore">
@@ -153,23 +155,24 @@ function Cart() {
                           <span
                             className="orange fs-3 ps-0"
                             style={{ color: "var(--orange)" }}
-                            onClick={addDelivery}
+                            
                           >
                             &#9660;
                           </span>
 
                           <label
                             className="form-check-label gray1"
-                            htmlFor="flexRadioDefault2"
+                            htmlFor="flexRadioDefault"
                           >
                             Delivery it to your place
                           </label>
-                          <p className=" ms-3 mb-0 fff"> +50 EGP</p>
+                          <p className=" ms-3 mb-0 fff"> +50 $</p>
                         </div>
                         <div className="collapse ms-3" id="adress">
                           {addresses?.map((address, index) => (
                             <Address
                               address={address}
+                              addDelivery={addDelivery}
                               setDeliveryAddress={setDeliveryAddress}
                               key={index}
                               index={index}
@@ -232,7 +235,7 @@ function Cart() {
                         </label>
                       </div>
 
-                      <div
+                      {/* <div
                         className=" "
                         data-bs-toggle="collapse"
                         data-bs-target="#onlinecard"
@@ -269,7 +272,7 @@ function Cart() {
                             Add Card
                           </button>
                         </div>
-                      </div>
+                      </div> */}
 
                       {/* <div className="form-check">
                       <input

@@ -6,7 +6,7 @@ import Grid from "@mui/material/Grid";
 import Card from "@mui/material/Card";
 import CardContent from "@mui/material/CardContent";
 import Typography from "@mui/material/Typography";
-import { MenuItem } from "@mui/material";
+import { Fab, MenuItem } from "@mui/material";
 import "mdb-react-ui-kit/dist/css/mdb.min.css";
 import "animate.css/animate.min.css";
 import { axiosInstance } from "../../../apis/config";
@@ -16,16 +16,15 @@ import { useSelector } from "react-redux";
 export default function AddressPage() {
   const user = useSelector((state) => state.auth.userInfo);
   useEffect(() => {
+    // window.location.reload();
     const truckIcon = document.getElementById("truck-icon");
     if (truckIcon) {
-      console.log("Adding Animation Classes");
       truckIcon.classList.add("animate__animated", "animate__slideInLeft");
     }
 
     // Cleanup: Remove animation class when the component unmounts
     return () => {
       if (truckIcon) {
-        console.log("Removing Animation Classes");
         truckIcon.classList.remove("animate__animated", "animate__slideInLeft");
       }
     };
@@ -43,12 +42,14 @@ export default function AddressPage() {
 
   const validateForm = () => {
     let isValid = true;
+    if (telephone){
 
-    if (!egyptianLandlineRegex.test(telephone)) {
-      setTelephoneError("Invalid telephone number");
-      isValid = false;
-    } else {
-      setTelephoneError("");
+      if (!egyptianLandlineRegex.test(telephone)) {
+        setTelephoneError("Invalid telephone number");
+        isValid = false;
+      } else {
+        setTelephoneError("");
+      }
     }
 
     if (!egyptianMobileRegex.test(mobile)) {
@@ -73,9 +74,8 @@ export default function AddressPage() {
 
       // Send a POST request to the API endpoint
       axiosInstance
-        .post("/accounts/api/address/", addressData)
+        .post(`/accounts/api/address/${user.id}/`, addressData)
         .then((response) => {
-          console.log("Address saved successfully:", response.data);
           // Navigate to the profile page or any other desired page after successful save
           navigate("/profile");
         })

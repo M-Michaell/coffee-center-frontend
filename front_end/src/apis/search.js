@@ -12,7 +12,6 @@ export function SearchResult(searchWord ,page,filters) {
         .map(([key, value]) => `${key}=${value.join('_')}`)
         .join(',')}&page=${page}`;
   
-    console.log("url", url)
 
 
   useEffect(() => {

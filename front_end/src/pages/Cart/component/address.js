@@ -1,43 +1,41 @@
 import React, { useState } from "react";
 
 function Address(props) {
-  const { address, setDeliveryAddress, index } = props;
+  const { address, setDeliveryAddress, index,addDelivery } = props;
 
 
   const handleSetAddress = () => {
-    console.log("setAddres",address);
     setDeliveryAddress(address);
+    addDelivery()
   };
   return (
     <>
     <div>
       <div
-        // Adding a unique key for each iteration
         className="form-check w-100"
         data-bs-toggle="collapse"
-        data-bs-target={`#address-${index}`} // Making the target ID unique for each iteration
+        data-bs-target={`#address-50${index}`}
         aria-expanded="true"
-        aria-controls={`address-${index}`}
+        aria-controls={`address-50`}
       >
         <input
-          className="form-check-input"
+          className="form-check-input mt-1"
           type="radio"
           name="flexRadioDefault"
-          id={`flexRadioDefault${index}`}
+          id={`flexRadioDefault-50${index}`}
           onClick={handleSetAddress}
         />
         <div className="d-flex justify-content-between w-100">
           <label
             className="form-check-label gray1"
-            htmlFor={`flexRadioDefault${index}`}
+            htmlFor={`flexRadioDefault-50${index}`}
           >
             {address.address_line1}
-            {/* Assuming you have a property named "name" in your address object */}
           </label>
         </div>
 
       </div>
-      <div className="collapse" id={`address-${index}`}>
+      <div className="collapse" id={`address-50${index}`}>
         <h3>Address Details</h3>
         <div className="row">
             <div className="col">Details: {address.address_line1}</div>

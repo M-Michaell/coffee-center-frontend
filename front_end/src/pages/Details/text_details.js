@@ -11,12 +11,10 @@ export default function TextDetails() {
   const { id } = useParams();
   const [product, setProduct] = useState();
 
-
   useEffect(() => {
     const fetchData = async () => {
       const data = await ProductDetails(id);
       setProduct(data);
-
     };
     fetchData();
   }, [id]);
@@ -28,7 +26,9 @@ export default function TextDetails() {
           <div className="container pt-5 ">
             <div className="row">
               <div className="col col-xl-6 d-flex flex-column align-items-center mb-4">
-                {product.image && <DetailsImage image={product.image} item={product}/>}
+                {product.image && (
+                  <DetailsImage image={product.image} item={product} />
+                )}
 
                 <div
                   className="panel-group text-start rounded-1 mt-5 "
@@ -46,7 +46,7 @@ export default function TextDetails() {
                     collId={"ShippingandPayment"}
                     tab={"Shipping"}
                     details={
-                      "free from our shop or +50 EGP shipping to your place "
+                      "free from our shop or +50 $ shipping to your place "
                     }
                     title={""}
                   />

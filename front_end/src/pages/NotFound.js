@@ -7,7 +7,6 @@ function NotFound() {
   axios
     .get("http://127.0.0.1:8000/cart/shopping-sessions/1/")
     .then((res) => {
-      console.log(res);
     })
     .catch((err) => console.log(err));
 

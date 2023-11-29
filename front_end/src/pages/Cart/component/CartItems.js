@@ -107,7 +107,7 @@ function CartItems(props) {
         <div>
           <div className="d-flex gray1 w-75 justify-content-evenly fs-5">
             <p>{cart.length} items</p>
-            <p className="fff">total: {totalPrice} EGP</p>
+            <p className="fff">total: {totalPrice} $</p>
           </div>
 
           {/* /////////////// */}
@@ -121,19 +121,19 @@ function CartItems(props) {
           <div className="d-flex flex-column w-75 mx-auto my-5 ">
             <div className="d-flex justify-content-between mb-0 pb-0">
               <p className="gray1 p-0 m-0">Total</p>
-              <p className="fff fs-5 m-0 p-0">{totalPrice} EGP</p>
+              <p className="fff fs-5 m-0 p-0">{totalPrice} $</p>
             </div>
             <div className="d-flex justify-content-between mb-0 pb-0">
               <p className="gray1 p-0 m-0">Discount</p>
-              <p className="fff fs-5 m-0 p-0">-{totalDiscount} EGP</p>
+              <p className="fff fs-5 m-0 p-0">-{totalDiscount} $</p>
             </div>
             <div className="d-flex justify-content-between mt-0 pt-0">
               <p className="gray1 p-0 m-0">Delivery</p>
-              <p className="fff fs-5 p-0 m-0">{Delivery} EGP</p>
+              <p className="fff fs-5 p-0 m-0">{Delivery} $</p>
             </div>
             <div className="d-flex justify-content-between my-4">
               <p className="gray1 ms-3 fs-5">To pay</p>
-              <p className="fff fs-4">{toPay + Delivery} EGP</p>
+              <p className="fff fs-4">{toPay + Delivery} $</p>
             </div>
 
             <button

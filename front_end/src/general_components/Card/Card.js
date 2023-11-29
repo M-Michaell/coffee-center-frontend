@@ -14,6 +14,8 @@ import { addToWishlist, removeFromWishlist } from "../../store/slices/wishlist";
 import { useNavigate } from "react-router-dom";
 
 export default function Card({ item }) {
+
+  console.log("mpza", item);
   const navigate = useNavigate();
   const disPatch = useDispatch();
   const isProductInWishlist = useSelector((state) =>
@@ -172,7 +174,8 @@ export default function Card({ item }) {
               {item?.desc}
             </p>
             {
-              item.discount_percentage != 0 ?
+
+              item.discount_percentage !== "0.0"?
               <p className="text-decoration-line-through gray1">{item.price}EGP</p>
             :
                   <br/>
@@ -183,8 +186,8 @@ export default function Card({ item }) {
                 <div className="d-flex justify-content-between mt-5 ">
                   <h3 style={{ color: "var(--fff)" }} className="mt-2">
                     {
-                    item.discount_percentage ?
-                    Math.ceil((item?.price * (100 - item.discount_percentage)) / 100) : item?.price
+
+                    Math.ceil((item?.price * (100 - item.discount_percentage)) / 100)
                   }
                     EGP
                   </h3>
@@ -218,8 +221,8 @@ export default function Card({ item }) {
                   </button>
                   <h4 className="text-center mt-2 mx-2 text-nowrap">
                     {
-                    item.discount_percentage ?
-                    Math.ceil((item?.price * (100 - item.discount_percentage)) / 100) : item?.price
+
+                    Math.ceil((item?.price * count * (100 - item.discount_percentage)) / 100)
                   }
                     EGP
                   </h4>

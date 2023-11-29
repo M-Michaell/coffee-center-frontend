@@ -147,7 +147,7 @@ export default function ProductForm({submitAdd}) {
                     <label htmlFor="validationDefault02"
                            style={{color: "var(--gray1)", fontSize: "18px"}}
                            className="form-label mt-3">Description</label>
-                    <textarea value={formInput.Description}
+                    <textarea value={formInput.desc}
                               style={{
                                   backgroundColor: "var(--gray2)",
                                   borderColor: "var(--orange)",
@@ -195,7 +195,7 @@ export default function ProductForm({submitAdd}) {
                                color: "var(--orange)"
                            }}
                            name="Quantity"
-                           value={formInput.Quantity}
+                           value={formInput.quantity}
                            type="number"
                            className="form-control"
                            id="validationDefault02"
@@ -234,12 +234,15 @@ export default function ProductForm({submitAdd}) {
                             fontSize: "20px",
                             color: "var(--orange)"
                         }}
+
                         value={formInput.coffee_type}
                         name="coffee_type"
                         id="coffee_type"
                         className="form-select"
                         aria-label="Default select example"
-                        onChange={handleInput}>
+                        onChange={handleInput}
+                        required>
+                        <option value="">chose from list</option>
 
                         {
                             coffeeTypes?.map((item) => {
@@ -271,7 +274,7 @@ export default function ProductForm({submitAdd}) {
                         id="caffeine"
                         aria-label="Default select example"
                         required>
-
+                        <option value="">chose from list</option>
                         {
                             caffeines?.map((item) => {
                                 return (
@@ -294,12 +297,14 @@ export default function ProductForm({submitAdd}) {
                             fontSize: "20px",
                             color: "var(--orange)"
                         }}
-                        value={formInput.creators}
+                        value={formInput.creator}
                         className="form-select"
                         onChange={handleInput}
                         name="creator"
                         id="creator"
-                        aria-label="Default select example">
+                        aria-label="Default select example"
+                        required>
+                        <option value="">chose from list</option>
 
                         {
                             creators?.map((item, index) => {
@@ -330,7 +335,9 @@ export default function ProductForm({submitAdd}) {
                         onChange={handleInput}
                         name="origin"
                         id="origin"
-                        aria-label="Default select example">
+                        aria-label="Default select example"
+                        required>
+                        <option value="">chose from list</option>
 
                         {
                             origins?.map((item) => {
@@ -361,7 +368,9 @@ export default function ProductForm({submitAdd}) {
                         name="roastingDegree"
                         id="roastingDegree"
                         className="form-select"
-                        aria-label="Default select example">
+                        aria-label="Default select example"
+                        required>
+                        <option value="">chose from list</option>
 
                         {
                             roastingDegrees?.map((item, index) => {
@@ -390,7 +399,9 @@ export default function ProductForm({submitAdd}) {
                         className="form-select"
                         name="discount"
                         id="discount"
-                        aria-label="Default select example">
+                        aria-label="Default select example"
+                        required>
+                        <option value="">chose from list</option>
                         {
                             discounts?.map((item, index) => {
                                 return (

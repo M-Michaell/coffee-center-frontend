@@ -89,7 +89,6 @@ export default function Product() {
                     <tbody>
                     {
                         coffeeTypes?.map((item, index) => {
-                            console.log("photo",item.image)
                             return (
                                 <tr key={item.id}>
                                     {/*<td style={{color: "var(--gray1)", fontSize:"20px"}}>{index+1}</td>*/}

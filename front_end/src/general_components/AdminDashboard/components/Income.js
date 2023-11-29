@@ -31,7 +31,6 @@ export default function Income({ user }) {
     try {
       const response = await totalIncome.get();
       const incoming = response.data.income;
-      console.log("user orders: ", incoming.cash["paid"]);
 
       setIncomeData({
         pPaid: parseInt(incoming.paypal["paid"]),

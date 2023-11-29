@@ -8,7 +8,6 @@ const Checkout = ({order}) => {
     const OrderPaid = (order_id) => {
         axiosInstance.post(`/order/paid/`, {'order_id':order_id})
           .then((response) => {
-            console.log('success paid',response.data)
             window.location.reload()
           })
           .catch((error) => {
@@ -17,7 +16,6 @@ const Checkout = ({order}) => {
           });
       }
 
-    console.log('order: ',order)
     const product = {
         description: "Some Thing",
         price: order.payment_method.amount,
@@ -68,7 +66,6 @@ const Checkout = ({order}) => {
 
             onApprove={async (data,actions) => {
                 const order = await actions.order.capture();
-                console.log('order', order);
                 handleApprove(data.orderID)
             }}
 

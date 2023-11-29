@@ -14,7 +14,7 @@ export default function AddressEdit() {
   const [telephoneError, setTelephoneError] = useState("");
   const [mobileError, setMobileError] = useState("");
   const navigate = useNavigate();
-  const { id } = useParams(); // Get the address ID from the URL
+  const { id } = useParams();
   const [telephone, setTelephone] = useState("");
   const [mobile, setMobile] = useState("");
   const [addressLine1, setAddressLine1] = useState("");
@@ -54,7 +54,7 @@ export default function AddressEdit() {
     "Suez",
   ];
 
-  window.location.reload();
+ 
 
   const validateForm = () => {
     let isValid = true;
@@ -77,7 +77,7 @@ export default function AddressEdit() {
   };
   useEffect(() => {
     axiosInstance
-      .get(`/accounts/api/address/${id}`)
+      .get(`/accounts/api/address/${user.id}/${id}/`)
       .then((response) => {
         const userData = response.data.User;
 
@@ -89,7 +89,6 @@ export default function AddressEdit() {
         setPostalCode(userData.postal_code || "");
       })
       .catch((error) => {
-        console.error("Error fetching user data:", error);
       });
   }, [id]);
 
@@ -104,12 +103,10 @@ export default function AddressEdit() {
         postal_code: postalCode,
       };
 
-      console.log("Updated Address Data:", updatedAddressData);
 
       axiosInstance
-        .put(`/accounts/api/address/${id}`, updatedAddressData)
+        .put(`/accounts/api/address/${user.id}/${id}/`, updatedAddressData)
         .then((response) => {
-          console.log("Address updated successfully:", response.data);
           navigate("/profile"); // Redirect to the profile page or any other desired page after successful update
         })
         .catch((error) => {

@@ -53,9 +53,9 @@ export default function MoreData({ product }) {
           className="text-secondary text-decoration-line-through me-4"
           style={{ fontSize: "12px" }}
         >
-          {product.price} EGP
+          {product.price} $
         </span>
-        <span style={{ fontWeight: "bolder" }}>{newPrice} EGP</span>
+        <span style={{ fontWeight: "bolder" }}>{newPrice} $</span>
       </div>
       <div className="w-50">
         {/* buy now */}

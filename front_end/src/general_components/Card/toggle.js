@@ -20,7 +20,6 @@ function Toggle(props) {
     if (user) {
       if (!isInList) {
         dispatch(addToWishlistSuccess({ item, wishlistId }));
-        console.log(isInList);
       } else {
         dispatch(removeFromWishlistSuccess({ item, wishlistId }));
       }

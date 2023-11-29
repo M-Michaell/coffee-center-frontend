@@ -18,7 +18,6 @@ export default function OrderComponent({order}){
 
     const navigate = useNavigate()
     const handleOrderDetails = () => {
-      console.log('orderComponent')
         navigate(`/order/${order.id}/`)
     }
   return (

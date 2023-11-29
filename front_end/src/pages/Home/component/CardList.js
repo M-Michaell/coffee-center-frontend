@@ -2,7 +2,7 @@ import Card from "../../../general_components/Card/Card";
 
 export default function CardList({cards}) {
     return (
-        <div className="row row-cols-1 row-cols-md-2 row-cols-xl-4 g-4 justify-content-center" style={{margin: "80px"}}>
+        <div className="row row-cols-1 row-cols-md-2 row-cols-xl-4 g-4 justify-content-center mt-2" style={{margin: "80px"}}>
             {
                 cards?.map((product, index)=>{
 

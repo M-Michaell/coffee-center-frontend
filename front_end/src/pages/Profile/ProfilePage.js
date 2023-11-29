@@ -111,7 +111,7 @@ export default function Account({ location = {} }) {
                 </span>
               </li>
             </Link>
-            <Link
+            {/* <Link
               to={`/profile/payments`}
               className="order-link"
               onClick={() => handleLinkClick("payments")}
@@ -127,7 +127,7 @@ export default function Account({ location = {} }) {
                   &#9654;
                 </span>
               </li>
-            </Link>
+            </Link> */}
             <Link
               to={`/profile/addresses`}
               className="order-link"

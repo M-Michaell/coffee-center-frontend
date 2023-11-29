@@ -95,125 +95,125 @@ export default function Card({item}) {
         window.location.reload();
     };
 
-    return (
-        <div className="mt-4 d-flex justify-content-center">
-            <div
-                className="card text-start position-relative"
-                style={{
-                    color: "var(--fff)",
-                    width: "270px",
-                    height: "400px",
-                    backgroundColor: "var(--gray2)",
-                    marginTop: "100px",
-                }}
+  return (
+    <div className="mt-4 d-flex justify-content-center">
+      <div
+        className="card text-start position-relative"
+        style={{
+          color: "var(--fff)",
+          width: "270px",
+          height: "400px",
+          backgroundColor: "var(--gray2)",
+          marginTop: "100px",
+        }}
+      >
+        <img
+          src={`http://127.0.0.1:8000${item?.image}`}
+          className="mt-5 position-absolute top-0 start-50 translate-middle z-1"
+          style={{ height: "250px", cursor: "pointer" }}
+          alt="..."
+          onClick={handleDetails}
+        />
+        <StyledBadge
+          badgeContent={count}
+          color="success"
+          invisible={!invisible}
+        >
+          <div className="card-body " style={{ marginTop: "150px" }}>
+            <div className="fs-3">
+              <Toggle item={item} />
+            </div>
+            <h3
+              className="card-title"
+              style={{ color: "var(--orange)", cursor: "pointer" }}
+              onClick={handleDetails}
             >
-                <img
-                    src={`http://127.0.0.1:8000${item?.image}`}
-                    className="mt-5 position-absolute top-0 start-50 translate-middle z-1"
-                    style={{height: "250px", cursor: "pointer"}}
-                    alt="..."
-                    onClick={handleDetails}
-                />
-                <StyledBadge
-                    badgeContent={count}
-                    color="success"
-                    invisible={!invisible}
-                >
-                    <div className="card-body " style={{marginTop: "150px"}}>
-                        <div className="fs-3">
+              {item?.name}
+            </h3>
+            <p
+              className=" p-1 h-auto   text-truncate "
+              style={{ width: "200px", height: "60px" }}
+            >
+              {item?.desc}
+            </p>
+            {item.discount_percentage !== 0 ? (
+              <p className="text-decoration-line-through gray1">
+                {item.price}$
+              </p>
+            ) : (
+              <br />
+            )}
 
-                            <Toggle item={item}/>
-                        </div>
-                        <h3
-                            className="card-title"
-                            style={{color: "var(--orange)", cursor: "pointer"}}
-                            onClick={handleDetails}
-                        >
-                            {item?.name}
-                        </h3>
-                        <p
-                            className="card-text p-1 h-auto"
-                            style={{fontSize: "15px", height: "60px"}}
-                        >
-                            {item?.desc}
-                        </p>
-                        {
+            {item.quantity > 0 ? (
+              isCartVisible ? (
+                <div className="d-flex justify-content-between mt-5 ">
+                  <h3 style={{ color: "var(--fff)" }} className="mt-2">
+                    {item.discount_percentage
+                      ? Math.ceil(
+                          (item?.price * (100 - item.discount_percentage)) / 100
+                        )
+                      : item?.price}
+                    $
+                  </h3>
 
-                            item.discount_percentage !== "0.0" ?
-                                <p className="text-decoration-line-through gray1">{item.price}EGP</p>
-                                :
-                                <br/>
-                        }
-
-                        {item.quantity > 0 ? (
-                            isCartVisible ? (
-                                <div className="d-flex justify-content-between mt-5 ">
-                                    <h3 style={{color: "var(--fff)"}} className="mt-2">
-
-                                        {
-
-                                            Math.ceil((item?.price * (100 - item.discount_percentage)) / 100)
-                                        }
-
-                                        EGP
-                                    </h3>
-
-                                    <button
-                                        style={{
-                                            backgroundColor: "var(--orange)",
-                                            color: "var(--fff)",
-                                            fontSize: "15px",
-                                        }}
-                                        onClick={handleAddToCart}
-                                        className="shadow rounded-pill btn "
-                                    >
-                                        Cart <i className="bi bi-cart3"></i>
-                                    </button>
-                                </div>
-                            ) : (
-                                <div className="d-flex justify-content-around mt-5">
-                                    <button
-                                        onClick={handleDecrease}
-                                        className="btn shadow rounded rounded-pill"
-                                        style={{
-                                            height: "44px",
-                                            width: "62px",
-                                            backgroundColor: "var(--orange)",
-                                            fontSize: "20px",
-                                            color: "var(--fff)",
-                                        }}
-                                    >
-                                        -
-                                    </button>
-                                    <h4 className="text-center mt-2 mx-2 text-nowrap">
-
-                                        {
-
-                                            Math.ceil((item?.price * count * (100 - item.discount_percentage)) / 100)
-                                        }
-
-                                        EGP
-                                    </h4>
-                                    <button
-                                        onClick={handleIncrease}
-                                        className="btn shadow rounded btn rounded-pill"
-                                        style={{
-                                            height: "44px",
-                                            width: "62px",
-                                            backgroundColor: "var(--orange)",
-                                            fontSize: "20px",
-                                            color: "var(--fff)",
-                                        }}
-                                    >
-                                        +
-                                    </button>
-                                </div>
-                            )
-                        ) : (
-                            <button
-                                className="btn shadow rounded rounded-pill mx-auto d-flex mt-5  "
-                                style={{
-                                    cursor: "text",
+                  <button
+                    style={{
+                      backgroundColor: "var(--orange)",
+                      color: "var(--fff)",
+                      fontSize: "15px",
+                    }}
+                    onClick={handleAddToCart}
+                    className="shadow rounded-pill btn "
+                  >
+                    Cart <i className="bi bi-cart3"></i>
+                  </button>
+                </div>
+              ) : (
+                <div className="d-flex justify-content-around mt-5">
+                  <button
+                    onClick={handleDecrease}
+                    className="btn shadow rounded rounded-pill"
+                    style={{
+                      height: "44px",
+                      width: "62px",
+                      backgroundColor: "var(--orange)",
+                      fontSize: "20px",
+                      color: "var(--fff)",
+                    }}
+                  >
+                    -
+                  </button>
+                  <h4 className="text-center mt-2 mx-2 text-nowrap">
+                    {item.discount_percentage
+                      ? Math.ceil(
+                          (item?.price *
+                            count *
+                            (100 - item.discount_percentage)) /
+                            100
+                        )
+                      : item?.price * count}
+                    $
+                  </h4>
+                  <button
+                    onClick={handleIncrease}
+                    className="btn shadow rounded btn rounded-pill"
+                    style={{
+                      height: "44px",
+                      width: "62px",
+                      backgroundColor: "var(--orange)",
+                      fontSize: "20px",
+                      color: "var(--fff)",
+                    }}
+                  >
+                    +
+                  </button>
+                </div>
+              )
+            ) : (
+              <button
+                className="btn shadow rounded rounded-pill mx-auto d-flex mt-5  "
+                style={{
+                  cursor: "text",
 
                                     backgroundColor: "var(--orange)",
 

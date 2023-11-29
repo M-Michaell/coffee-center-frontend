@@ -34,7 +34,6 @@ export default function WishlistComponent() {
       ) : (
         <div className="row row-cols-1 row-cols-md-3 g-4 d-flex justify-content-center">
 {wishlist.map(product => {
-  console.log(product); // Log each product to inspect its properties
   return (
     <div key={product.id} className="col-12 col-sm-6 col-md-4 p-2">
       <Card item={product} />

@@ -32,7 +32,6 @@ export default function Tracing({ user }) {
     try {
       const response = await userOrdersDetails.get();
       setUserOrders(response.data.orders);
-      console.log("user orders: ", response.data.orders);
     } catch (error) {
       console.error("Error fetching user order details:", error);
     }

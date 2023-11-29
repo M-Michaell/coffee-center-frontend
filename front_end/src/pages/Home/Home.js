@@ -26,6 +26,18 @@ export default function Home() {
         <Carousel />
         <CardSlider cards={products} />
         <Images />
+        <div className="container mt-5 pt-5">
+          <h2
+            className="text-start ms-5 mt-5 fw-bold text-nowrap"
+            style={{ color: "var(--orange)" }}
+          >
+            Discover the perfect coffee
+          </h2>
+          <hr
+            className=" ms-3"
+            style={{ height: "3px", backgroundColor: "var(--orange)" }}
+          ></hr>
+        </div>
         <CardList cards={products} />
         <div className="d-flex justify-content-center my-5">
           <PaginationControlled

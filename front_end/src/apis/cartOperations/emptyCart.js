@@ -17,7 +17,6 @@ export function EmptyCart(session) {
       });
     })
     .catch((error) => {
-      console.log(error);
       toast.error(error.message, {
         position: "top-center",
         autoClose: 5000,

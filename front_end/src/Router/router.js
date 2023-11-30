@@ -2,6 +2,8 @@
 import React, { Suspense } from "react";
 import { Route, Routes } from "react-router-dom";
 import CoffeeTypeEdit from "../general_components/product_forms/CoffeeTypeEdit";
+const PrivateAdmin = React.lazy(()=> import("../pages/Auth/PrivateAdmin"));
+const Known = React.lazy(()=> import("../pages/Auth/Known"));
 
 
 
@@ -46,37 +48,45 @@ function Router() {
                 <Route path="/" element={<Home/>}/>
                 <Route path="order/:order_id" element={<Order/>}/>
                 <Route path="admin/order/:order_id" element={<AdminOrder/>}/>
-                <Route path="registration/" element={<Registration/>}/>
-                <Route path="login/" element={<Login/>}/>
                 <Route path="/profile/*" element={
                     <PrivateRoute>
                         <Account/>
                     </PrivateRoute>
                     }/>
                 <Route path={`admin/`} element={
-                    <PrivateRoute>
+                    <PrivateAdmin>
                       <AdminDashboard />
-                    </PrivateRoute>
+                    </PrivateAdmin>
                     }
                     />
                 <Route path={`admin/:name`} element={
-                    <PrivateRoute>
+                    <PrivateAdmin>
                       <AdminDashboard />
-                    </PrivateRoute>
+                    </PrivateAdmin>
                     }
                     />
                 <Route path={`admin/:category/:name/:id/`} element={
-                    <PrivateRoute>
+                    <PrivateAdmin>
                       <AdminDashboard />
-                    </PrivateRoute>
+                    </PrivateAdmin>
                     }
                     />
                 <Route path="/order/tracking/" element={<Account/>}/>
                 <Route path="/search/:productname" element={<Search/>}/>
                 <Route path="*" element={<NotFound/>}/>
                 <Route path="home/" element={<Home/>}/>
-                <Route path="registration/" element={<Registration/>}/>
-                <Route path="login/" element={<Login/>}/>
+                <Route path="registration/" element={
+                    <Known>
+                    <Registration/>
+                    </Known>
+                }
+                />
+                <Route path="/login" element={
+                    <Known>
+                        <Login/>
+                    </Known>
+
+                }/>
                 <Route path="/profile/*" element={<Account/>}/>
                 <Route path="/addressform/:id" element={<AddressEdit/>}/>
                 <Route path="/addressform" element={<AddressForm/>}/>

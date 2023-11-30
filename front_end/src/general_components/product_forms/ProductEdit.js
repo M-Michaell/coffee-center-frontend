@@ -34,6 +34,21 @@ export default function ProductEdit({submitAdd, item}) {
         discount: item.discount,
     });
 
+    const [formErr, setFormErr] = useState({
+        name: "",
+        desc: "",
+        quantity: "",
+        price: '',
+        image: null,
+        coffee_type: "",
+        caffeine: '',
+        creator: '',
+        roasting_degree: '',
+        origin: '',
+        discount: '',
+    });
+
+
 
     const handleInput = (e) => {
         if (e.target.name === 'name') {
@@ -44,9 +59,11 @@ export default function ProductEdit({submitAdd, item}) {
         }
         if (e.target.name === 'Quantity') {
             setFormInput({...formInput, quantity: e.target.value});
+            setFormErr({...formErr, quantity: e.target.value < 0 ? "disallow" : null })
         }
         if (e.target.name === 'price') {
             setFormInput({...formInput, price: e.target.value});
+            setFormErr({...formErr, price: e.target.value < 0 ? "disallow" : null })
         }
         if (e.target.name === 'coffee_type') {
             setFormInput({...formInput, coffee_type: e.target.value});
@@ -183,6 +200,9 @@ export default function ProductEdit({submitAdd, item}) {
                            id="price"
                            required/>
                 </div>
+                {formErr.price && (
+          <h6 className="form-text text-danger">{formErr.price}</h6>
+        )}
 
 
                 <div className="col-md-4 w-75">
@@ -203,6 +223,10 @@ export default function ProductEdit({submitAdd, item}) {
                            id="validationDefault02"
                            required/>
                 </div>
+                 {formErr.quantity && (
+          <h6 className="form-text text-danger">{formErr.quantity}</h6>
+        )}
+
 
                 <div className="col-md-4 w-75">
                     <label htmlFor="validationDefault099"

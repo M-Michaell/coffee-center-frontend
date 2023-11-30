@@ -135,7 +135,7 @@ export default function Card({item}) {
             >
               {item?.desc}
             </p>
-            {item.discount_percentage !== 0 ? (
+            {item.discount_percentage !== "0.0" ? (
               <p className="text-decoration-line-through gray1">
                 {item.price}$
               </p>

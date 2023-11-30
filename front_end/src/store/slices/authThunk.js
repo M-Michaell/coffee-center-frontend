@@ -111,11 +111,12 @@ const getUserInfo = async (accessToken) => {
 const deleteUser = async (accessToken,userData) => {
     const config = {
         headers: {
-            "Authorization": `JWT ${accessToken}`
+            "Authorization": `JWT ${accessToken}`,
+            "Content-Type": "application/json",
         },
         data: userData,
     }
-    const response = await axios.delete(DELETE_USER, config)
+    const response = await axios.delete(DELETE_USER,config)
     return response.data
 }
 

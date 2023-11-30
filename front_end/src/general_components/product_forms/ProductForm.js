@@ -33,6 +33,21 @@ export default function ProductForm({submitAdd}) {
     });
 
 
+    const [formErr, setFormErr] = useState({
+        name: "",
+        desc: "",
+        quantity: "",
+        price: '',
+        image: null,
+        coffee_type: "",
+        caffeine: '',
+        creator: '',
+        roasting_degree: '',
+        origin: '',
+        discount: '',
+    });
+
+
     const handleInput = (e) => {
         if (e.target.name === 'name') {
             setFormInput({...formInput, name: e.target.value});
@@ -42,9 +57,11 @@ export default function ProductForm({submitAdd}) {
         }
         if (e.target.name === 'Quantity') {
             setFormInput({...formInput, quantity: e.target.value});
+            setFormErr({...formErr, quantity: e.target.value < 0 ? "disallow" : null })
         }
         if (e.target.name === 'price') {
             setFormInput({...formInput, price: e.target.value});
+            setFormErr({...formErr, price: e.target.value < 0 ? "disallow" : null })
         }
         if (e.target.name === 'coffee_type') {
             setFormInput({...formInput, coffee_type: e.target.value});
@@ -181,6 +198,9 @@ export default function ProductForm({submitAdd}) {
                            id="price"
                            required/>
                 </div>
+                {formErr.price && (
+          <h6 className="form-text text-danger">{formErr.price}</h6>
+        )}
 
 
                 <div className="col-md-4 w-75">
@@ -201,6 +221,9 @@ export default function ProductForm({submitAdd}) {
                            id="validationDefault02"
                            required/>
                 </div>
+                      {formErr.quantity && (
+          <h6 className="form-text text-danger">{formErr.quantity}</h6>
+        )}
 
                 <div className="col-md-4 w-75">
                     <label htmlFor="validationDefault099"
@@ -220,6 +243,9 @@ export default function ProductForm({submitAdd}) {
                            id="validationDefault099"
                            required/>
                 </div>
+
+
+
 
 
                 <div className="col-md-4 w-75">

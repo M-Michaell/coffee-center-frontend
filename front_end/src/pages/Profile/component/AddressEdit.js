@@ -21,7 +21,7 @@ export default function AddressEdit() {
   const [city, setCity] = useState("");
   const [postalCode, setPostalCode] = useState("");
   const user = useSelector((state) => state.auth.userInfo);
-  const egyptianMobileRegex = /^01[0-2]\d{8}$/;
+  const egyptianMobileRegex = /^(012|011|010|015)\d{8}$/;
   const egyptianLandlineRegex = /^0[2-9]\d{7}$/;
 
   const egyptGovernorates = [
@@ -54,16 +54,15 @@ export default function AddressEdit() {
     "Suez",
   ];
 
- 
-
   const validateForm = () => {
     let isValid = true;
-
-    if (!egyptianLandlineRegex.test(telephone)) {
-      setTelephoneError("Invalid telephone number");
-      isValid = false;
-    } else {
-      setTelephoneError("");
+    if (telephone) {
+      if (!egyptianLandlineRegex.test(telephone)) {
+        setTelephoneError("Invalid telephone number");
+        isValid = false;
+      } else {
+        setTelephoneError("");
+      }
     }
 
     if (!egyptianMobileRegex.test(mobile)) {
@@ -88,8 +87,7 @@ export default function AddressEdit() {
         setCity(userData.city || "");
         setPostalCode(userData.postal_code || "");
       })
-      .catch((error) => {
-      });
+      .catch((error) => {});
   }, [id]);
 
   const handleSaveAddress = () => {
@@ -102,7 +100,6 @@ export default function AddressEdit() {
         city,
         postal_code: postalCode,
       };
-
 
       axiosInstance
         .put(`/accounts/api/address/${user.id}/${id}/`, updatedAddressData)

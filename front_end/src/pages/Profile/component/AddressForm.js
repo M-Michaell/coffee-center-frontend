@@ -37,7 +37,7 @@ export default function AddressPage() {
   const [addressLine1, setAddressLine1] = useState("");
   const [city, setCity] = useState("");
   const [postalCode, setPostalCode] = useState("");
-  const egyptianMobileRegex = /^01[0-2]\d{8}$/;
+  const egyptianMobileRegex = /^(012|011|010|015)\d{8}$/;
   const egyptianLandlineRegex = /^0[2-9]\d{7}$/;
 
   const validateForm = () => {
